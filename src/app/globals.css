@@ -1,26 +1,360 @@
 @import "tailwindcss";
 
+/* ============================================================
+   THEME — dark premium. Blue accent, gold for awards.
+   Serif display headings, sans body, mono labels.
+   ============================================================ */
+/* ---- DARK (default) ---- elevation from lighter surfaces + soft shadow + top sheen */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* neutrals */
+  --background: #0a0a0c;
+  --surface: #141519; /* cards sit ABOVE bg */
+  --surface-2: #1c1e24;
+  --foreground: #f4f4f2;
+  --muted: #9196a1;
+  --border: #282a31;
+  /* brand */
+  --accent: #5b82ff; /* readable blue on dark (family of #1847c7) */
+  --accent-deep: #1847c7;
+  --accent-ink: #ffffff;
+  --gold: #d4b25e;
+  /* display gradient */
+  --grad-from: #ffffff;
+  --grad-to: #aeb1ba;
+  /* ambient glow */
+  --glow-a: rgba(91, 130, 255, 0.1);
+  --glow-b: rgba(212, 178, 94, 0.06);
+  /* elevation */
+  --card-hi: rgba(255, 255, 255, 0.055); /* top-edge sheen (lit from above) */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.34),
+    0 20px 44px -12px rgba(0, 0, 0, 0.55),
+    0 0 50px -18px rgba(91, 130, 255, 0.22);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.5), 0 14px 30px rgba(0, 0, 0, 0.5),
+    0 34px 66px -12px rgba(0, 0, 0, 0.62);
+  /* glass */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hi: rgba(255, 255, 255, 0.14);
+  /* radii */
+  --radius-sm: 0.625rem;
+  --radius: 0.9rem;
+  --radius-lg: 1.15rem;
+  --radius-xl: 1.5rem;
+  /* one motion language */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 400ms;
+  --dur-4: 600ms;
+}
+
+/* ---- LIGHT ---- off-white page + pure-white cards + real layered soft shadows (Stripe/Razorpay) */
+:root[data-theme="light"] {
+  --background: #f4f2ee; /* warm paper off-white (Antigravity/Razorpay feel) */
+  --surface: #ffffff; /* cards are pure white and lift off the warm page */
+  --surface-2: #ebe7df;
+  --foreground: #14151a; /* warm near-black ink */
+  --muted: #6b6862;
+  --border: #e7e2d8;
+  --accent: #1847c7;
+  --accent-deep: #123aa8;
+  --accent-ink: #ffffff;
+  --gold: #927012;
+  --grad-from: #14151a;
+  --grad-to: #4a4a52;
+  --glow-a: rgba(24, 71, 199, 0.05);
+  --glow-b: rgba(201, 168, 76, 0.06);
+  --card-hi: rgba(255, 255, 255, 0.9);
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.05), 0 4px 10px rgba(16, 24, 40, 0.06),
+    0 16px 40px -12px rgba(16, 24, 40, 0.12);
+  --shadow-lift: 0 2px 6px rgba(16, 24, 40, 0.06), 0 10px 24px rgba(16, 24, 40, 0.1),
+    0 30px 60px -14px rgba(16, 24, 40, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(16, 24, 40, 0.07);
+  --glass-hi: rgba(255, 255, 255, 0.9);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-ink: var(--accent-ink);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-dm-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle radial glow — blue + gold */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 40rem at 78% -10%, var(--glow-a), transparent 60%),
+    radial-gradient(50rem 40rem at 0% 15%, var(--glow-b), transparent 55%);
+  pointer-events: none;
+}
+
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 999px;
+  border: 2px solid var(--background);
+}
+
+/* ============================================================
+   Reusable utilities
+   ============================================================ */
+@utility container-x {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Clean serif for display headings — let Fraunces drive its optical axis */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  letter-spacing: -0.014em;
+  text-wrap: balance;
+}
+
+/* tighter, more even body paragraphs */
+p {
+  text-wrap: pretty;
+}
+
+/* engineered numerals for metrics */
+.tnum {
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* tool logo-wall chip — monochrome at rest, brand colour on hover */
+.tool-chip {
+  --brand: var(--accent);
+  transition:
+    color var(--dur-2) var(--ease-standard),
+    border-color var(--dur-2) var(--ease-standard),
+    background-color var(--dur-2) var(--ease-standard);
+}
+.tool-chip:hover {
+  color: var(--brand);
+  border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+  background-color: color-mix(in srgb, var(--brand) 10%, transparent);
+}
+
+/* one eyebrow label primitive */
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-to) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.accent-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 8px;
+  text-decoration-thickness: 3px;
+}
+
+/* Blue gradient text (matches the hero blue shade) */
+.text-accent-gradient {
+  background: linear-gradient(180deg, #8aa8ff 0%, #3b6ef5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Primary action — blue gradient with glow */
+.btn-gradient {
+  background: linear-gradient(135deg, #6f93ff 0%, #1f52d6 100%);
+  color: #fff;
+  box-shadow:
+    0 6px 20px -6px rgba(91, 130, 255, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    filter var(--dur-2) var(--ease-out);
+}
+.btn-gradient:hover {
+  transform: scale(1.03);
+  filter: brightness(1.06);
+  box-shadow:
+    0 10px 32px -6px rgba(91, 130, 255, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.btn-gradient:active {
+  transform: scale(0.98);
+}
+
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card), inset 0 1px 0 var(--card-hi);
+}
+
+/* Frosted glass surface — Razorpay-style translucent card with hairline highlight */
+.glass {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+}
+/* top edge highlight that sells the "glass" */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding-top: 1px;
+  background: linear-gradient(180deg, var(--glass-hi), transparent 40%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Hover lift for interactive cards */
+.lift {
+  transition:
+    transform var(--dur-3) var(--ease-out),
+    box-shadow var(--dur-3) var(--ease-out),
+    border-color var(--dur-2) var(--ease-standard);
+}
+.lift:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    var(--shadow-lift),
+    0 0 60px -14px rgba(91, 130, 255, 0.5);
+  border-color: rgba(91, 130, 255, 0.35);
+}
+
+/* Soft always-on blue product glow (behind featured/product cards) */
+.glow-blue::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    150deg,
+    rgba(91, 130, 255, 0.35),
+    transparent 40%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 3.5rem 3.5rem;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 75%);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Infinite horizontal media loop (content is duplicated ×2, so -50% seams) */
+@keyframes marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* wrong-code shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7) */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Real reduced-motion guard (WCAG 2.3.3) — kills loops + long transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
