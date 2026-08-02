@@ -24,7 +24,7 @@ export function FeaturedWork() {
         </Reveal>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {caseStudies.map((cs, i) => (
+          {caseStudies.filter((c) => !c.lab).map((cs, i) => (
             <Reveal key={cs.slug} delay={(i % 2) * 0.08}>
               <Link
                 href={`/work/${cs.slug}`}

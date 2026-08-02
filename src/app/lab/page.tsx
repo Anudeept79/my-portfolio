@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { profile, lab } from "@/data/site";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -31,11 +33,16 @@ export default function LabPage() {
 
         <section className="container-x mt-14 pb-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {lab.map((item, i) => (
-              <Reveal key={item.title} delay={(i % 3) * 0.07}>
-                <article className="card lift group flex h-full flex-col overflow-hidden">
+            {lab.map((item, i) => {
+              const href = "href" in item ? item.href : undefined;
+              const cover =
+                "cover" in item && item.cover
+                  ? item.cover
+                  : `/lab/${item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.jpg`;
+              const body = (
+                <>
                   <CoverFrame
-                    src={`/lab/${item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.jpg`}
+                    src={cover}
                     label={item.title}
                     accent={item.accent}
                     index={i + 1}
@@ -51,10 +58,32 @@ export default function LabPage() {
                     <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
                       {item.blurb}
                     </p>
+                    {href && (
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+                        Read the story
+                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </span>
+                    )}
                   </div>
-                </article>
-              </Reveal>
-            ))}
+                </>
+              );
+              return (
+                <Reveal key={item.title} delay={(i % 3) * 0.07}>
+                  {href ? (
+                    <Link
+                      href={href}
+                      className="card lift group flex h-full flex-col overflow-hidden hover:border-foreground/25"
+                    >
+                      {body}
+                    </Link>
+                  ) : (
+                    <article className="card lift group flex h-full flex-col overflow-hidden">
+                      {body}
+                    </article>
+                  )}
+                </Reveal>
+              );
+            })}
           </div>
         </section>
       </main>

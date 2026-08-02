@@ -1,7 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { ToolsBand } from "@/components/ToolsBand";
-import { Redesigns } from "@/components/Redesigns";
+// import { Redesigns } from "@/components/Redesigns"; // hidden for now
 import { FeaturedWork } from "@/components/FeaturedWork";
 import { MoreWork } from "@/components/MoreWork";
 import { Testimonials } from "@/components/Testimonials";
@@ -14,7 +14,7 @@ export default function Home() {
       <main>
         <Hero />
         <ToolsBand />
-        <Redesigns />
+        {/* <Redesigns /> — hidden for now; component + data left intact */}
         <FeaturedWork />
         <MoreWork />
         <Testimonials />

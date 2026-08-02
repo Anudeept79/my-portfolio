@@ -9,6 +9,7 @@ import { Reveal } from "@/components/Reveal";
 import { CoverFrame } from "@/components/CoverFrame";
 import { FlipCompare } from "@/components/FlipCompare";
 import { LockOverlay } from "@/components/LockOverlay";
+import { CaseSections } from "@/components/CaseSections";
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -37,7 +38,7 @@ export default async function CaseStudyPage({
   const cs = caseStudies.find((c) => c.slug === slug);
   if (!cs) notFound();
 
-  const others = caseStudies.filter((c) => c.slug !== slug);
+  const others = caseStudies.filter((c) => c.slug !== slug && !c.lab);
 
   return (
     <>
@@ -110,6 +111,12 @@ export default async function CaseStudyPage({
           )}
         </div>
 
+        {/* Studies that define `sections` are told in their own shape — the
+            fixed Overview→Process→Outcome body below is skipped entirely. */}
+        {cs.sections ? (
+          <CaseSections sections={cs.sections} accent={cs.accent} />
+        ) : (
+          <>
         {/* results strip */}
         <section className="container-x mt-16">
           <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
@@ -302,6 +309,8 @@ export default async function CaseStudyPage({
             ))}
           </ul>
         </Section>
+          </>
+        )}
 
         {/* more case studies */}
         <section className="mt-24 border-t border-border">
