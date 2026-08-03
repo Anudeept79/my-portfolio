@@ -26,7 +26,7 @@ export const profile = {
 
 export const stats = [
   { value: "10+", label: "Apps shipped", sub: "production-grade" },
-  { value: "1y 10m", label: "Owning design end-to-end", sub: "problem → code" },
+  { value: "1y 11m", label: "Owning design end-to-end", sub: "problem → code" },
   { value: "4", label: "US Gov projects", sub: "for Virginia State Police" },
   { value: "100%", label: "Design → production", sub: "solo, no handoff" },
 ];
@@ -2443,7 +2443,7 @@ export const caseStudies: CaseStudy[] = [
     accent: "blue",
     cover: "/work/clearcut/cover.jpg",
     video: "/work/clearcut/demo.mp4",
-    tools: ["Antigravity", "AI-first build", "Product Design", "Vercel"],
+    tools: ["Antigravity", "AI-led build", "Product Design", "Vercel"],
     sections: [
       {
         kind: "snapshot",
@@ -3163,7 +3163,7 @@ export const process = [
   {
     step: "03",
     title: "Prototype fast with AI",
-    body: "Use an AI-first workflow to move from idea to high-fidelity, testable prototype in hours.",
+    body: "Use an AI-led workflow to move from idea to high-fidelity, testable prototype in hours.",
   },
   {
     step: "04",

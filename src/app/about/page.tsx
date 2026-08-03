@@ -36,7 +36,7 @@ export default function AboutPage() {
                 Hi, I&apos;m Anudeep. I design products — then ship them.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted">
-                I&apos;m an AI-first Product Designer in {profile.location}. I
+                I&apos;m an AI Product Designer in {profile.location}. I
                 love the moment a messy, frustrating flow turns into something
                 that just feels obvious — and I don&apos;t stop at the Figma
                 handoff. I build and ship the working code too.
@@ -78,8 +78,8 @@ export default function AboutPage() {
             <p>
               Then AI changed everything. At{" "}
               <span className="text-foreground">PIPRA Solutions</span>{" "}I
-              pioneered an AI-first design-and-build workflow that let me go from
-              a problem to a shipped, working product — solo. Over 1 year 10
+              pioneered an AI-led design-and-build workflow that let me go from
+              a problem to a shipped, working product — solo. Over 1 year 11
               months I&apos;ve delivered 10+ production apps across fintech,
               government, logistics, SaaS and EdTech, earning the company its{" "}
               <span className="text-gold">AI Excellence Award</span> — with zero
