@@ -3036,6 +3036,164 @@ export const caseStudies: CaseStudy[] = [
     ],
     gallery: [],
   },
+  // -------------------------------------------------------------- 3D Warehouse Sim (Lab)
+  // NOTE: this is a scripted demo environment — the on-screen ops numbers (units
+  // synced, associates on floor, etc.) are simulated for the narrative, not a
+  // live data feed. Framed honestly as a demo/experiment below, not a deployment.
+  {
+    slug: "warepro-command-center",
+    lab: true,
+    title: "Turning a 3D twin into a command center you can press play on",
+    client: "WarePro — personal experiment",
+    domain: "3D / Spatial AI · Experiment",
+    year: "2026",
+    role: "Designer & Builder",
+    impact:
+      "A follow-on from the WarePro digital twin: instead of a free-roam 3D scene, a scripted 10-chapter demo that pitches the idea of a warehouse command center in about ninety seconds.",
+    teaser:
+      "What if the WarePro twin became a full command center — live cameras, predictive AI, security alerts — and the demo itself told that story, scene by scene?",
+    accent: "blue",
+    cover: "/work/3d-warehouse-sim/cover.jpg",
+    video: "/work/3d-warehouse-sim/demo.mp4",
+    tools: ["Three.js", "React", "Antigravity", "Vercel"],
+    sections: [
+      {
+        kind: "snapshot",
+        role: "Designer & builder — concept, 3D scene, UI, scripted narrative",
+        timeline: "2026 · personal experiment",
+        team: "Solo",
+        platform: "Web — live at 3d-warehouse-simulator-app.vercel.app",
+        status: "Live demo · scripted scenario data",
+        problem:
+          "The original WarePro twin proves the 3D space works, but you can't pitch “an AI command center” by handing someone a free-roam scene and hoping they find the point.",
+        outcome:
+          "A ten-scene scripted demo — sync, workforce, security, unified visibility — that narrates the idea for you, on a loop, with no explanation needed.",
+      },
+      {
+        kind: "takeaways",
+        items: [
+          "The interesting decision wasn't the 3D scene — it was replacing free exploration with a scripted, chaptered narrative so the pitch tells itself.",
+          "It fuses three things I'd built separately before — the spatial twin, AI-camera detection, predictive analytics — into one command-center screen.",
+          "This is a demo with scripted scenario data, not a connected live system, and I'm keeping that distinction explicit.",
+        ],
+      },
+      {
+        kind: "lead",
+        body:
+          "The WarePro twin proved a warehouse could be navigable in 3D. The question this experiment chased was smaller and harder: how do you make someone understand that in ninety seconds, without giving them a joystick and a shrug?",
+      },
+      {
+        kind: "prose",
+        eyebrow: "The problem with free-roam",
+        title: "A sandbox doesn't pitch itself",
+        body:
+          "Free 3D navigation is great once you already know what you're looking for. It's a poor pitch — hand a stakeholder a camera and full freedom, and half of them never find the payoff. A command-center concept has too many things happening at once — inventory, people, vehicles, security, prediction — to trust that a first-time viewer stumbles onto the right one unaided.",
+      },
+      {
+        kind: "insight",
+        eyebrow: "The reframe",
+        title: "Make the demo the narrator",
+        body:
+          "Instead of a sandbox, I scripted it: ten scenes, each with a name and a one-line thesis, playing in sequence like a guided tour with a remote control. “Digital Twin Sync.” “Workforce Activity.” “Security Event Detected.” “Command Center — Full Visibility.” Nobody has to explore to get the point; the point arrives on a timer, in order, and you can pause, rewind, or jump straight to the scene you care about.",
+      },
+      {
+        kind: "figures",
+        items: [
+          { src: "/work/3d-warehouse-sim/scene-01-overview.jpg", caption: "Scene 1 — the system online: live map, zone occupancy, ops analytics." },
+          { src: "/work/3d-warehouse-sim/scene-03-sync.jpg", caption: "Scene 3 — “Digital Twin Sync”: every pallet scanned, instantly mirrored." },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "What each scene sells",
+        title: "Four ideas, four chapters",
+        body: [
+          "Sync establishes trust — the twin isn't decorative, it mirrors real scans in real time. Workforce activity switches to a heatmap read of the floor, because a command center's second question is always “where are people right now.”",
+          "Security is the scene built to make you sit up: two AI camera feeds with live bounding boxes flag a person without credentials crossing into a restricted zone, and a red alert takes over the frame. Then Command Center closes the loop — the same screen holding inventory, people, vehicles and security together, with the line that's really the thesis of the whole thing: “One platform.”",
+        ],
+      },
+      {
+        kind: "figures",
+        items: [
+          { src: "/work/3d-warehouse-sim/scene-05-workforce.jpg", caption: "Scene 5 — “Workforce Activity”: a live heatmap read of where people are on the floor." },
+          { src: "/work/3d-warehouse-sim/scene-07-security.jpg", caption: "Scene 7 — “Security Event Detected”: AI camera feeds flag a restricted-zone breach." },
+        ],
+      },
+      {
+        kind: "figure",
+        src: "/work/3d-warehouse-sim/scene-10-command.jpg",
+        caption: "Scene 10 — “Command Center · Full Visibility”: inventory, people, vehicles, security and insight, on one screen.",
+        wide: true,
+      },
+      {
+        kind: "decisions",
+        eyebrow: "Key decisions",
+        title: "What made the pitch land",
+        items: [
+          {
+            decision: "A scripted sequence instead of a free sandbox",
+            logic:
+              "A first-time viewer doesn't know what to look for in an open 3D scene. Chaptering the experience means the strongest four ideas are guaranteed to be seen, in the order that builds the argument, every single time.",
+          },
+          {
+            decision: "AI insights phrased as recommendations, not just numbers",
+            logic:
+              "“Move 14 fast-moving SKUs to the golden zone — est. −11% travel time” does more work than a chart ever could. A raw metric asks the viewer to draw the conclusion; a recommendation states it and lets the number back it up.",
+          },
+          {
+            decision: "Live-looking camera detection overlays",
+            logic:
+              "Bounding boxes with confidence scores (“PERSON 0.94”) are what makes computer vision legible at a glance — anyone who's seen a self-driving car demo reads that instantly as “the AI is actually watching.”",
+          },
+          {
+            decision: "An adaptive performance mode",
+            logic:
+              "The scene quietly drops effects under load rather than stuttering — a small piece of engineering craft that matters because a laggy demo undercuts the exact “this is a serious platform” impression the piece is trying to create.",
+          },
+        ],
+      },
+      {
+        kind: "metrics",
+        eyebrow: "What this is — and isn't",
+        items: [
+          { metric: "10 scenes", label: "a scripted narrative, not a free sandbox" },
+          { metric: "Live demo", label: "public and playable, scenario data is simulated" },
+          { metric: "3 ideas fused", label: "spatial twin + AI vision + predictive insight" },
+          { metric: "Spin-off", label: "extends the original WarePro digital twin" },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "What I'd build next",
+        title: "The gap between demo and deployment",
+        body: "This is honestly a pitch, not a product — the alerts, the AI insights and the camera feeds are scripted to a timeline, not wired to a real sensor or a real camera. The obvious next step is the unglamorous one: replace the script with a real event stream, so Scene 7's restricted-zone alert is a thing that actually happened rather than a beat in a demo. The narrative structure would survive that change completely unchanged — which is probably the best sign that the structure was the right call.",
+      },
+    ],
+    overview:
+      "A follow-on experiment from the WarePro digital twin: rather than a free-roam 3D scene, this is a scripted, ten-chapter demo of what a full warehouse command center could look like — live 3D twin, AI camera detection, predictive insights and security alerts unified on one screen, narrated scene by scene so the pitch needs no explanation. The scenario data is simulated; the interaction and visual system are real.",
+    problem: [
+      "A free-roam 3D scene doesn't explain itself to a first-time viewer evaluating a complex idea.",
+      "A command-center concept — inventory, people, vehicles, security, prediction — has too many things happening at once to trust unguided exploration.",
+      "Selling “AI-powered” requires making the AI's output legible at a glance, not just present.",
+    ],
+    process: [
+      { title: "Started from the WarePro twin", body: "Reused the spatial 3D foundation as the base for a broader command-center concept." },
+      { title: "Scripted a ten-scene narrative", body: "Named chapters — Sync, Workforce, Security, Command Center — each with a one-line thesis." },
+      { title: "Layered in AI-styled surfaces", body: "Camera detection overlays, a recommendation feed, and live-looking ops analytics." },
+      { title: "Added adaptive performance", body: "Effects scale down under load so playback stays smooth." },
+    ],
+    solution: [
+      "A scripted, replayable demo that narrates a warehouse command-center concept in under two minutes.",
+      "AI camera overlays and a recommendations feed that make “AI-powered” visually legible rather than asserted.",
+      "One screen unifying spatial twin, workforce, security and predictive insight — the pitch WarePro's original twin couldn't make alone.",
+    ],
+    results: [
+      { metric: "10 scenes", label: "scripted narrative demo" },
+      { metric: "Live", label: "public, playable experiment" },
+      { metric: "Spin-off", label: "of the WarePro digital twin" },
+    ],
+    gallery: [],
+  },
 ];
 
 // Compact grid — the rest of the work, listed not deep-dived.
@@ -3141,11 +3299,13 @@ export const lab = [
     accent: "blue",
   },
   {
-    title: "3D Warehouse Simulator",
-    tag: "Experiment · Spatial",
+    title: "WarePro Command Center",
+    tag: "Experiment · Spatial AI",
     blurb:
-      "A standalone 3D warehouse simulator for planning and onboarding — a spin-off from the WarePro digital twin.",
+      "A scripted, ten-scene demo imagining WarePro's twin as a full command center — live cameras, predictive AI, security alerts — that narrates itself instead of asking you to explore.",
     accent: "blue",
+    href: "/work/warepro-command-center",
+    cover: "/work/3d-warehouse-sim/cover.jpg",
   },
 ];
 
