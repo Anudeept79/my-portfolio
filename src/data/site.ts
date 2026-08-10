@@ -3287,7 +3287,7 @@ export const lab = [
       "My own company's site, redesigned twice. Version 1 gave it a voice and ran for a year — which taught me the real problem was structure: buyers navigate by industry, not by technology.",
     accent: "blue",
     href: "/work/pipra-website",
-    cover: "/work/pipra-website/cover.jpg",
+    cover: "/work/pipra-website/hero-live.jpg",
   },
   {
     title: "Minimalist Institute — #LiveToExpress",
