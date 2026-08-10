@@ -3299,11 +3299,13 @@ export const lab = [
     cover: "/work/livetoexpress/cover.jpg",
   },
   {
-    title: "Golden Suisse — 3 fintech apps",
-    tag: "Fintech · Live platform",
+    title: "WarePro Command Center",
+    tag: "Experiment · Spatial AI",
     blurb:
-      "Investor, Trader and Agency & Admin — three responsive products for a live gold-trading platform, sharing one design system and wired to live backend APIs. Backend confirmed live by CEO and VP.",
-    accent: "gold",
+      "A scripted, ten-scene demo imagining WarePro's twin as a full command center — live cameras, predictive AI, security alerts — that narrates itself instead of asking you to explore.",
+    accent: "blue",
+    href: "/work/warepro-command-center",
+    cover: "/work/3d-warehouse-sim/cover.jpg",
   },
   {
     title: "ClearCut — background remover",
@@ -3313,6 +3315,13 @@ export const lab = [
     accent: "blue",
     href: "/work/clearcut",
     cover: "/work/clearcut/cover.jpg",
+  },
+  {
+    title: "Golden Suisse — 3 fintech apps",
+    tag: "Fintech · Live platform",
+    blurb:
+      "Investor, Trader and Agency & Admin — three responsive products for a live gold-trading platform, sharing one design system and wired to live backend APIs. Backend confirmed live by CEO and VP.",
+    accent: "gold",
   },
   {
     title: "Kerala EV Station App",
@@ -3334,15 +3343,6 @@ export const lab = [
     blurb:
       "A drag-and-drop form builder for PIPRA, designed and built front-to-back. Launching soon.",
     accent: "blue",
-  },
-  {
-    title: "WarePro Command Center",
-    tag: "Experiment · Spatial AI",
-    blurb:
-      "A scripted, ten-scene demo imagining WarePro's twin as a full command center — live cameras, predictive AI, security alerts — that narrates itself instead of asking you to explore.",
-    accent: "blue",
-    href: "/work/warepro-command-center",
-    cover: "/work/3d-warehouse-sim/cover.jpg",
   },
 ];
 
