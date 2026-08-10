@@ -2995,12 +2995,49 @@ export const caseStudies: CaseStudy[] = [
         wide: true,
       },
       {
+        kind: "prose",
+        eyebrow: "The identity",
+        title: "One image had to say what a page of copy couldn't",
+        body: [
+          "Before I touched the hero copy, I sketched the idea as a blueprint — a rough, wireframe-blue diagram of PIPRA as a place rather than a list: one central tower for AI, with the other capabilities — IoT, cloud, blockchain, security — as districts wired into it by the same glowing roads. Once that structure held together as a drawing, I named it: the City of PIPRA. Everything after that was refining the same idea, not replacing it.",
+          "I generated the artwork with AI from that blueprint, then iterated it — sharpening the skyline, adding the drone and wind turbines, working through which icons actually read at a glance versus which ones were just decoration. Once the still image was right, I fed it into an AI video tool to bring the city to life — lights travelling the roads, the cloud drifting, the AI tower pulsing — and that's the motion piece running in the hero today.",
+        ],
+      },
+      {
+        kind: "figures",
+        items: [
+          { src: "/work/pipra-website/hero-city-v1.jpg", caption: "First AI-generated pass — the blueprint's idea rendered as a city, before the detail passes." },
+          { src: "/work/pipra-website/hero-city-annotated.jpg", caption: "The idea made legible: each district labelled back to a real PIPRA capability — IoT & Edge, Cloud & Data, Blockchain, the Innovation District." },
+        ],
+      },
+      {
+        kind: "figure",
+        src: "/work/pipra-website/hero-city-v3.jpg",
+        caption:
+          "The refined city — drone, wind turbines, satellite dish and a denser skyline — the version the motion piece was built from.",
+        wide: true,
+      },
+      {
+        kind: "video",
+        src: "/work/pipra-website/hero-motion.mp4",
+        badge: "Live on pipra.solutions",
+        caption:
+          "The AI-generated motion piece made from that still — now running as the actual hero on the live site.",
+        wide: true,
+      },
+      {
+        kind: "figure",
+        src: "/work/pipra-website/hero-live.jpg",
+        caption: "The finished hero, live today: “Empowering Your Vision, Leading the Innovation” over the moving city.",
+        wide: true,
+      },
+      {
         kind: "metrics",
         eyebrow: "Where it stands",
         items: [
           { metric: "3 versions", label: "original, my v1, and the current rebuild" },
           { metric: "~1 year", label: "version 1 ran live before the rebuild" },
-          { metric: "4 entry points", label: "Services · Products · Solutions · Industries" },
+          { metric: "Blueprint → video", label: "one idea taken from a sketch to a live motion hero" },
           { metric: "Live", label: "PIPRA's public company site" },
         ],
       },
@@ -3008,7 +3045,7 @@ export const caseStudies: CaseStudy[] = [
         kind: "prose",
         eyebrow: "What I took from it",
         title: "Living with your own work is the fastest way to improve",
-        body: "I've handed over plenty of designs and never learned whether they worked. Here I watched mine for a year, on my own company, and the flaw that surfaced wasn't one I could have seen in a review — the site looked good and still made buyers do the work of translating their problem into our language. Getting to fix that is the most useful feedback loop I've had, and it changed how I judge structure before visuals on everything since.",
+        body: "I've handed over plenty of designs and never learned whether they worked. Here I watched mine for a year, on my own company, and the flaw that surfaced wasn't one I could have seen in a review — the site looked good and still made buyers do the work of translating their problem into our language. Getting to fix that is the most useful feedback loop I've had, and it changed how I judge structure before visuals on everything since. The hero's city went through the same loop in miniature: a blueprint, a name, a still, and only then a motion piece — because none of it was worth animating until the idea underneath it actually held up.",
       },
     ],
     overview:
