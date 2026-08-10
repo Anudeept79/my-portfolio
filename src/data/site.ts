@@ -2844,8 +2844,8 @@ export const caseStudies: CaseStudy[] = [
     teaser:
       "The rare project you get to watch age. I redesigned PIPRA's site, lived with it for a year, then rebuilt it around industry verticals instead of service categories.",
     accent: "blue",
-    cover: "/work/pipra-website/cover.jpg",
-    video: "/work/pipra-website/demo-final.mp4",
+    cover: "/work/pipra-website/hero-live.jpg",
+    video: "/work/pipra-website/hero-motion.mp4",
     compare: {
       before: "/work/pipra-website/v0-old.jpg",
       after: "/work/pipra-website/v2-hero.jpg",
