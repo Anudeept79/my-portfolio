@@ -3575,17 +3575,32 @@ export const caseStudies: CaseStudy[] = [
       {
         kind: "decisions",
         eyebrow: "Key decisions",
-        title: "The calls that made it legible",
+        title: "Widget by widget, against the old style",
         items: [
           {
-            decision: "Donut charts with a centre total, not plain pies",
+            decision: "A donut with a centre total and a percentage legend, not a plain filled pie",
             logic:
-              "A pie chart alone makes you sum the slices to find the headline number. A donut with the total printed in the centre answers the first question — “how many, total?” — before anyone has to read a legend.",
+              "The old “First visit” chart was a solid pie with a colour key underneath — you had to match colours to a legend and estimate proportions yourself. The redesign prints the total (“110”) in the donut's centre and states each share as a percentage (Completed 60%, Pending 10%, Rejected 20%) directly under its own dot. The headline number and the breakdown are both handed to you, not inferred.",
           },
           {
-            decision: "Collapse raw sensor tables into status cards",
+            decision: "One IoT reading per IoT card, not one row in a six-column table",
             logic:
-              "A table of temperature and humidity readings across four rooms asks the reader to scan and compare manually. A grid of per-room cards with the number and its status in one glance does that comparison for them.",
+              "The old IoT table forced a left-to-right scan across Room, Temperature, Humidity, Temp Status, Humidity Status, Battery and Time just to answer “is C1 fine?” The redesigned card puts the room, the live temperature, humidity and light state on one face — “16°C · C1 · Humidity/30% · Lights OFF 10H” — so that single question is answered without scanning a row.",
+          },
+          {
+            decision: "Stage names as column headers over big numbers, not a dense data table",
+            logic:
+              "Stage-wise culture distribution reads as six wide columns — Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening — each with one large number underneath. No table borders, no repeated row chrome. It reads like a row of KPIs, because that's what it actually is to the person checking it.",
+          },
+          {
+            decision: "Keep room-by-stage detail in a real table, but make it a table again",
+            logic:
+              "Not every view should be de-tabled — “Medium bottles by room” genuinely is a matrix (5 rooms × 5 stages), so it stays a table. The decision was giving it clean row separation, aligned numerals, and a bold room label per row, instead of the cramped, low-contrast grid the old dashboard used for the same kind of data.",
+          },
+          {
+            decision: "Bar charts get gridlines, readable labels and a hover tooltip with the exact figure",
+            logic:
+              "The old “User wise TCT Performance” chart had unlabeled axes and username labels like “TCT@pipra” that didn't read as a person. The redesign gives every user a real name (Muthu, Srikanth, Mahindra), adds horizontal gridlines so bar heights are comparable at a glance, and puts the exact number behind a hover — “Muthu · 44,058 · Total” — so the chart works both as an at-a-glance comparison and as a precise lookup.",
           },
           {
             decision: "Keep the government identity, not a generic template skin",
