@@ -3231,6 +3231,234 @@ export const caseStudies: CaseStudy[] = [
     ],
     gallery: [],
   },
+  // -------------------------------------------------------------- WarePro Mobile
+  {
+    slug: "warepro-mobile",
+    title: "Five apps with the same icon, rebuilt as one",
+    client: "WarePro (PIPRA Solutions)",
+    domain: "Logistics · Mobile",
+    year: "2026",
+    role: "Product Designer",
+    impact:
+      "WarePro's handheld app was a launcher full of near-identical apps. I rebuilt the whole operator side — receiving through dispatch — as one system on the Atlassian Design System.",
+    teaser:
+      "The operator side of WarePro: nine flows covering the whole inbound-to-outbound chain, rebuilt so a picker can run them one-handed while holding a scanner.",
+    accent: "blue",
+    cover: "/work/warepro-mobile/cover.jpg",
+    video: "/work/warepro-mobile/flow-full.mp4",
+    compare: {
+      before: "/work/warepro-mobile/old-ui-launcher.jpg",
+      after: "/work/warepro-mobile/screen-putaway.jpg",
+    },
+    tools: ["Figma", "Atlassian Design System", "Mobile UX", "Design Systems"],
+    sections: [
+      {
+        kind: "snapshot",
+        role: "Product designer — research, flows, component library, UI across all modules",
+        timeline: "2026",
+        team: "With PIPRA's WarePro product and engineering teams",
+        platform: "Android handhelds · warehouse scanners",
+        status: "Redesign delivered",
+        problem:
+          "The app opened on a “Select your app” launcher where five assembly apps shared one identical icon. Inside, screens showed raw unlabelled IDs to operators working one-handed with a scanner, where a mis-read becomes a real inventory error.",
+        outcome:
+          "Nine flows rebuilt as one system on the Atlassian Design System — task-first instructions, a single status grammar, and guards that stop invalid work before it's submitted.",
+      },
+      {
+        kind: "takeaways",
+        items: [
+          "The original wasn't one app — it was a launcher of separate apps, several of which were visually indistinguishable from each other.",
+          "The unit of design here is a task, not a screen: every flow states the next physical action before it shows any data.",
+          "A mis-scan isn't a UI bug, it's stock that exists in the system but not on the shelf — so consistency is a safety feature, not a style preference.",
+        ],
+      },
+      {
+        kind: "lead",
+        body:
+          "Open the old WarePro app and the first thing you get isn't work — it's a menu. “Select your app.” Five tiles for assembly alone: Pick, Assembled, QC, Box Packing, Carton Packing. Every one of them the same orange box with the same green tick.",
+      },
+      {
+        kind: "figure",
+        src: "/work/warepro-mobile/old-ui-launcher.jpg",
+        caption:
+          "The original launcher. Five different jobs, one identical icon — the label is the only thing distinguishing them, so the icon does no work at all.",
+      },
+      {
+        kind: "prose",
+        eyebrow: "What was actually wrong",
+        title: "It had grown into a folder of apps, not a product",
+        body: [
+          "Each warehouse job had been shipped as its own mini-app, and the launcher was how they were held together. Different roles saw different grids, so there wasn't even one consistent home screen to learn — and because every tile reused the same generic icon, choosing the right one meant reading every label, every time.",
+          "Inside, the screens had the same problem in miniature. A manufacturing list showed “80078 · 1000134 · 1000001” with nothing labelling which number was the order, the part, or the location. Titles truncated mid-word. Detail screens were bare label-and-value tables with no hierarchy, so the ordered quantity looked exactly as important as the internal location code. Filters lived in a tab bar pinned to the bottom of the screen, far from the list they controlled.",
+        ],
+      },
+      {
+        kind: "figure",
+        src: "/work/warepro-mobile/old-ui-hero.jpg",
+        caption:
+          "The original app across its main screens — login, receiving, the launcher, and put away.",
+        wide: true,
+      },
+      {
+        kind: "insight",
+        eyebrow: "The reframe",
+        title: "Design the task, not the screen",
+        body:
+          "The desktop instinct is to present data and let the user decide what to do with it. On a warehouse floor that's backwards — the operator already knows which job they're on; what they need is the next physical action. So every flow now leads with the instruction and puts the data underneath: “Task 3 of 4,” then “1. GO TO THIS BIN — A1-02,” then the item. The screen tells you where to walk before it tells you what you're carrying.",
+      },
+      {
+        kind: "figure",
+        src: "/work/warepro-mobile/screen-putaway.jpg",
+        caption:
+          "Putaway, redesigned — progress state, then the bin at the largest type on screen, then the item, then the single scan action.",
+      },
+      {
+        kind: "prose",
+        eyebrow: "Process",
+        title: "Understanding, then components, then screens",
+        body: [
+          "I worked it in that order in Figma — an Understanding page mapping how each job actually runs, then a component and variables library (cards, tabs, buttons, status bar, the WarePro colour ramp), and only then the screens. Building the pieces first is what let nine modules end up speaking the same language instead of nine separate visual dialects.",
+          "The receiving and manufacturing list screens each went through a dozen-plus iterations before they settled. I annotated the reasoning directly on the canvas as I went, so the decisions were arguable with the product team rather than just asserted.",
+        ],
+      },
+      {
+        kind: "quote",
+        text:
+          "Segmented tabs on top give easy navigation — most users have used that kind of interaction before, so it won't confuse them while using it.",
+        attribution: "From my design annotations in the Figma file",
+      },
+      {
+        kind: "principles",
+        eyebrow: "Design principles",
+        title: "Three rules for a device held in one hand",
+        items: [
+          {
+            name: "Emphasise what matters first",
+            body:
+              "Every card leads with the information the operator actually scans for — the order, the quantity, the status — and demotes internal codes. Readability by hierarchy, not by making everything bigger.",
+          },
+          {
+            name: "Use patterns they already know",
+            body:
+              "Segmented tabs on top, search where search always is, a familiar card list. Novelty costs nothing to design and a great deal to learn on a shift.",
+          },
+          {
+            name: "Say the next action",
+            body:
+              "Instructions are numbered steps — “1. Scan Location Barcode.” The operator should never infer what the app expects from them next.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "The system",
+        title: "Why Atlassian, again",
+        body: "I'd already put PI-ERP on the Atlassian Design System for its density under enterprise data, and the reasoning applies harder here. Warehouse screens are lists of states — orders, batches, shipments, bins — and Atlassian's lozenge and card patterns are built for exactly that, without the generous consumer spacing that would cost visible rows on a small screen. Sharing it across both products also means a PIPRA operator moving between desktop and handheld isn't learning two visual languages.",
+      },
+      {
+        kind: "figures",
+        items: [
+          { src: "/work/warepro-mobile/screen-receiving.jpg", caption: "Receiving — purchase orders with completion percentages and unit counts, not bare IDs." },
+          { src: "/work/warepro-mobile/screen-inventory.jpg", caption: "Inventory — filter tabs moved to the top, for the two states anyone actually searches for." },
+          { src: "/work/warepro-mobile/screen-qc.jpg", caption: "Quality check — a scan queue with pass/fail per batch, and a submit that stays disabled until an inspection exists." },
+          { src: "/work/warepro-mobile/screen-dispatch.jpg", caption: "Dispatch — shipments sorted by readiness, with the authorise action only on the one that's ready." },
+        ],
+      },
+      {
+        kind: "decisions",
+        eyebrow: "Key decisions",
+        title: "The calls that protect the count",
+        items: [
+          {
+            decision: "Collapse the launcher into flows",
+            logic:
+              "Five near-identical tiles is a choice the operator shouldn't have to make. Reorganising around the actual chain of work — receive, put away, check, pack, dispatch — means the app reflects the shift rather than the org chart of how it was built.",
+          },
+          {
+            decision: "Label every number, kill the bare IDs",
+            logic:
+              "“80078 · 1000134 · 1000001” is only readable to someone who already memorised the schema. Every value now carries its field, because the person reading it is holding a box and hasn't got working memory to spare.",
+          },
+          {
+            decision: "Move filters from the bottom bar to segmented tabs on top",
+            logic:
+              "Filters belong next to what they filter. Putting them directly above the list — a pattern operators have met in every other app they use — removes the gap between choosing a state and seeing it applied.",
+          },
+          {
+            decision: "Disable submit until the work is real",
+            logic:
+              "Submit QC Report, Execute Transfer and Process Return all start disabled and enable only once items are genuinely scanned in. Preventing an empty submission is far cheaper than reconciling a phantom one against physical stock later.",
+          },
+          {
+            decision: "Offer the alternative at the point of failure",
+            logic:
+              "“Bin is full? Suggest alternative” sits right on the putaway screen. The moment someone hits a physical blocker is exactly when they improvise and put stock somewhere the system doesn't know about — so the recovery path has to be in reach before that happens.",
+          },
+          {
+            decision: "A persistent scan trigger in a fixed position",
+            logic:
+              "Scanning is the most repeated action across all nine modules, so it gets the same floating control in the same place everywhere. Positional consistency matters more than elegance when someone performs an action hundreds of times a shift.",
+          },
+        ],
+      },
+      {
+        kind: "video",
+        src: "/work/warepro-mobile/flow-receiving.mp4",
+        caption: "Receiving — purchase order to pre-receive checklist to scan.",
+      },
+      {
+        kind: "video",
+        src: "/work/warepro-mobile/flow-qc.mp4",
+        caption: "Quality check — building an inspection queue, then passing or failing each batch.",
+      },
+      {
+        kind: "video",
+        src: "/work/warepro-mobile/flow-dispatch.mp4",
+        caption: "Dispatch — the end of the chain: authorise a ready shipment and release it.",
+      },
+      {
+        kind: "metrics",
+        eyebrow: "Scope",
+        items: [
+          { metric: "9 flows", label: "receiving, putaway, inventory, QC, packing, dispatch, transfer, returns, sales orders" },
+          { metric: "1 system", label: "one component library replacing a folder of separate apps" },
+          { metric: "One-handed", label: "designed around thumb reach and a scanner in the other hand" },
+          { metric: "Delivered", label: "full mobile redesign handed to the product team" },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "What I took from it",
+        title: "Consistency is a safety feature here",
+        body: "On a marketing site, an inconsistent component is an aesthetic problem. In a warehouse app it's a mis-scan — and a mis-scan is stock that exists in the system but not on the shelf. Giving nine modules one status grammar, one scan position and one instruction format wasn't tidiness. It was the cheapest available way to reduce the number of decisions someone has to make while holding a heavy box.",
+      },
+    ],
+    overview:
+      "WarePro's mobile app is the operator counterpart to the desktop digital twin — the tool used by the people physically moving stock. It had grown into a launcher of separate mini-apps, several sharing an identical icon, with screens that showed raw unlabelled IDs. I rebuilt all nine flows — receiving, putaway, inventory, quality check, packing, dispatch, transfer, returns and sales orders — as one system on the Atlassian Design System, structured around one-handed use with a scanner.",
+    problem: [
+      "The app opened on a launcher of separate mini-apps, five of which shared the same generic icon.",
+      "Screens showed raw unlabelled IDs, truncated titles, and flat label-value tables with no hierarchy.",
+      "Operators work one-handed with a scanner, on the move, with frequent interruptions — and a mis-scan becomes a real inventory discrepancy.",
+    ],
+    process: [
+      { title: "Mapped how each job actually runs", body: "An Understanding page in Figma covering the full inbound-to-outbound chain." },
+      { title: "Built components before screens", body: "Cards, tabs, buttons, status bar and colour ramp first, so nine modules share one language." },
+      { title: "Iterated with the reasoning on the canvas", body: "Receiving and manufacturing list each went through a dozen-plus versions, annotated as I went." },
+      { title: "Standardised on Atlassian DS", body: "Reused the system already adopted for PI-ERP, chosen for list and status density." },
+    ],
+    solution: [
+      "One system replacing a launcher of near-identical apps.",
+      "Task-first screens that state the next physical action before showing data.",
+      "Labelled fields, top segmented tabs, and a single status grammar across all nine flows.",
+      "Guards against invalid work — disabled submissions and in-context recovery at the point of failure.",
+    ],
+    results: [
+      { metric: "9 flows", label: "the full inbound-to-outbound chain" },
+      { metric: "1 design system", label: "Atlassian DS, shared with PI-ERP" },
+      { metric: "Delivered", label: "handed to the WarePro product team" },
+    ],
+    gallery: [],
+  },
 ];
 
 // Compact grid — the rest of the work, listed not deep-dived.
