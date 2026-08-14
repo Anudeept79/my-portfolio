@@ -3296,13 +3296,6 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        kind: "figure",
-        src: "/work/warepro-mobile/old-ui-hero.jpg",
-        caption:
-          "The original app across its main screens — login, receiving, the launcher, and put away.",
-        wide: true,
-      },
-      {
         kind: "insight",
         eyebrow: "The reframe",
         title: "Design the task, not the screen",
@@ -3467,6 +3460,188 @@ export const caseStudies: CaseStudy[] = [
     ],
     gallery: [],
   },
+  // -------------------------------------------------------------- K-DISC Tissue Culture (Lab)
+  {
+    slug: "kdisc-tissue-culture",
+    lab: true,
+    title: "A government lab dashboard that read like a database dump",
+    client: "K-DISC — Kerala Development & Innovation Strategic Council",
+    domain: "Civic Tech · Government",
+    year: "2026",
+    role: "Product Designer",
+    impact:
+      "Redesigned the Kerala state government's tissue-culture traceability dashboard — from a generic admin-panel template dumping raw sensor tables into a system built around six production stages and the people running them.",
+    teaser:
+      "A live Kerala state government dashboard tracking plant tissue-culture production, rebuilt from a raw-data admin template into a system anyone on the programme can actually read.",
+    accent: "blue",
+    cover: "/work/kdisc-tissue-culture/cover.jpg",
+    compare: {
+      before: "/work/kdisc-tissue-culture/old-dashboard.jpg",
+      after: "/work/kdisc-tissue-culture/new-dashboard.jpg",
+    },
+    tools: ["Figma", "Civic UX", "Data Visualisation", "Dashboard Design"],
+    sections: [
+      {
+        kind: "snapshot",
+        role: "Product designer — redesign of the production dashboard",
+        timeline: "2026",
+        team: "With PIPRA's team, for K-DISC / Biotechnology & Model Floriculture Center",
+        platform: "Web — internal government dashboard",
+        status: "Redesign delivered",
+        problem:
+          "The live dashboard at tissueculture.kdisc.kerala.gov.in was a generic admin-panel template — plain pie charts, dense raw sensor tables, and orange accent bars with no meaning behind them.",
+        outcome:
+          "A dashboard organised around the six real production stages and the people running them, with sensor data shown as scannable status cards instead of raw tables.",
+      },
+      {
+        kind: "takeaways",
+        items: [
+          "This is real, live government infrastructure — a state programme tracking plant tissue-culture production from lab to field, not a concept exercise.",
+          "The old dashboard was a template with data poured into it; the redesign is organised around six real production stages — Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening.",
+          "The clearest single win: rows of raw IoT temperature and humidity readings became compact status cards you can read in one pass down a shift.",
+        ],
+      },
+      {
+        kind: "lead",
+        body:
+          "K-DISC runs a real state programme: tracking plant tissue cultures through a lab pipeline, in growth rooms wired with temperature and humidity sensors, all the way to field collection. The dashboard that ran it looked like an admin template nobody had customised.",
+      },
+      {
+        kind: "figure",
+        src: "/work/kdisc-tissue-culture/old-dashboard.jpg",
+        caption:
+          "The live dashboard as it stood — captured directly from tissueculture.kdisc.kerala.gov.in. A generic admin sidebar, plain pie charts, and no visual hierarchy between a headline number and a device log.",
+        wide: true,
+      },
+      {
+        kind: "prose",
+        eyebrow: "What was actually wrong",
+        title: "A template with data poured into it",
+        body: [
+          "Nothing on the old dashboard was broken — every number was real and current. The problem was that it read like the default screen of whatever admin-panel framework it was built on: a collapsible “Favourites” sidebar, orange accent bars on every card regardless of what the card meant, and plain filled pie charts with no centre total to anchor the eye.",
+          "The worst offender was the IoT section. Average temperature, humidity, per-device readings, light status, battery — all of it as raw table rows. “OverHeat” and “LessHumidity” sat in the same red as an error message, with no way to tell at a glance which growth room actually needed attention right now.",
+        ],
+      },
+      {
+        kind: "figure",
+        src: "/work/kdisc-tissue-culture/old-iot-tables.jpg",
+        caption:
+          "The old IoT section — four separate raw tables for temperature, humidity, device status and light status, with no summary above them.",
+        wide: true,
+      },
+      {
+        kind: "insight",
+        eyebrow: "The reframe",
+        title: "Organise around the six stages, not around the sensors",
+        body:
+          "A tissue culture moves through six defined stages on its way from a lab sample to a plantable sucker: Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening. That's the actual mental model of everyone using this system — a technician, a field officer, a programme manager all think in stages, not in database tables. So the redesign puts stage-wise distribution and rejection history front and centre, with the sensor data demoted to supporting status, not the headline.",
+      },
+      {
+        kind: "figure",
+        src: "/work/kdisc-tissue-culture/new-iot-sensors.jpg",
+        caption:
+          "The same IoT data and the same six stages, redesigned — sensors as compact status cards, stage distribution as a single readable row instead of four separate tables.",
+        wide: true,
+      },
+      {
+        kind: "principles",
+        eyebrow: "Design principles",
+        title: "Three rules for a civic data dashboard",
+        items: [
+          {
+            name: "Summarise before you tabulate",
+            body:
+              "Every data section leads with a scannable summary — a status card, a stage count — before any raw table. A table is for someone who already knows what they're looking for; a summary is for everyone else.",
+          },
+          {
+            name: "Colour only where it means something",
+            body:
+              "The old dashboard used the same orange bar on every card type. The redesign spends colour deliberately — green for on-track, amber and red reserved for what actually needs a person's attention.",
+          },
+          {
+            name: "Match the navigation to the job, not the database",
+            body:
+              "The sidebar is organised by task — Culture Production, Batch Production, Growth Room Report, Plant Tag Reports — mirroring how a technician or field officer actually describes their day, not the underlying table names.",
+          },
+        ],
+      },
+      {
+        kind: "figures",
+        items: [
+          { src: "/work/kdisc-tissue-culture/new-stages.jpg", caption: "IoT sensors as status cards, and stage-wise culture distribution as a single readable row." },
+          { src: "/work/kdisc-tissue-culture/entry-screen.jpg", caption: "The branded entry screen — both the Kerala state emblem and the K-DISC identity, carried through to the app itself." },
+        ],
+      },
+      {
+        kind: "decisions",
+        eyebrow: "Key decisions",
+        title: "The calls that made it legible",
+        items: [
+          {
+            decision: "Donut charts with a centre total, not plain pies",
+            logic:
+              "A pie chart alone makes you sum the slices to find the headline number. A donut with the total printed in the centre answers the first question — “how many, total?” — before anyone has to read a legend.",
+          },
+          {
+            decision: "Collapse raw sensor tables into status cards",
+            logic:
+              "A table of temperature and humidity readings across four rooms asks the reader to scan and compare manually. A grid of per-room cards with the number and its status in one glance does that comparison for them.",
+          },
+          {
+            decision: "Keep the government identity, not a generic template skin",
+            logic:
+              "The Kerala state emblem and the K-DISC mark carry real institutional trust. Rather than replace the branding with a generic dashboard look, the redesign kept it visible — including on the app's own entry screen — so the system still reads as official.",
+          },
+          {
+            decision: "Task-based navigation instead of table-based navigation",
+            logic:
+              "Renaming and regrouping the sidebar around what a user is trying to do — production, reports, users — instead of what table the data happens to live in removes a translation step between the job and the interface.",
+          },
+        ],
+      },
+      {
+        kind: "metrics",
+        eyebrow: "Where it stands",
+        items: [
+          { metric: "6 stages", label: "Initiation through Hardening, the real production pipeline" },
+          { metric: "Live", label: "government dashboard, real production data" },
+          { metric: "Government client", label: "K-DISC · Biotechnology & Model Floriculture Center" },
+          { metric: "Delivered", label: "redesign handed over" },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "What I took from it",
+        title: "Civic dashboards fail quietly",
+        body: "Nobody complains loudly about a confusing government dashboard the way they would about a broken consumer app — they just work around it, or stop trusting the numbers. The old dashboard wasn't wrong, it was just unreadable at the speed the job actually moves at. Redesigning around the six real stages instead of the underlying tables is the same lesson as everywhere else in this portfolio: design the task, not the data model.",
+      },
+    ],
+    overview:
+      "K-DISC (Kerala Development and Innovation Strategic Council) runs a state tissue-culture traceability programme with the Biotechnology & Model Floriculture Center, tracking plant cultures through six production stages across growth rooms wired with IoT sensors. The live dashboard was a generic admin-panel template — raw sensor tables, plain pie charts, and no visual hierarchy. I redesigned it around the programme's real six-stage production model, turning raw device tables into scannable status cards.",
+    problem: [
+      "The live government dashboard read as an unstyled admin template, not a purpose-built tool.",
+      "IoT sensor data was shown as four separate raw tables with no summary.",
+      "Navigation and layout followed the underlying database structure instead of how technicians and field officers actually describe their work.",
+    ],
+    process: [
+      { title: "Audited the live system", body: "Captured the dashboard as it actually runs at tissueculture.kdisc.kerala.gov.in." },
+      { title: "Mapped the real production model", body: "Six stages — Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening — as the organising structure." },
+      { title: "Redesigned the data layer", body: "Raw sensor tables became status cards; plain pies became donuts with centre totals." },
+      { title: "Kept the institutional identity", body: "Retained the Kerala state emblem and K-DISC branding throughout, including the app's entry screen." },
+    ],
+    solution: [
+      "A dashboard organised around the programme's six real production stages.",
+      "IoT sensor data shown as scannable status cards instead of raw device tables.",
+      "Donut charts with centre totals, and colour spent only where it signals something actionable.",
+      "Task-based navigation that matches how technicians and field officers describe their work.",
+    ],
+    results: [
+      { metric: "6 stages", label: "the real production pipeline, made the organising structure" },
+      { metric: "Live", label: "government dashboard, real production data" },
+      { metric: "Delivered", label: "redesign handed to K-DISC / PIPRA" },
+    ],
+    gallery: [],
+  },
 ];
 
 // Compact grid — the rest of the work, listed not deep-dived.
@@ -3558,6 +3733,15 @@ export const lab = [
     blurb:
       "Investor, Trader and Agency & Admin — three responsive products for a live gold-trading platform, sharing one design system and wired to live backend APIs. Backend confirmed live by CEO and VP.",
     accent: "gold",
+  },
+  {
+    title: "K-DISC Tissue Culture Dashboard",
+    tag: "Kerala govt · Dashboard redesign",
+    blurb:
+      "The live Kerala state dashboard tracking plant tissue-culture production, redesigned from a raw-data admin template into a system built around the programme's six real production stages.",
+    accent: "blue",
+    href: "/work/kdisc-tissue-culture",
+    cover: "/work/kdisc-tissue-culture/cover.jpg",
   },
   {
     title: "Kerala EV Station App",
