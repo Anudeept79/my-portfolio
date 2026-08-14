@@ -24,6 +24,14 @@ export function CaseSections({
   );
 }
 
+/**
+ * Portrait handset captures are ~384px wide natively. Left to fill a prose
+ * column they upscale ~2x — blurry, and taller than the viewport. These cap
+ * them near native width and centre them so they read as a phone, not a poster.
+ */
+const PHONE_FRAME = "mx-auto w-full max-w-[300px] sm:max-w-[340px]";
+const PHONE_CAPTION = "mx-auto max-w-[340px] text-center";
+
 /** Narrow measure for reading; figures break wider. */
 function Prose({ children }: { children: React.ReactNode }) {
   return <div className="container-x max-w-3xl">{children}</div>;
@@ -269,7 +277,11 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
           <figure
             className={`container-x ${s.wide ? "max-w-6xl" : "max-w-4xl"}`}
           >
-            <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)]">
+            <div
+              className={`overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)] ${
+                s.phone ? PHONE_FRAME : ""
+              }`}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={s.src}
@@ -279,7 +291,11 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
               />
             </div>
             {s.caption && (
-              <figcaption className="mt-3 text-sm leading-relaxed text-muted">
+              <figcaption
+                className={`mt-3 text-sm leading-relaxed text-muted ${
+                  s.phone ? PHONE_CAPTION : ""
+                }`}
+              >
                 {s.caption}
               </figcaption>
             )}
@@ -291,7 +307,11 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
       return (
         <Reveal>
           <figure className={`container-x ${s.wide ? "max-w-6xl" : "max-w-4xl"}`}>
-            <div className="relative overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)]">
+            <div
+              className={`relative overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)] ${
+                s.phone ? PHONE_FRAME : ""
+              }`}
+            >
               <video
                 src={s.src}
                 autoPlay
@@ -308,7 +328,11 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
               )}
             </div>
             {s.caption && (
-              <figcaption className="mt-3 text-sm leading-relaxed text-muted">
+              <figcaption
+                className={`mt-3 text-sm leading-relaxed text-muted ${
+                  s.phone ? PHONE_CAPTION : ""
+                }`}
+              >
                 {s.caption}
               </figcaption>
             )}
@@ -319,7 +343,15 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
     case "figures":
       return (
         <div className="container-x max-w-6xl">
-          <div className="grid gap-5 sm:grid-cols-2">
+          {/* phone sets go 2-up on mobile and 4-up on desktop, so handset
+              captures stay near native size instead of stretching */}
+          <div
+            className={`grid gap-5 ${
+              s.phone
+                ? "grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4"
+                : "sm:grid-cols-2"
+            }`}
+          >
             {s.items.map((f, i) => (
               <Reveal key={i} delay={(i % 2) * 0.08}>
                 <figure>

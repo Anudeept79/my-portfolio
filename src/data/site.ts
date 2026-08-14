@@ -120,10 +120,12 @@ export type CaseSection =
   // a boxed realisation — the turn in the story
   | { kind: "insight"; eyebrow?: string; title: string; body: string }
   | { kind: "bullets"; eyebrow?: string; title?: string; items: string[] }
-  | { kind: "figure"; src: string; caption?: string; wide?: boolean }
-  | { kind: "figures"; items: { src: string; caption?: string }[] }
+  // `phone` constrains portrait mobile captures to a handset-sized column so
+  // they aren't upscaled past their native width (and rendered blurry)
+  | { kind: "figure"; src: string; caption?: string; wide?: boolean; phone?: boolean }
+  | { kind: "figures"; items: { src: string; caption?: string }[]; phone?: boolean }
   // an inline muted/looping clip of the product actually running
-  | { kind: "video"; src: string; caption?: string; badge?: string; wide?: boolean }
+  | { kind: "video"; src: string; caption?: string; badge?: string; wide?: boolean; phone?: boolean }
   | {
       kind: "steps";
       eyebrow?: string;
@@ -3280,6 +3282,7 @@ export const caseStudies: CaseStudy[] = [
       {
         kind: "figure",
         src: "/work/warepro-mobile/old-ui-launcher.jpg",
+        phone: true,
         caption:
           "The original launcher. Five different jobs, one identical icon — the label is the only thing distinguishing them, so the icon does no work at all.",
       },
@@ -3309,6 +3312,7 @@ export const caseStudies: CaseStudy[] = [
       {
         kind: "figure",
         src: "/work/warepro-mobile/screen-putaway.jpg",
+        phone: true,
         caption:
           "Putaway, redesigned — progress state, then the bin at the largest type on screen, then the item, then the single scan action.",
       },
@@ -3357,6 +3361,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         kind: "figures",
+        phone: true,
         items: [
           { src: "/work/warepro-mobile/screen-receiving.jpg", caption: "Receiving — purchase orders with completion percentages and unit counts, not bare IDs." },
           { src: "/work/warepro-mobile/screen-inventory.jpg", caption: "Inventory — filter tabs moved to the top, for the two states anyone actually searches for." },
@@ -3404,16 +3409,19 @@ export const caseStudies: CaseStudy[] = [
       {
         kind: "video",
         src: "/work/warepro-mobile/flow-receiving.mp4",
+        phone: true,
         caption: "Receiving — purchase order to pre-receive checklist to scan.",
       },
       {
         kind: "video",
         src: "/work/warepro-mobile/flow-qc.mp4",
+        phone: true,
         caption: "Quality check — building an inspection queue, then passing or failing each batch.",
       },
       {
         kind: "video",
         src: "/work/warepro-mobile/flow-dispatch.mp4",
+        phone: true,
         caption: "Dispatch — the end of the chain: authorise a ready shipment and release it.",
       },
       {
