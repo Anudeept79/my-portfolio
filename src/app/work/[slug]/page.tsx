@@ -85,7 +85,10 @@ export default async function CaseStudyPage({
         {/* cover — live demo video when available, image otherwise */}
         <div className="container-x mt-12">
           {cs.video ? (
-            <div className="relative overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)]">
+            // `max-h` keeps portrait captures (phone demos) from being blown up
+            // to full column width — they stay near native size and centred,
+            // while landscape demos are unaffected.
+            <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)]">
               <video
                 src={cs.video}
                 poster={cs.cover}
@@ -94,7 +97,7 @@ export default async function CaseStudyPage({
                 loop
                 playsInline
                 controls
-                className="h-auto w-full"
+                className="block h-auto max-h-[78vh] w-auto max-w-full"
               />
               <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />

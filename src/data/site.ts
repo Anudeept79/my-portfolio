@@ -120,10 +120,12 @@ export type CaseSection =
   // a boxed realisation — the turn in the story
   | { kind: "insight"; eyebrow?: string; title: string; body: string }
   | { kind: "bullets"; eyebrow?: string; title?: string; items: string[] }
-  | { kind: "figure"; src: string; caption?: string; wide?: boolean }
-  | { kind: "figures"; items: { src: string; caption?: string }[] }
+  // `phone` constrains portrait mobile captures to a handset-sized column so
+  // they aren't upscaled past their native width (and rendered blurry)
+  | { kind: "figure"; src: string; caption?: string; wide?: boolean; phone?: boolean }
+  | { kind: "figures"; items: { src: string; caption?: string }[]; phone?: boolean }
   // an inline muted/looping clip of the product actually running
-  | { kind: "video"; src: string; caption?: string; badge?: string; wide?: boolean }
+  | { kind: "video"; src: string; caption?: string; badge?: string; wide?: boolean; phone?: boolean }
   | {
       kind: "steps";
       eyebrow?: string;
@@ -3231,6 +3233,430 @@ export const caseStudies: CaseStudy[] = [
     ],
     gallery: [],
   },
+  // -------------------------------------------------------------- WarePro Mobile
+  {
+    slug: "warepro-mobile",
+    title: "Five apps with the same icon, rebuilt as one",
+    client: "WarePro (PIPRA Solutions)",
+    domain: "Logistics · Mobile",
+    year: "2026",
+    role: "Product Designer",
+    impact:
+      "WarePro's handheld app was a launcher full of near-identical apps. I rebuilt the whole operator side — receiving through dispatch — as one system on the Atlassian Design System.",
+    teaser:
+      "The operator side of WarePro: nine flows covering the whole inbound-to-outbound chain, rebuilt so a picker can run them one-handed while holding a scanner.",
+    accent: "blue",
+    cover: "/work/warepro-mobile/cover.jpg",
+    video: "/work/warepro-mobile/flow-full.mp4",
+    compare: {
+      before: "/work/warepro-mobile/old-ui-launcher.jpg",
+      after: "/work/warepro-mobile/screen-putaway.jpg",
+    },
+    tools: ["Figma", "Atlassian Design System", "Mobile UX", "Design Systems"],
+    sections: [
+      {
+        kind: "snapshot",
+        role: "Product designer — research, flows, component library, UI across all modules",
+        timeline: "2026",
+        team: "With PIPRA's WarePro product and engineering teams",
+        platform: "Android handhelds · warehouse scanners",
+        status: "Redesign delivered",
+        problem:
+          "The app opened on a “Select your app” launcher where five assembly apps shared one identical icon. Inside, screens showed raw unlabelled IDs to operators working one-handed with a scanner, where a mis-read becomes a real inventory error.",
+        outcome:
+          "Nine flows rebuilt as one system on the Atlassian Design System — task-first instructions, a single status grammar, and guards that stop invalid work before it's submitted.",
+      },
+      {
+        kind: "takeaways",
+        items: [
+          "The original wasn't one app — it was a launcher of separate apps, several of which were visually indistinguishable from each other.",
+          "The unit of design here is a task, not a screen: every flow states the next physical action before it shows any data.",
+          "A mis-scan isn't a UI bug, it's stock that exists in the system but not on the shelf — so consistency is a safety feature, not a style preference.",
+        ],
+      },
+      {
+        kind: "lead",
+        body:
+          "Open the old WarePro app and the first thing you get isn't work — it's a menu. “Select your app.” Five tiles for assembly alone: Pick, Assembled, QC, Box Packing, Carton Packing. Every one of them the same orange box with the same green tick.",
+      },
+      {
+        kind: "figure",
+        src: "/work/warepro-mobile/old-ui-launcher.jpg",
+        phone: true,
+        caption:
+          "The original launcher. Five different jobs, one identical icon — the label is the only thing distinguishing them, so the icon does no work at all.",
+      },
+      {
+        kind: "prose",
+        eyebrow: "What was actually wrong",
+        title: "It had grown into a folder of apps, not a product",
+        body: [
+          "Each warehouse job had been shipped as its own mini-app, and the launcher was how they were held together. Different roles saw different grids, so there wasn't even one consistent home screen to learn — and because every tile reused the same generic icon, choosing the right one meant reading every label, every time.",
+          "Inside, the screens had the same problem in miniature. A manufacturing list showed “80078 · 1000134 · 1000001” with nothing labelling which number was the order, the part, or the location. Titles truncated mid-word. Detail screens were bare label-and-value tables with no hierarchy, so the ordered quantity looked exactly as important as the internal location code. Filters lived in a tab bar pinned to the bottom of the screen, far from the list they controlled.",
+        ],
+      },
+      {
+        kind: "insight",
+        eyebrow: "The reframe",
+        title: "Design the task, not the screen",
+        body:
+          "The desktop instinct is to present data and let the user decide what to do with it. On a warehouse floor that's backwards — the operator already knows which job they're on; what they need is the next physical action. So every flow now leads with the instruction and puts the data underneath: “Task 3 of 4,” then “1. GO TO THIS BIN — A1-02,” then the item. The screen tells you where to walk before it tells you what you're carrying.",
+      },
+      {
+        kind: "figure",
+        src: "/work/warepro-mobile/screen-putaway.jpg",
+        phone: true,
+        caption:
+          "Putaway, redesigned — progress state, then the bin at the largest type on screen, then the item, then the single scan action.",
+      },
+      {
+        kind: "prose",
+        eyebrow: "Process",
+        title: "Understanding, then components, then screens",
+        body: [
+          "I worked it in that order in Figma — an Understanding page mapping how each job actually runs, then a component and variables library (cards, tabs, buttons, status bar, the WarePro colour ramp), and only then the screens. Building the pieces first is what let nine modules end up speaking the same language instead of nine separate visual dialects.",
+          "The receiving and manufacturing list screens each went through a dozen-plus iterations before they settled. I annotated the reasoning directly on the canvas as I went, so the decisions were arguable with the product team rather than just asserted.",
+        ],
+      },
+      {
+        kind: "quote",
+        text:
+          "Segmented tabs on top give easy navigation — most users have used that kind of interaction before, so it won't confuse them while using it.",
+        attribution: "From my design annotations in the Figma file",
+      },
+      {
+        kind: "principles",
+        eyebrow: "Design principles",
+        title: "Three rules for a device held in one hand",
+        items: [
+          {
+            name: "Emphasise what matters first",
+            body:
+              "Every card leads with the information the operator actually scans for — the order, the quantity, the status — and demotes internal codes. Readability by hierarchy, not by making everything bigger.",
+          },
+          {
+            name: "Use patterns they already know",
+            body:
+              "Segmented tabs on top, search where search always is, a familiar card list. Novelty costs nothing to design and a great deal to learn on a shift.",
+          },
+          {
+            name: "Say the next action",
+            body:
+              "Instructions are numbered steps — “1. Scan Location Barcode.” The operator should never infer what the app expects from them next.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "The system",
+        title: "Why Atlassian, again",
+        body: "I'd already put PI-ERP on the Atlassian Design System for its density under enterprise data, and the reasoning applies harder here. Warehouse screens are lists of states — orders, batches, shipments, bins — and Atlassian's lozenge and card patterns are built for exactly that, without the generous consumer spacing that would cost visible rows on a small screen. Sharing it across both products also means a PIPRA operator moving between desktop and handheld isn't learning two visual languages.",
+      },
+      {
+        kind: "figures",
+        phone: true,
+        items: [
+          { src: "/work/warepro-mobile/screen-receiving.jpg", caption: "Receiving — purchase orders with completion percentages and unit counts, not bare IDs." },
+          { src: "/work/warepro-mobile/screen-inventory.jpg", caption: "Inventory — filter tabs moved to the top, for the two states anyone actually searches for." },
+          { src: "/work/warepro-mobile/screen-qc.jpg", caption: "Quality check — a scan queue with pass/fail per batch, and a submit that stays disabled until an inspection exists." },
+          { src: "/work/warepro-mobile/screen-dispatch.jpg", caption: "Dispatch — shipments sorted by readiness, with the authorise action only on the one that's ready." },
+        ],
+      },
+      {
+        kind: "decisions",
+        eyebrow: "Key decisions",
+        title: "The calls that protect the count",
+        items: [
+          {
+            decision: "Collapse the launcher into flows",
+            logic:
+              "Five near-identical tiles is a choice the operator shouldn't have to make. Reorganising around the actual chain of work — receive, put away, check, pack, dispatch — means the app reflects the shift rather than the org chart of how it was built.",
+          },
+          {
+            decision: "Label every number, kill the bare IDs",
+            logic:
+              "“80078 · 1000134 · 1000001” is only readable to someone who already memorised the schema. Every value now carries its field, because the person reading it is holding a box and hasn't got working memory to spare.",
+          },
+          {
+            decision: "Move filters from the bottom bar to segmented tabs on top",
+            logic:
+              "Filters belong next to what they filter. Putting them directly above the list — a pattern operators have met in every other app they use — removes the gap between choosing a state and seeing it applied.",
+          },
+          {
+            decision: "Disable submit until the work is real",
+            logic:
+              "Submit QC Report, Execute Transfer and Process Return all start disabled and enable only once items are genuinely scanned in. Preventing an empty submission is far cheaper than reconciling a phantom one against physical stock later.",
+          },
+          {
+            decision: "Offer the alternative at the point of failure",
+            logic:
+              "“Bin is full? Suggest alternative” sits right on the putaway screen. The moment someone hits a physical blocker is exactly when they improvise and put stock somewhere the system doesn't know about — so the recovery path has to be in reach before that happens.",
+          },
+          {
+            decision: "A persistent scan trigger in a fixed position",
+            logic:
+              "Scanning is the most repeated action across all nine modules, so it gets the same floating control in the same place everywhere. Positional consistency matters more than elegance when someone performs an action hundreds of times a shift.",
+          },
+        ],
+      },
+      {
+        kind: "video",
+        src: "/work/warepro-mobile/flow-receiving.mp4",
+        phone: true,
+        caption: "Receiving — purchase order to pre-receive checklist to scan.",
+      },
+      {
+        kind: "video",
+        src: "/work/warepro-mobile/flow-qc.mp4",
+        phone: true,
+        caption: "Quality check — building an inspection queue, then passing or failing each batch.",
+      },
+      {
+        kind: "video",
+        src: "/work/warepro-mobile/flow-dispatch.mp4",
+        phone: true,
+        caption: "Dispatch — the end of the chain: authorise a ready shipment and release it.",
+      },
+      {
+        kind: "metrics",
+        eyebrow: "Scope",
+        items: [
+          { metric: "9 flows", label: "receiving, putaway, inventory, QC, packing, dispatch, transfer, returns, sales orders" },
+          { metric: "1 system", label: "one component library replacing a folder of separate apps" },
+          { metric: "One-handed", label: "designed around thumb reach and a scanner in the other hand" },
+          { metric: "Delivered", label: "full mobile redesign handed to the product team" },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "What I took from it",
+        title: "Consistency is a safety feature here",
+        body: "On a marketing site, an inconsistent component is an aesthetic problem. In a warehouse app it's a mis-scan — and a mis-scan is stock that exists in the system but not on the shelf. Giving nine modules one status grammar, one scan position and one instruction format wasn't tidiness. It was the cheapest available way to reduce the number of decisions someone has to make while holding a heavy box.",
+      },
+    ],
+    overview:
+      "WarePro's mobile app is the operator counterpart to the desktop digital twin — the tool used by the people physically moving stock. It had grown into a launcher of separate mini-apps, several sharing an identical icon, with screens that showed raw unlabelled IDs. I rebuilt all nine flows — receiving, putaway, inventory, quality check, packing, dispatch, transfer, returns and sales orders — as one system on the Atlassian Design System, structured around one-handed use with a scanner.",
+    problem: [
+      "The app opened on a launcher of separate mini-apps, five of which shared the same generic icon.",
+      "Screens showed raw unlabelled IDs, truncated titles, and flat label-value tables with no hierarchy.",
+      "Operators work one-handed with a scanner, on the move, with frequent interruptions — and a mis-scan becomes a real inventory discrepancy.",
+    ],
+    process: [
+      { title: "Mapped how each job actually runs", body: "An Understanding page in Figma covering the full inbound-to-outbound chain." },
+      { title: "Built components before screens", body: "Cards, tabs, buttons, status bar and colour ramp first, so nine modules share one language." },
+      { title: "Iterated with the reasoning on the canvas", body: "Receiving and manufacturing list each went through a dozen-plus versions, annotated as I went." },
+      { title: "Standardised on Atlassian DS", body: "Reused the system already adopted for PI-ERP, chosen for list and status density." },
+    ],
+    solution: [
+      "One system replacing a launcher of near-identical apps.",
+      "Task-first screens that state the next physical action before showing data.",
+      "Labelled fields, top segmented tabs, and a single status grammar across all nine flows.",
+      "Guards against invalid work — disabled submissions and in-context recovery at the point of failure.",
+    ],
+    results: [
+      { metric: "9 flows", label: "the full inbound-to-outbound chain" },
+      { metric: "1 design system", label: "Atlassian DS, shared with PI-ERP" },
+      { metric: "Delivered", label: "handed to the WarePro product team" },
+    ],
+    gallery: [],
+  },
+  // -------------------------------------------------------------- K-DISC Tissue Culture (Lab)
+  {
+    slug: "kdisc-tissue-culture",
+    lab: true,
+    title: "A government lab dashboard that read like a database dump",
+    client: "K-DISC — Kerala Development & Innovation Strategic Council",
+    domain: "Civic Tech · Government",
+    year: "2026",
+    role: "Product Designer",
+    impact:
+      "Redesigned the Kerala state government's tissue-culture traceability dashboard — from a generic admin-panel template dumping raw sensor tables into a system built around six production stages and the people running them.",
+    teaser:
+      "A live Kerala state government dashboard tracking plant tissue-culture production, rebuilt from a raw-data admin template into a system anyone on the programme can actually read.",
+    accent: "blue",
+    cover: "/work/kdisc-tissue-culture/cover.jpg",
+    compare: {
+      before: "/work/kdisc-tissue-culture/old-dashboard.jpg",
+      after: "/work/kdisc-tissue-culture/new-dashboard.jpg",
+    },
+    tools: ["Figma", "Civic UX", "Data Visualisation", "Dashboard Design"],
+    sections: [
+      {
+        kind: "snapshot",
+        role: "Product designer — redesign of the production dashboard",
+        timeline: "2026",
+        team: "With PIPRA's team, for K-DISC / Biotechnology & Model Floriculture Center",
+        platform: "Web — internal government dashboard",
+        status: "Redesign delivered",
+        problem:
+          "The live dashboard at tissueculture.kdisc.kerala.gov.in was a generic admin-panel template — plain pie charts, dense raw sensor tables, and orange accent bars with no meaning behind them.",
+        outcome:
+          "A dashboard organised around the six real production stages and the people running them, with sensor data shown as scannable status cards instead of raw tables.",
+      },
+      {
+        kind: "takeaways",
+        items: [
+          "This is real, live government infrastructure — a state programme tracking plant tissue-culture production from lab to field, not a concept exercise.",
+          "The old dashboard was a template with data poured into it; the redesign is organised around six real production stages — Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening.",
+          "The clearest single win: rows of raw IoT temperature and humidity readings became compact status cards you can read in one pass down a shift.",
+        ],
+      },
+      {
+        kind: "lead",
+        body:
+          "K-DISC runs a real state programme: tracking plant tissue cultures through a lab pipeline, in growth rooms wired with temperature and humidity sensors, all the way to field collection. The dashboard that ran it looked like an admin template nobody had customised.",
+      },
+      {
+        kind: "figure",
+        src: "/work/kdisc-tissue-culture/old-dashboard.jpg",
+        caption:
+          "The live dashboard as it stood — captured directly from tissueculture.kdisc.kerala.gov.in. A generic admin sidebar, plain pie charts, and no visual hierarchy between a headline number and a device log.",
+        wide: true,
+      },
+      {
+        kind: "prose",
+        eyebrow: "What was actually wrong",
+        title: "A template with data poured into it",
+        body: [
+          "Nothing on the old dashboard was broken — every number was real and current. The problem was that it read like the default screen of whatever admin-panel framework it was built on: a collapsible “Favourites” sidebar, orange accent bars on every card regardless of what the card meant, and plain filled pie charts with no centre total to anchor the eye.",
+          "The worst offender was the IoT section. Average temperature, humidity, per-device readings, light status, battery — all of it as raw table rows. “OverHeat” and “LessHumidity” sat in the same red as an error message, with no way to tell at a glance which growth room actually needed attention right now.",
+        ],
+      },
+      {
+        kind: "figure",
+        src: "/work/kdisc-tissue-culture/old-iot-tables.jpg",
+        caption:
+          "The old IoT section — four separate raw tables for temperature, humidity, device status and light status, with no summary above them.",
+        wide: true,
+      },
+      {
+        kind: "insight",
+        eyebrow: "The reframe",
+        title: "Organise around the six stages, not around the sensors",
+        body:
+          "A tissue culture moves through six defined stages on its way from a lab sample to a plantable sucker: Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening. That's the actual mental model of everyone using this system — a technician, a field officer, a programme manager all think in stages, not in database tables. So the redesign puts stage-wise distribution and rejection history front and centre, with the sensor data demoted to supporting status, not the headline.",
+      },
+      {
+        kind: "figure",
+        src: "/work/kdisc-tissue-culture/new-iot-sensors.jpg",
+        caption:
+          "The same IoT data and the same six stages, redesigned — sensors as compact status cards, stage distribution as a single readable row instead of four separate tables.",
+        wide: true,
+      },
+      {
+        kind: "principles",
+        eyebrow: "Design principles",
+        title: "Three rules for a civic data dashboard",
+        items: [
+          {
+            name: "Summarise before you tabulate",
+            body:
+              "Every data section leads with a scannable summary — a status card, a stage count — before any raw table. A table is for someone who already knows what they're looking for; a summary is for everyone else.",
+          },
+          {
+            name: "Colour only where it means something",
+            body:
+              "The old dashboard used the same orange bar on every card type. The redesign spends colour deliberately — green for on-track, amber and red reserved for what actually needs a person's attention.",
+          },
+          {
+            name: "Match the navigation to the job, not the database",
+            body:
+              "The sidebar is organised by task — Culture Production, Batch Production, Growth Room Report, Plant Tag Reports — mirroring how a technician or field officer actually describes their day, not the underlying table names.",
+          },
+        ],
+      },
+      {
+        kind: "figures",
+        items: [
+          { src: "/work/kdisc-tissue-culture/new-stages.jpg", caption: "IoT sensors as status cards, and stage-wise culture distribution as a single readable row." },
+          { src: "/work/kdisc-tissue-culture/entry-screen.jpg", caption: "The branded entry screen — both the Kerala state emblem and the K-DISC identity, carried through to the app itself." },
+        ],
+      },
+      {
+        kind: "decisions",
+        eyebrow: "Key decisions",
+        title: "Widget by widget, against the old style",
+        items: [
+          {
+            decision: "A donut with a centre total and a percentage legend, not a plain filled pie",
+            logic:
+              "The old “First visit” chart was a solid pie with a colour key underneath — you had to match colours to a legend and estimate proportions yourself. The redesign prints the total (“110”) in the donut's centre and states each share as a percentage (Completed 60%, Pending 10%, Rejected 20%) directly under its own dot. The headline number and the breakdown are both handed to you, not inferred.",
+          },
+          {
+            decision: "One IoT reading per IoT card, not one row in a six-column table",
+            logic:
+              "The old IoT table forced a left-to-right scan across Room, Temperature, Humidity, Temp Status, Humidity Status, Battery and Time just to answer “is C1 fine?” The redesigned card puts the room, the live temperature, humidity and light state on one face — “16°C · C1 · Humidity/30% · Lights OFF 10H” — so that single question is answered without scanning a row.",
+          },
+          {
+            decision: "Stage names as column headers over big numbers, not a dense data table",
+            logic:
+              "Stage-wise culture distribution reads as six wide columns — Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening — each with one large number underneath. No table borders, no repeated row chrome. It reads like a row of KPIs, because that's what it actually is to the person checking it.",
+          },
+          {
+            decision: "Keep room-by-stage detail in a real table, but make it a table again",
+            logic:
+              "Not every view should be de-tabled — “Medium bottles by room” genuinely is a matrix (5 rooms × 5 stages), so it stays a table. The decision was giving it clean row separation, aligned numerals, and a bold room label per row, instead of the cramped, low-contrast grid the old dashboard used for the same kind of data.",
+          },
+          {
+            decision: "Bar charts get gridlines, readable labels and a hover tooltip with the exact figure",
+            logic:
+              "The old “User wise TCT Performance” chart had unlabeled axes and username labels like “TCT@pipra” that didn't read as a person. The redesign gives every user a real name (Muthu, Srikanth, Mahindra), adds horizontal gridlines so bar heights are comparable at a glance, and puts the exact number behind a hover — “Muthu · 44,058 · Total” — so the chart works both as an at-a-glance comparison and as a precise lookup.",
+          },
+          {
+            decision: "Keep the government identity, not a generic template skin",
+            logic:
+              "The Kerala state emblem and the K-DISC mark carry real institutional trust. Rather than replace the branding with a generic dashboard look, the redesign kept it visible — including on the app's own entry screen — so the system still reads as official.",
+          },
+          {
+            decision: "Task-based navigation instead of table-based navigation",
+            logic:
+              "Renaming and regrouping the sidebar around what a user is trying to do — production, reports, users — instead of what table the data happens to live in removes a translation step between the job and the interface.",
+          },
+        ],
+      },
+      {
+        kind: "metrics",
+        eyebrow: "Where it stands",
+        items: [
+          { metric: "6 stages", label: "Initiation through Hardening, the real production pipeline" },
+          { metric: "Live", label: "government dashboard, real production data" },
+          { metric: "Government client", label: "K-DISC · Biotechnology & Model Floriculture Center" },
+          { metric: "Delivered", label: "redesign handed over" },
+        ],
+      },
+      {
+        kind: "prose",
+        eyebrow: "What I took from it",
+        title: "Civic dashboards fail quietly",
+        body: "Nobody complains loudly about a confusing government dashboard the way they would about a broken consumer app — they just work around it, or stop trusting the numbers. The old dashboard wasn't wrong, it was just unreadable at the speed the job actually moves at. Redesigning around the six real stages instead of the underlying tables is the same lesson as everywhere else in this portfolio: design the task, not the data model.",
+      },
+    ],
+    overview:
+      "K-DISC (Kerala Development and Innovation Strategic Council) runs a state tissue-culture traceability programme with the Biotechnology & Model Floriculture Center, tracking plant cultures through six production stages across growth rooms wired with IoT sensors. The live dashboard was a generic admin-panel template — raw sensor tables, plain pie charts, and no visual hierarchy. I redesigned it around the programme's real six-stage production model, turning raw device tables into scannable status cards.",
+    problem: [
+      "The live government dashboard read as an unstyled admin template, not a purpose-built tool.",
+      "IoT sensor data was shown as four separate raw tables with no summary.",
+      "Navigation and layout followed the underlying database structure instead of how technicians and field officers actually describe their work.",
+    ],
+    process: [
+      { title: "Audited the live system", body: "Captured the dashboard as it actually runs at tissueculture.kdisc.kerala.gov.in." },
+      { title: "Mapped the real production model", body: "Six stages — Initiation, Callusing, Multiplication, Elongation, Rooting, Hardening — as the organising structure." },
+      { title: "Redesigned the data layer", body: "Raw sensor tables became status cards; plain pies became donuts with centre totals." },
+      { title: "Kept the institutional identity", body: "Retained the Kerala state emblem and K-DISC branding throughout, including the app's entry screen." },
+    ],
+    solution: [
+      "A dashboard organised around the programme's six real production stages.",
+      "IoT sensor data shown as scannable status cards instead of raw device tables.",
+      "Donut charts with centre totals, and colour spent only where it signals something actionable.",
+      "Task-based navigation that matches how technicians and field officers describe their work.",
+    ],
+    results: [
+      { metric: "6 stages", label: "the real production pipeline, made the organising structure" },
+      { metric: "Live", label: "government dashboard, real production data" },
+      { metric: "Delivered", label: "redesign handed to K-DISC / PIPRA" },
+    ],
+    gallery: [],
+  },
 ];
 
 // Compact grid — the rest of the work, listed not deep-dived.
@@ -3322,6 +3748,15 @@ export const lab = [
     blurb:
       "Investor, Trader and Agency & Admin — three responsive products for a live gold-trading platform, sharing one design system and wired to live backend APIs. Backend confirmed live by CEO and VP.",
     accent: "gold",
+  },
+  {
+    title: "K-DISC Tissue Culture Dashboard",
+    tag: "Kerala govt · Dashboard redesign",
+    blurb:
+      "The live Kerala state dashboard tracking plant tissue-culture production, redesigned from a raw-data admin template into a system built around the programme's six real production stages.",
+    accent: "blue",
+    href: "/work/kdisc-tissue-culture",
+    cover: "/work/kdisc-tissue-culture/cover.jpg",
   },
   {
     title: "Kerala EV Station App",
