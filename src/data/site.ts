@@ -776,11 +776,7 @@ export const caseStudies: CaseStudy[] = [
       { metric: "Ahead", label: "of schedule" },
       { metric: "CEO + VP", label: "confirmed success" },
     ],
-    gallery: [
-      { src: "/work/stonex-migration/01.jpg", caption: "Original Figma designs" },
-      { src: "/work/stonex-migration/02.jpg", caption: "React Native build" },
-      { src: "/work/stonex-migration/03.jpg", caption: "Dubai corporate website" },
-    ],
+    gallery: [],
   },
 
   // -------------------------------------------------------------- PI-ERP
