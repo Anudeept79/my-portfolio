@@ -1,3 +1,5 @@
+import { wareproCaseStudy } from "./warepro";
+
 // ============================================================================
 // SITE CONTENT — single source of truth for the whole portfolio.
 // Edit facts/metrics here; every page reads from this file.
@@ -80,7 +82,48 @@ export const toolkit = [
  * the fixed Overview→Process→Outcome skeleton and are told in whatever order
  * and rhythm the product's own story demands — the way a real case study reads.
  */
-export type CaseSection =
+/** A genuine capture. `label` names the stage of the work it belongs to. */
+export type EvidenceItem = {
+  src: string;
+  /** Describes what is visible; `caption` says why it matters. */
+  alt: string;
+  /** Stage of the work: Legacy, Iteration, Reference, Prototype or Final. */
+  label?: string;
+  caption?: string;
+  /** Magnifies a detail in the thumbnail only; the enlarged view always shows the whole capture. */
+  zoom?: { scale: number; origin: string };
+};
+
+/** Secondary material, collapsed until asked for. */
+export type DetailItem = { title: string; body: string | string[]; images?: EvidenceItem[] };
+
+export type CaseSection = { id?: string } & (
+  // ---- editorial blocks (used by case studies that set `editorial`)
+  | { kind: "comparison"; eyebrow?: string; title: string; body: string; items: EvidenceItem[] }
+  | { kind: "turning"; eyebrow: string; title: string; body: string; shift?: { from: string; to: string } }
+  | {
+      kind: "model";
+      label: string;
+      title: string;
+      stages: { name: string; note: string }[];
+      items: string[];
+      caption: string;
+    }
+  | { kind: "ownership"; eyebrow?: string; title: string; groups: { name: string; items: string[] }[] }
+  | {
+      kind: "status";
+      eyebrow?: string;
+      title: string;
+      states: { name: string; status: string; state: "production" | "in-progress" }[];
+      qualification: string;
+    }
+  | { kind: "note"; label?: string; title: string; body: string }
+  | {
+      kind: "closing";
+      eyebrow?: string;
+      statement: string;
+      open: { label: string; text: string };
+    }
   // Scannable header block. Hiring managers skim a case study in seconds before
   // deciding whether to read it — this answers role / scope / problem / outcome
   // without them having to hunt for it in prose.
@@ -114,7 +157,8 @@ export type CaseSection =
   // oversized opening paragraph — the hook
   | { kind: "lead"; body: string }
   // standard narrative beat
-  | { kind: "prose"; eyebrow?: string; title?: string; body: string | string[] }
+  // `variant: "split"` sets the heading beside the copy; `more` adds collapsed supporting detail
+  | { kind: "prose"; eyebrow?: string; title?: string; body: string | string[]; variant?: "split"; more?: DetailItem[] }
   // the line worth stopping on
   | { kind: "quote"; text: string; attribution?: string }
   // a boxed realisation — the turn in the story
@@ -124,8 +168,22 @@ export type CaseSection =
   // they aren't upscaled past their native width (and rendered blurry)
   | { kind: "figure"; src: string; caption?: string; wide?: boolean; phone?: boolean }
   | { kind: "figures"; items: { src: string; caption?: string }[]; phone?: boolean }
-  // an inline muted/looping clip of the product actually running
-  | { kind: "video"; src: string; caption?: string; badge?: string; wide?: boolean; phone?: boolean }
+  // an inline muted/looping clip of the product actually running. In an editorial
+  // study, giving it a `title` sets it beside its copy, with `more` collapsed beneath.
+  | {
+      kind: "video";
+      controlled?: boolean;
+      poster?: string;
+      src: string;
+      caption?: string;
+      badge?: string;
+      wide?: boolean;
+      phone?: boolean;
+      eyebrow?: string;
+      title?: string;
+      body?: string | string[];
+      more?: DetailItem[];
+    }
   | {
       kind: "steps";
       eyebrow?: string;
@@ -136,7 +194,17 @@ export type CaseSection =
       kind: "decisions";
       eyebrow?: string;
       title?: string;
-      items: { decision: string; logic: string }[];
+      intro?: string;
+      // `evidence` + `result` opt an item into the editorial row (Evidence → Decision → Trade-off → Result);
+      // `images` sets the capture(s) that support it beside the reasoning
+      items: {
+        decision: string;
+        logic: string;
+        tradeoff?: string;
+        evidence?: string;
+        result?: string;
+        images?: EvidenceItem[];
+      }[];
     }
   | { kind: "metrics"; eyebrow?: string; items: { metric: string; label: string }[] }
   // a rules/constraints list rendered as a spec card (e.g. an AI system prompt)
@@ -156,10 +224,18 @@ export type CaseSection =
       title?: string;
       note?: string;
       items: { hex: string; range: string; meaning: string }[];
-    };
+    }
+);
 
 export type CaseStudy = {
   slug: string;
+  editorial?: {
+    headline: string;
+    subheadline: string;
+    summary: { label: string; value: string }[];
+    caption: string;
+    navigation: { id: string; label: string }[];
+  };
   title: string;
   client: string;
   domain: string;
@@ -212,329 +288,7 @@ export type CaseStudy = {
 };
 
 export const caseStudies: CaseStudy[] = [
-  // -------------------------------------------------------------- WarePro 3D
-  {
-    slug: "warepro-digital-twin",
-    title: "A living 3D digital twin you can command with your hands",
-    client: "WarePro (PIPRA Solutions — flagship product)",
-    domain: "Logistics · 3D / Spatial AI",
-    year: "2025",
-    role: "Lead Product Designer & Builder",
-    impact:
-      "Turned spreadsheet-driven warehouse ops into a real-time 3D twin — with Gemini-powered gesture and voice control.",
-    teaser:
-      "A web-native 3D smart warehouse with a glassmorphic UI and Gemini Live multimodal AI — designed and built end-to-end.",
-    accent: "blue",
-    cover: "/work/warepro-digital-twin/cover.jpg",
-    video: "/work/warepro-digital-twin/demo.mp4",
-    compare: {
-      before: "/redesigns/warepro-before.png",
-      after: "/redesigns/warepro-after.png",
-    },
-    tools: ["React Three Fiber", "Three.js", "Gemini Live API", "Tailwind", "Antigravity"],
-    sections: [
-      {
-        kind: "snapshot",
-        role: "Lead product designer & builder — research, design system, 3D scene, and the code",
-        timeline: "2025",
-        team: "Me, integrating with PIPRA's engineering team",
-        platform: "Web — desktop & warehouse tablet",
-        status: "Shipped — running in the production WarePro app",
-        problem:
-          "Warehouse managers reasoned about a physical building through spreadsheets and a legacy 3D view nobody opened — no spatial sense of where anything actually was.",
-        outcome:
-          "A web-native digital twin mapping live occupancy onto the real racks, with Gemini Live gesture and voice control — integrated into the production app.",
-      },
-      {
-        kind: "takeaways",
-        items: [
-          "I didn't make the old 3D view prettier — I inverted its three failures: one colour for everything, a lost camera, and meaning stored in a corner legend instead of in the space.",
-          "The colour system is the interface. Occupancy lives on the cargo itself, so one glance down an aisle answers the only question a manager has.",
-          "Designed and built it: React Three Fiber over a game engine, so the twin stays web-native and opens in a browser tab in seconds.",
-        ],
-      },
-      {
-        kind: "lead",
-        body:
-          "WarePro already had a 3D view. A blinding orange grid seen from a drone, every rack shouting the same colour, and a legend bolted to the corner to explain what the space itself couldn't. Managers glanced at it once and went back to their spreadsheets.",
-      },
-      {
-        kind: "research",
-        eyebrow: "Method",
-        title: "I went and watched people run a floor",
-        methods: [
-          {
-            method: "Contextual observation",
-            detail:
-              "Sat with the people who actually run the warehouse floor and watched how they work — where they stand, what they hold, and what they look at first.",
-          },
-          {
-            method: "Legacy audit",
-            detail:
-              "Went through the existing twin screen by screen to name exactly why it went unused, rather than assuming it was simply ugly.",
-          },
-        ],
-        findings: [
-          "Managers think in zones and bin addresses — “A-L-2-3” — not in table rows.",
-          "They work standing on the floor with a tablet in one hand, not seated at a desk with a mouse.",
-          "They never read inventory top to bottom; they scan for exceptions — what's full, and what's about to be.",
-        ],
-      },
-      {
-        kind: "insight",
-        eyebrow: "The reframe",
-        title: "The space should carry the meaning, not a legend",
-        body:
-          "The old twin stored its meaning in a corner key, which forced a lookup on every glance — extraneous cognitive load on a screen meant to be read in seconds. If occupancy lives on the cargo itself, understanding becomes perception rather than interpretation, and the aisle answers the question before anyone reads a word.",
-      },
-      {
-        kind: "figure",
-        src: "/work/warepro-digital-twin/process-old-ui.png",
-        caption:
-          "The legacy twin — one colour regardless of load, a camera with no way home, and a legend doing the space's job.",
-        wide: true,
-      },
-      {
-        kind: "principles",
-        eyebrow: "Design principles",
-        title: "What every decision was measured against",
-        items: [
-          {
-            name: "Speak their addresses",
-            body:
-              "The twin uses the same “A-L-2-3” bin language managers already speak, rendered in space — so no translation happens in anyone's head.",
-          },
-          {
-            name: "Exceptions first",
-            body:
-              "Nobody reads a warehouse; they hunt for problems. Colour is spent on urgency so full and nearly-full racks pull the eye before anything else.",
-          },
-          {
-            name: "Never lose the operator",
-            body:
-              "Free 3D navigation disorients non-technical users. Constrained cameras and named viewpoints mean it's impossible to get lost in a void.",
-          },
-        ],
-      },
-      {
-        kind: "steps",
-        eyebrow: "Process",
-        title: "From the real building to a working twin",
-        items: [
-          {
-            title: "Started from the real building's blueprint",
-            body: "Instead of an idealised diagram, I sketched the actual warehouse — pallet racks, loading docks, storage zones — and mapped every bin to the addresses managers already use, rendered as labels in space.",
-            image: "/work/warepro-digital-twin/process-blueprint.jpg",
-            imageCaption: "The blueprint — geometry traced from the real floor.",
-          },
-          {
-            title: "Built the scene system",
-            body: "The blueprint became geometry: procedural materials drawn at runtime, environment lighting, fog for depth, and every rack carrying its own bin address so the space reads physical and stays legible at warehouse scale.",
-            image: "/work/warepro-digital-twin/process-scene.jpg",
-            imageCaption: "Version 1 of the scene — labelled racks, zone markings and guided viewpoints.",
-          },
-          {
-            title: "Designed navigation and the overlay",
-            body: "One-click guided viewpoints — Exterior, Receiving, Dispatch, Front, Back — glide a constrained camera between strategic angles, while a frosted-glass UI floats above the scene without ever hiding it.",
-          },
-          {
-            title: "Layered in the AI",
-            body: "Wired Gemini Live with function calling: the app streams the manager's camera to the model, and gestures or voice map to real actions — switch view, adjust lighting — with no hands on a mouse.",
-          },
-          {
-            title: "Shipped it with engineering",
-            body: "Integrated the twin with live occupancy data alongside the engineering team and delivered it inside the production app — not a prototype and a prayer.",
-            image: "/work/warepro-digital-twin/process-shipped.png",
-            imageCaption: "The finished floor — dock doors with live status, zone grids, and occupancy on real data.",
-          },
-        ],
-      },
-      {
-        kind: "swatches",
-        eyebrow: "The colour logic",
-        title: "One glance should answer: where can this pallet go?",
-        note:
-          "The colour lives on the cargo, not in a corner legend. Because managers scan for exceptions, the scale maps to urgency — green recedes, amber warns, red fires against the dark scene.",
-        items: [
-          { hex: "#4ade80", range: "1–50%", meaning: "Space available — safe to route inbound stock here." },
-          { hex: "#c19a6b", range: "51–99%", meaning: "Nearing capacity — re-slot before it blocks the flow." },
-          { hex: "#f87171", range: "100%", meaning: "Full — nothing more fits; action required." },
-        ],
-      },
-      {
-        kind: "decisions",
-        eyebrow: "Key decisions",
-        title: "The calls that shaped it — and why",
-        items: [
-          {
-            decision: "React Three Fiber — not a game engine",
-            logic: "Unity would have meant installs, licences and a second codebase. R3F keeps the twin web-native: one React state tree drives both the 2D UI and the 3D scene, and it opens in a browser tab in seconds.",
-          },
-          {
-            decision: "Procedural textures instead of image files",
-            logic: "Rack uprights, perforations and wire decking are drawn with the Canvas API at runtime — high-fidelity detail at zero network cost, so the twin loads fast on warehouse Wi-Fi.",
-          },
-          {
-            decision: "Guided viewpoints instead of free-roam",
-            logic: "The fastest way to lose a manager is to drop them in a void. Named viewpoints move the camera for them and hard constraints make it impossible to clip through a floor — recognition over recall, applied to space.",
-          },
-          {
-            decision: "A dark scene with a frosted-glass overlay",
-            logic: "Operators watch these screens across whole shifts. A near-black environment lets the occupancy colours carry the signal, and panels float in glass so context behind them never disappears.",
-          },
-          {
-            decision: "Gemini Live for hands-free control",
-            logic: "Floor managers hold tablets and clipboards; mouse-first interaction dies on the floor. Streaming the camera to Gemini and mapping function calls to gestures turns the twin from a viewing tool into an assistant.",
-          },
-        ],
-      },
-      {
-        kind: "video",
-        src: "/work/warepro-digital-twin/proof.mp4",
-        badge: "Shipped — in production",
-        caption:
-          "The twin running inside the production WarePro app — integrated, live, and in managers' hands.",
-        wide: true,
-      },
-      {
-        kind: "figures",
-        items: [
-          { src: "/work/warepro-digital-twin/01.png", caption: "Guided viewpoints — one-click camera transitions." },
-          { src: "/work/warepro-digital-twin/02.png", caption: "Traffic-light occupancy on rack-level cargo." },
-          { src: "/work/warepro-digital-twin/03.png", caption: "Dock doors with live status — receiving to returns." },
-        ],
-      },
-      {
-        kind: "metrics",
-        eyebrow: "Where it stands",
-        items: [
-          { metric: "In production", label: "integrated into the live WarePro app with engineering" },
-          { metric: "Hands-free", label: "gesture + voice control via Gemini Live" },
-          { metric: "0 installs", label: "fully web-native — runs in a browser tab" },
-          { metric: "Real-time", label: "occupancy mapped onto the physical racks" },
-        ],
-      },
-    ],
-    overview:
-      "WarePro is PIPRA's flagship logistics product. Managers were reasoning about a physical warehouse through dry tables and a legacy 3D view nobody used — no spatial sense of where anything actually was. I rebuilt it as a web-native digital twin that maps live occupancy onto the real racks and zones, then integrated Google's Gemini Live API so floor managers can drive it hands-free. Design philosophy: spatial clarity through modern aesthetics.",
-    story: [
-      {
-        title: "How it started",
-        body: "WarePro already had a 3D view — the kind you get when data is handed straight to a renderer. A blinding orange grid seen from a drone, every rack shouting the same colour, a legend bolted to the corner to explain what the space itself couldn't. Managers glanced at it once and went back to their spreadsheets. As the lead designer on PIPRA's flagship, I took the rebuild end-to-end: the research, the design system, the 3D scene — and the code.",
-      },
-      {
-        title: "What I extracted",
-        body: "Before touching pixels I sat with the people who actually run the floor and watched how they work. Three truths kept surfacing — managers think in zones and bin addresses, they work standing up, and they only ever look for exceptions. Those three sentences became the spec: every decision below traces back to one of them.",
-      },
-    ],
-    problem: [
-      "Managers think in zones and bin addresses — “A-L-2-3” — not in table rows.",
-      "They work standing on the floor, tablet in one hand — not seated at a desk with a mouse.",
-      "They never read inventory; they scan for exceptions — what's full, and what's about to be.",
-    ],
-    process: [
-      {
-        title: "Audited the old twin",
-        body: "I started by naming exactly why nobody used it. Every rack shouted the same orange whether it held one pallet or a hundred; the camera dropped you at floor level with no way home; and the meaning lived in a corner legend instead of in the space. The rebuild had to invert all three.",
-        image: "/work/warepro-digital-twin/process-old-ui.png",
-        imageCaption:
-          "The old twin — one colour for everything, a lost camera, and a legend doing the space's job.",
-      },
-      {
-        title: "Started from the real building's blueprint",
-        body: "Instead of an idealised diagram, I sketched the actual WarePro warehouse — pallet racks, loading docks, storage zones — and mapped every bin with the same “A-L-2-3” addresses managers already speak, rendered as labels in space so the twin talks their language.",
-        image: "/work/warepro-digital-twin/process-blueprint.jpg",
-        imageCaption:
-          "The blueprint — the twin's geometry traced from the real floor: racks, docks, zones.",
-      },
-      {
-        title: "Built the scene system",
-        body: "The blueprint became geometry. Procedural materials drawn at runtime, environment lighting, fog for depth, softened cargo geometry — and every rack carrying its own bin address, so the space reads physical and stays legible at warehouse scale.",
-        image: "/work/warepro-digital-twin/process-scene.jpg",
-        imageCaption:
-          "Version 1 of the scene — labelled racks, zone markings, guided viewpoints and the first environment controls.",
-      },
-      {
-        title: "Designed navigation & the overlay",
-        body: "One-click guided viewpoints — Exterior, Receiving, Dispatch, Front, Back — glide a constrained camera between strategic angles, while the frosted-glass UI floats above the scene without ever hiding it.",
-      },
-      {
-        title: "Layered in the AI",
-        body: "Wired Gemini Live with function calling: the app streams the manager's camera to the model, and gestures or voice map to real actions — switch view, adjust lighting — no hands on a mouse.",
-      },
-      {
-        title: "Shipped it with engineering",
-        body: "Integrated the twin with live occupancy data alongside the engineering team and delivered a working product — not a prototype and a prayer.",
-        image: "/work/warepro-digital-twin/process-shipped.png",
-        imageCaption:
-          "The finished floor — dock doors with live status lights, zone grids, and occupancy running on real data.",
-      },
-    ],
-    decisions: [
-      {
-        decision: "React Three Fiber — not a game engine",
-        logic: "Unity would have meant installs, licences and a second codebase. R3F keeps the twin web-native: one React state tree drives both the 2D UI and the 3D scene, and it opens in a browser tab in seconds.",
-      },
-      {
-        decision: "Procedural textures instead of image files",
-        logic: "Rack uprights, perforations and wire decking are drawn with the Canvas API at runtime — high-fidelity detail at zero network cost, so the twin loads fast on warehouse Wi-Fi.",
-      },
-      {
-        decision: "Guided viewpoints instead of free-roam",
-        logic: "Free 3D navigation disorients non-technical users — the fastest way to lose a manager is to drop them in a void. Named viewpoints move the camera for them, and hard constraints make it impossible to clip through a floor or zoom into nothing.",
-      },
-      {
-        decision: "A dark scene with a frosted-glass overlay",
-        logic: "Operators watch these screens across whole shifts — a near-black environment cuts eye strain and lets the occupancy colours do the talking. Panels float in frosted glass so context behind them never disappears.",
-      },
-      {
-        decision: "Gemini Live for hands-free control",
-        logic: "Floor managers hold tablets and clipboards; mouse-first interaction dies on the floor. Streaming the camera to Gemini and mapping function calls to gestures and voice turns the twin from a viewing tool into an assistant.",
-      },
-    ],
-    colorLogic: {
-      note: "The colour lives on the cargo itself — not in a corner legend. Because managers scan for exceptions, the scale maps to urgency: green recedes, amber warns, red fires against the dark scene. One glance down an aisle answers the only question that matters — where can this pallet go?",
-      scale: [
-        {
-          hex: "#4ade80",
-          range: "1–50%",
-          meaning: "Space available — safe to route inbound stock here.",
-        },
-        {
-          hex: "#c19a6b",
-          range: "51–99%",
-          meaning: "Nearing capacity — re-slot before it blocks the flow.",
-        },
-        {
-          hex: "#f87171",
-          range: "100%",
-          meaning: "Full — nothing more fits; action required.",
-        },
-      ],
-    },
-    solution: [
-      "A real-time 3D twin where occupancy maps directly onto physical racks and zones.",
-      "Hands-free control — point or speak, and Gemini Live switches views and adjusts the scene.",
-      "Guided viewpoints that make 3D navigable for non-technical staff.",
-      "Web-native performance: no installs, no game engine, procedural textures at zero network cost.",
-      "Integrated into the production WarePro app with the engineering team — not a standalone demo.",
-    ],
-    proof: {
-      video: "/work/warepro-digital-twin/proof.mp4",
-      caption:
-        "The twin running inside the production WarePro app — integrated, live, and in managers' hands.",
-    },
-    results: [
-      { metric: "Hands-free", label: "gesture + voice control via Gemini Live" },
-      { metric: "Real-time", label: "occupancy on a spatial twin" },
-      { metric: "0 installs", label: "fully web-native — runs in the browser" },
-    ],
-    gallery: [
-      { src: "/work/warepro-digital-twin/01.png", caption: "Guided viewpoints — one-click camera transitions" },
-      { src: "/work/warepro-digital-twin/02.png", caption: "Traffic-light occupancy on rack-level cargo" },
-      { src: "/work/warepro-digital-twin/03.png", caption: "Dock doors with live status — receiving to returns" },
-    ],
-  },
+  wareproCaseStudy,
 
   // -------------------------------------------------------------- StoneX
   {

@@ -1,0 +1,31 @@
+.page {
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 12%);
+}
+.page .heroTitle {
+  max-width: 950px;
+  font-size: clamp(3rem, 6.6vw, 6.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+.page .heroDescription {
+  max-width: 760px;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+}
+.page :global(.evidence-dialog) {
+  width: min(96vw, 1600px);
+  max-width: 96vw;
+  max-height: 92dvh;
+  margin: auto;
+  padding: 0;
+  color: var(--foreground);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.page :global(.evidence-dialog)::backdrop { background: rgb(0 0 0 / 85%); }
+.page details > summary { cursor: pointer; }
+.page section[id] { scroll-margin-top: 6rem; }
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after { scroll-behavior: auto !important; }
+}

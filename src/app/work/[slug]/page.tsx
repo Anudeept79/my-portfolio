@@ -10,6 +10,8 @@ import { CoverFrame } from "@/components/CoverFrame";
 import { FlipCompare } from "@/components/FlipCompare";
 import { LockOverlay } from "@/components/LockOverlay";
 import { CaseSections } from "@/components/CaseSections";
+import { EvidenceImage } from "@/components/EvidenceImage";
+import editorialStyles from "@/components/CaseEditorial.module.css";
 
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.slug }));
@@ -44,8 +46,26 @@ export default async function CaseStudyPage({
     <>
       {cs.locked && <LockOverlay slug={cs.slug} code="9191" />}
       <Nav />
-      <main className="pt-28">
+      <main className={`pt-28 ${cs.editorial ? editorialStyles.page : ""}`}>
         {/* header */}
+        {cs.editorial ? (
+          <header className="container-x">
+            <Link href="/#work" className="mb-8 inline-flex items-center gap-2 text-sm text-muted hover:text-foreground"><ArrowLeft size={16} /> All work</Link>
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-muted">{cs.title} <span className="mx-3 text-border">/</span> Product design case study</p>
+            <h1 className={`font-display ${editorialStyles.heroTitle}`}>{cs.editorial.headline}</h1>
+            <p className={`mt-6 text-muted ${editorialStyles.heroDescription}`}>{cs.editorial.subheadline}</p>
+            <dl className="my-7 grid gap-x-8 gap-y-5 border-y border-border py-6 sm:grid-cols-2 lg:grid-cols-4">
+              {cs.editorial.summary.map(({ label, value }) => <div key={label}><dt className="mb-2 font-mono text-[11px] uppercase tracking-widest text-muted">{label}</dt><dd className="text-sm leading-relaxed">{value}</dd></div>)}
+            </dl>
+            <figure>
+              <EvidenceImage src={cs.cover} alt="WarePro complex warehouse layout with labeled storage, occupancy visualization and mezzanine structure" label="Final" priority />
+              <figcaption className="mt-3 max-w-3xl text-xs leading-relaxed text-muted">{cs.editorial.caption}</figcaption>
+            </figure>
+            <nav aria-label="Case study sections" className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-b border-border pb-4">
+              {cs.editorial.navigation.map((item, index) => <a key={item.id} href={`#${item.id}`} className="py-2 text-sm text-muted hover:text-foreground"><span className="mr-2 font-mono text-[10px] text-accent">{String(index + 1).padStart(2, "0")}</span>{item.label}</a>)}
+            </nav>
+          </header>
+        ) : (
         <header className="container-x">
           <Link
             href="/#work"
@@ -81,9 +101,10 @@ export default async function CaseStudyPage({
             ))}
           </div>
         </header>
+        )}
 
         {/* cover — live demo video when available, image otherwise */}
-        <div className="container-x mt-12">
+        {!cs.editorial && <div className="container-x mt-12">
           {cs.video ? (
             // `max-h` keeps portrait captures (phone demos) from being blown up
             // to full column width — they stay near native size and centred,
@@ -112,12 +133,12 @@ export default async function CaseStudyPage({
               className="aspect-[16/9] w-full"
             />
           )}
-        </div>
+        </div>}
 
         {/* Studies that define `sections` are told in their own shape — the
             fixed Overview→Process→Outcome body below is skipped entirely. */}
         {cs.sections ? (
-          <CaseSections sections={cs.sections} accent={cs.accent} />
+          <CaseSections sections={cs.sections} accent={cs.accent} editorial={!!cs.editorial} />
         ) : (
           <>
         {/* results strip */}

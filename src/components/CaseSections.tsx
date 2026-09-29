@@ -1,6 +1,19 @@
 import type { CaseSection } from "@/data/site";
 import { Reveal } from "./Reveal";
 import { FlipCompare } from "./FlipCompare";
+import { EvidenceImage } from "./EvidenceImage";
+import {
+  ClosingBlock,
+  ComparisonBlock,
+  DecisionRows,
+  ModelBlock,
+  NoteBlock,
+  OwnershipBlock,
+  SplitProse,
+  StatusBlock,
+  TurningBlock,
+  VideoSplit,
+} from "./CaseEditorialBlocks";
 
 /**
  * Renders a case study told as composable narrative blocks. Unlike the fixed
@@ -11,15 +24,19 @@ import { FlipCompare } from "./FlipCompare";
 export function CaseSections({
   sections,
   accent = "blue",
+  editorial = false,
 }: {
   sections: CaseSection[];
   accent?: string;
+  editorial?: boolean;
 }) {
   return (
-    <div className="mt-16 space-y-16 sm:space-y-20">
-      {sections.map((s, i) => (
-        <Block key={i} section={s} accent={accent} />
-      ))}
+    <div className={editorial ? "case-story mt-8 space-y-8 sm:space-y-12" : "mt-16 space-y-16 sm:space-y-20"}>
+      {sections.map((s, i) => editorial ? (
+        <section key={i} id={s.id}>
+          <Block section={s} accent={accent} editorial={editorial} />
+        </section>
+      ) : <Block key={i} section={s} accent={accent} editorial={false} />)}
     </div>
   );
 }
@@ -67,8 +84,23 @@ function Body({ body }: { body: string | string[] }) {
   );
 }
 
-function Block({ section: s, accent }: { section: CaseSection; accent: string }) {
+function Block({ section: s, accent, editorial }: { section: CaseSection; accent: string; editorial: boolean }) {
   switch (s.kind) {
+    // editorial blocks — see CaseEditorialBlocks.tsx
+    case "turning":
+      return <TurningBlock s={s} />;
+    case "comparison":
+      return <ComparisonBlock s={s} />;
+    case "model":
+      return <ModelBlock s={s} />;
+    case "ownership":
+      return <OwnershipBlock s={s} />;
+    case "status":
+      return <StatusBlock s={s} />;
+    case "note":
+      return <NoteBlock s={s} />;
+    case "closing":
+      return <ClosingBlock s={s} />;
     // ------------------------------------------------ the 6-second skim
     case "snapshot": {
       const meta = [
@@ -207,6 +239,7 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
       );
 
     case "prose":
+      if (editorial && (s.variant === "split" || s.more)) return <SplitProse s={s} />;
       return (
         <Reveal>
           <Prose>
@@ -282,13 +315,15 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
                 s.phone ? PHONE_FRAME : ""
               }`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {editorial ? <EvidenceImage src={s.src} alt={s.caption ?? "Project evidence"} /> : (
+              /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={s.src}
                 alt={s.caption ?? ""}
                 loading="lazy"
                 className="h-auto w-full"
               />
+              )}
             </div>
             {s.caption && (
               <figcaption
@@ -304,6 +339,7 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
       );
 
     case "video":
+      if (editorial && s.title) return <VideoSplit s={s} />;
       return (
         <Reveal>
           <figure className={`container-x ${s.wide ? "max-w-6xl" : "max-w-4xl"}`}>
@@ -314,9 +350,13 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
             >
               <video
                 src={s.src}
-                autoPlay
+                poster={s.poster}
+                autoPlay={!s.controlled}
                 muted
-                loop
+                loop={!s.controlled}
+                controls={s.controlled}
+                preload={s.controlled ? "none" : undefined}
+                aria-label={s.caption}
                 playsInline
                 className="h-auto w-full"
               />
@@ -356,13 +396,15 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
               <Reveal key={i} delay={(i % 2) * 0.08}>
                 <figure>
                   <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-[var(--shadow-card)]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    {editorial ? <EvidenceImage src={f.src} alt={f.caption ?? "Project evidence"} /> : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
                     <img
                       src={f.src}
                       alt={f.caption ?? ""}
                       loading="lazy"
                       className="h-auto w-full"
                     />
+                    )}
                   </div>
                   {f.caption && (
                     <figcaption className="mt-2.5 text-xs leading-relaxed text-muted">
@@ -421,6 +463,7 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
       );
 
     case "decisions":
+      if (editorial && s.items.every(d => d.evidence && d.result)) return <DecisionRows s={s} />;
       return (
         <div className="container-x max-w-4xl">
           <Reveal>
@@ -438,6 +481,7 @@ function Block({ section: s, accent }: { section: CaseSection; accent: string })
                     <span className="eyebrow mr-2.5">Why</span>
                     {d.logic}
                   </p>
+                  {d.tradeoff && <p className="mt-4 border-t border-border pt-4 text-sm leading-relaxed text-muted"><span className="font-medium text-foreground">Consideration / remaining limitation · </span>{d.tradeoff}</p>}
                 </div>
               </Reveal>
             ))}

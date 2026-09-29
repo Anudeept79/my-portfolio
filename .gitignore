@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw source media: originals kept locally, not used by any page, and over
+# GitHub's 100MB file limit
+/public/work/warepro-digital-twin/Digital twin case study/
+/public/case-studies/warepro-digital-twin/final/10-final-interaction.mp4
