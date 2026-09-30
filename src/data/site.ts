@@ -28,7 +28,7 @@ export const profile = {
 
 export const stats = [
   { value: "10+", label: "Apps shipped", sub: "production-grade" },
-  { value: "1y 11m", label: "Owning design end-to-end", sub: "problem → code" },
+  { value: "2 years", label: "Owning design end-to-end", sub: "problem → code" },
   { value: "4", label: "US Gov projects", sub: "for Virginia State Police" },
   { value: "100%", label: "Design → production", sub: "solo, no handoff" },
 ];

@@ -79,8 +79,8 @@ export default function AboutPage() {
               Then AI changed everything. At{" "}
               <span className="text-foreground">PIPRA Solutions</span>{" "}I
               pioneered an AI-led design-and-build workflow that let me go from
-              a problem to a shipped, working product — solo. Over 1 year 11
-              months I&apos;ve delivered 10+ production apps across fintech,
+              a problem to a shipped, working product — solo. Over the past 2
+              years I&apos;ve delivered 10+ production apps across fintech,
               government, logistics, SaaS and EdTech, earning the company its{" "}
               <span className="text-gold">AI Excellence Award</span> — with zero
               engineering dependency.
