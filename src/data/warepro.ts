@@ -32,6 +32,7 @@ export const wareproCaseStudy: CaseStudy = {
       { label: "Core shift", value: "Visual redesign → configurable spatial/data model" },
     ],
     caption: "Complex layout with a mezzanine. The larger warehouse is still in integration and validation.",
+    coverAlt: "WarePro complex warehouse layout with labeled storage, occupancy visualization and mezzanine structure",
     navigation: [
       { id: "starting-point", label: "Context" },
       { id: "engineering-challenge", label: "Turning point" },

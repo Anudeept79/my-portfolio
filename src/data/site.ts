@@ -1,4 +1,6 @@
 import { wareproCaseStudy } from "./warepro";
+import { pigoCaseStudy } from "./pigo";
+import { piErp2026CaseStudy } from "./pi-erp-2026";
 
 // ============================================================================
 // SITE CONTENT — single source of truth for the whole portfolio.
@@ -92,6 +94,8 @@ export type EvidenceItem = {
   caption?: string;
   /** Magnifies a detail in the thumbnail only; the enlarged view always shows the whole capture. */
   zoom?: { scale: number; origin: string };
+  /** A portrait phone capture: shown near native width instead of stretched to fill. */
+  phone?: boolean;
 };
 
 /** Secondary material, collapsed until asked for. */
@@ -99,7 +103,21 @@ export type DetailItem = { title: string; body: string | string[]; images?: Evid
 
 export type CaseSection = { id?: string } & (
   // ---- editorial blocks (used by case studies that set `editorial`)
-  | { kind: "comparison"; eyebrow?: string; title: string; body: string; items: EvidenceItem[] }
+  // `uncropped` shows each capture whole instead of cropping the pair to one ratio
+  | { kind: "comparison"; eyebrow?: string; title: string; body: string; items: EvidenceItem[]; uncropped?: boolean }
+  // the 30-second version: problem, what I did, result
+  | { kind: "glance"; items: { label: string; text: string }[] }
+  // before → after numbers, read at a glance
+  | {
+      kind: "stats";
+      eyebrow?: string;
+      title: string;
+      intro?: string;
+      items: { from?: string; value: string; label: string }[];
+      note?: string;
+    }
+  // a flow told as numbered phone captures, read left to right
+  | { kind: "sequence"; eyebrow?: string; title: string; intro?: string; items: EvidenceItem[] }
   | { kind: "turning"; eyebrow: string; title: string; body: string; shift?: { from: string; to: string } }
   | {
       kind: "model";
@@ -122,6 +140,8 @@ export type CaseSection = { id?: string } & (
       kind: "closing";
       eyebrow?: string;
       statement: string;
+      /** What I'd do differently, grounded in what actually happened. */
+      reflection?: string;
       open: { label: string; text: string };
     }
   // Scannable header block. Hiring managers skim a case study in seconds before
@@ -166,7 +186,7 @@ export type CaseSection = { id?: string } & (
   | { kind: "bullets"; eyebrow?: string; title?: string; items: string[] }
   // `phone` constrains portrait mobile captures to a handset-sized column so
   // they aren't upscaled past their native width (and rendered blurry)
-  | { kind: "figure"; src: string; caption?: string; wide?: boolean; phone?: boolean }
+  | { kind: "figure"; src: string; caption?: string; wide?: boolean; phone?: boolean; alt?: string; label?: string }
   | { kind: "figures"; items: { src: string; caption?: string }[]; phone?: boolean }
   // an inline muted/looping clip of the product actually running. In an editorial
   // study, giving it a `title` sets it beside its copy, with `more` collapsed beneath.
@@ -204,6 +224,8 @@ export type CaseSection = { id?: string } & (
         evidence?: string;
         result?: string;
         images?: EvidenceItem[];
+        /** Stack a pair of wide, short captures instead of setting them side by side. */
+        stack?: boolean;
       }[];
     }
   | { kind: "metrics"; eyebrow?: string; items: { metric: string; label: string }[] }
@@ -229,11 +251,15 @@ export type CaseSection = { id?: string } & (
 
 export type CaseStudy = {
   slug: string;
+  /** Other case studies about the same product, linked from the header. */
+  related?: { href: string; label: string }[];
   editorial?: {
     headline: string;
     subheadline: string;
     summary: { label: string; value: string }[];
     caption: string;
+    /** Describes the hero image (the cover) for screen readers and the enlarged view. */
+    coverAlt: string;
     navigation: { id: string; label: string }[];
   };
   title: string;
@@ -289,6 +315,7 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   wareproCaseStudy,
+  pigoCaseStudy,
 
   // -------------------------------------------------------------- StoneX
   {
@@ -533,12 +560,15 @@ export const caseStudies: CaseStudy[] = [
     gallery: [],
   },
 
+  piErp2026CaseStudy,
+
   // -------------------------------------------------------------- PI-ERP
   // VERIFY: the "delivered as a UI plugin/theme layer so core code stays
   // untouched" framing is inferred from iDempiere's plugin architecture plus
   // Anudeep's constraint that core code and DB could not change. Confirm.
   {
     slug: "pi-erp-design-system",
+    related: [{ href: "/work/pi-erp-platform-ux", label: "PI-ERP in 2026: role-based UX at scale" }],
     title: "Restyling an ERP that 4 years of muscle memory depended on",
     client: "PIPRA Solutions — PI-ERP (built on iDempiere)",
     domain: "Enterprise SaaS · Design Systems",

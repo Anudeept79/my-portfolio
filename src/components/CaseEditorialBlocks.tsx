@@ -26,11 +26,11 @@ function Paragraphs({ body }: { body: string | string[] }) {
   );
 }
 
-/** A capture with its caption; `compact` keeps small thumbnails from crowding. */
+/** A capture with its caption; `compact` keeps small thumbnails from crowding. Phone captures stay near native width. */
 function Capture({ item, compact = false, aspect }: { item: EvidenceItem; compact?: boolean; aspect?: string }) {
   return (
-    <figure>
-      <EvidenceImage src={item.src} alt={item.alt} label={item.label} zoom={item.zoom} aspect={aspect} />
+    <figure className={item.phone ? "mx-auto w-full max-w-[240px]" : undefined}>
+      <EvidenceImage src={item.src} alt={item.alt} label={item.label} zoom={item.zoom} aspect={item.phone ? undefined : aspect} phone={item.phone} />
       {item.caption && <figcaption className={`mt-2 leading-snug text-muted ${compact ? "text-[11px]" : "text-xs"}`}>{item.caption}</figcaption>}
     </figure>
   );
@@ -54,7 +54,7 @@ export function DetailList({ items }: { items: DetailItem[] }) {
               {(Array.isArray(item.body) ? item.body : [item.body]).map((p) => <p key={p}>{p}</p>)}
             </div>
             {item.images && (
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className={`grid gap-5 ${item.images.length > 1 ? "sm:grid-cols-2" : ""}`}>
                 {item.images.map((image) => <Capture key={image.src} item={image} />)}
               </div>
             )}
@@ -115,9 +115,76 @@ export function ComparisonBlock({ s }: { s: Of<"comparison"> }) {
         <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
         <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.body}</p>
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-6 sm:gap-5">
-        {s.items.map((item) => <Capture key={item.src} item={item} aspect="2 / 1" compact />)}
+      <div className={`mt-5 grid gap-3 sm:mt-6 sm:gap-5 ${s.items.some((item) => item.phone) ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"}`}>
+        {s.items.map((item) => <Capture key={item.src} item={item} aspect={s.uncropped ? undefined : "2 / 1"} compact />)}
       </div>
+    </div>
+  );
+}
+
+/** The 30-second version for someone skimming: problem, what I did, result. */
+export function GlanceBlock({ s }: { s: Of<"glance"> }) {
+  return (
+    <div className="container-x max-w-6xl">
+      <dl className="grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-3">
+        {s.items.map((item, i) => (
+          <div key={item.label} className={`p-5 sm:p-6 ${i === s.items.length - 1 ? "bg-surface" : "bg-background"}`}>
+            <dt className={`${LABEL} mb-2.5 ${i === s.items.length - 1 ? "text-accent" : "text-muted"}`}>{item.label}</dt>
+            <dd className="text-[0.9375rem] leading-relaxed text-foreground/90">{item.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+/** Before → after numbers. The old value is muted, so the change reads first. */
+export function StatsBlock({ s }: { s: Of<"stats"> }) {
+  return (
+    <div className="container-x max-w-6xl">
+      <div className="max-w-3xl">
+        <Eyebrow>{s.eyebrow}</Eyebrow>
+        <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
+        {s.intro && <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.intro}</p>}
+      </div>
+      <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {s.items.map((item) => (
+          <div key={item.label} className="bg-background p-5 sm:p-6">
+            <dt className="sr-only">{item.label}</dt>
+            <dd className="font-display text-3xl leading-none tracking-tight tabular-nums sm:text-4xl">
+              {item.from && <span className="text-muted">{item.from} <span aria-label="to">→</span> </span>}
+              {item.value}
+            </dd>
+            <dd aria-hidden className="mt-2.5 text-sm leading-snug text-muted">{item.label}</dd>
+          </div>
+        ))}
+      </dl>
+      {s.note && <p className="mt-3 max-w-3xl text-xs leading-relaxed text-muted">{s.note}</p>}
+    </div>
+  );
+}
+
+/** A flow told as numbered phone captures. Scrolls sideways, so each screen stays readable. */
+export function SequenceBlock({ s }: { s: Of<"sequence"> }) {
+  return (
+    <div className="container-x max-w-6xl">
+      <div className="max-w-3xl">
+        <Eyebrow>{s.eyebrow}</Eyebrow>
+        <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
+        {s.intro && <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.intro}</p>}
+      </div>
+      <div role="region" aria-label={`${s.title} ${s.items.length} steps, scroll sideways`} tabIndex={0} className="mt-6 overflow-x-auto pb-3 [scroll-snap-type:x_mandatory]">
+        <ol className="flex w-max gap-4 sm:gap-5">
+          {s.items.map((item, i) => (
+            <li key={item.src} className="w-[200px] shrink-0 [scroll-snap-align:start] sm:w-[220px]">
+              <p className="mb-2 font-mono text-[10px] text-accent">{String(i + 1).padStart(2, "0")}</p>
+              <EvidenceImage src={item.src} alt={item.alt} label={item.label} phone />
+              {item.caption && <p className="mt-2 text-xs leading-snug text-muted">{item.caption}</p>}
+            </li>
+          ))}
+        </ol>
+      </div>
+      <p aria-hidden className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted">Scroll sideways · {s.items.length} steps</p>
     </div>
   );
 }
@@ -171,15 +238,17 @@ export function DecisionRows({ s }: { s: Of<"decisions"> }) {
       <ol className="mt-6 space-y-7 sm:mt-7 sm:space-y-9">
         {s.items.map((d, i) => {
           const images = d.images ?? [];
-          const pair = images.length > 1;
+          const pair = images.length > 1 && !d.stack;
           const imageRight = i % 2 === 0;
           // full class names, so Tailwind can see them
           const figureCols = pair
             ? imageRight ? "md:col-span-7 md:col-start-6" : "md:col-span-7 md:col-start-1"
             : imageRight ? "md:col-span-5 md:col-start-8" : "md:col-span-5 md:col-start-1";
-          const textCols = pair
-            ? imageRight ? "md:col-span-5 md:col-start-1" : "md:col-span-5 md:col-start-8"
-            : imageRight ? "md:col-span-7 md:col-start-1" : "md:col-span-7 md:col-start-6";
+          const textCols = images.length === 0
+            ? "md:col-span-8 md:col-start-1"
+            : pair
+              ? imageRight ? "md:col-span-5 md:col-start-1" : "md:col-span-5 md:col-start-8"
+              : imageRight ? "md:col-span-7 md:col-start-1" : "md:col-span-7 md:col-start-6";
           const rows: [string, string | undefined][] = [
             ["Evidence", d.evidence],
             ["Decision", d.logic],
@@ -187,13 +256,13 @@ export function DecisionRows({ s }: { s: Of<"decisions"> }) {
             ["Implemented result", d.result],
           ];
           return (
-            <li key={d.decision} className="grid gap-x-10 gap-y-3 border-t border-border pt-4 sm:gap-y-4 sm:pt-5 md:grid-cols-12">
+            <li key={d.decision} className="grid gap-x-10 gap-y-3 border-t border-border pt-4 sm:gap-y-4 sm:pt-5 md:grid-cols-12 md:grid-rows-[auto_1fr]">
               <h3 className={`font-display text-xl leading-snug tracking-tight sm:text-2xl md:row-start-1 ${textCols}`}>
                 <span className="mr-3 font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
                 {d.decision}
               </h3>
               {images.length > 0 && (
-                <div className={`md:row-span-2 md:row-start-1 ${figureCols} ${pair ? "grid grid-cols-2 gap-3 self-start" : "self-start"}`}>
+                <div className={`md:row-span-2 md:row-start-1 ${figureCols} ${pair ? "grid grid-cols-2 gap-3 self-start" : d.stack ? "grid gap-4 self-start" : "self-start"}`}>
                   {images.map((image) => <Capture key={image.src} item={image} compact={pair} />)}
                 </div>
               )}
@@ -315,6 +384,12 @@ export function ClosingBlock({ s }: { s: Of<"closing"> }) {
     <div className="container-x max-w-6xl">
       <h2 className="eyebrow mb-4">{s.eyebrow}</h2>
       <p className="font-display max-w-4xl text-xl leading-snug tracking-tight sm:text-[2rem] sm:leading-[1.25]">{s.statement}</p>
+      {s.reflection && (
+        <div className="mt-6 grid gap-1.5 border-t border-border pt-4 sm:mt-8 md:grid-cols-12 md:gap-10">
+          <p className={`${LABEL} text-accent md:col-span-3`}>What I&apos;d do differently</p>
+          <p className="text-[0.9375rem] leading-relaxed text-foreground/85 md:col-span-9">{s.reflection}</p>
+        </div>
+      )}
       <div className="mt-6 grid gap-1.5 border-t border-border pt-4 sm:mt-8 md:grid-cols-12 md:gap-10">
         <p className={`${LABEL} text-muted md:col-span-3`}>{s.open.label}</p>
         <p className="text-sm leading-relaxed text-muted md:col-span-9">{s.open.text}</p>

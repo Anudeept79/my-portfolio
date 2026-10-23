@@ -6,7 +6,10 @@ import {
   ClosingBlock,
   ComparisonBlock,
   DecisionRows,
+  GlanceBlock,
   ModelBlock,
+  SequenceBlock,
+  StatsBlock,
   NoteBlock,
   OwnershipBlock,
   SplitProse,
@@ -91,6 +94,12 @@ function Block({ section: s, accent, editorial }: { section: CaseSection; accent
       return <TurningBlock s={s} />;
     case "comparison":
       return <ComparisonBlock s={s} />;
+    case "sequence":
+      return <SequenceBlock s={s} />;
+    case "stats":
+      return <StatsBlock s={s} />;
+    case "glance":
+      return <GlanceBlock s={s} />;
     case "model":
       return <ModelBlock s={s} />;
     case "ownership":
@@ -315,7 +324,7 @@ function Block({ section: s, accent, editorial }: { section: CaseSection; accent
                 s.phone ? PHONE_FRAME : ""
               }`}
             >
-              {editorial ? <EvidenceImage src={s.src} alt={s.caption ?? "Project evidence"} /> : (
+              {editorial ? <EvidenceImage src={s.src} alt={s.alt ?? s.caption ?? "Project evidence"} label={s.label} /> : (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={s.src}
