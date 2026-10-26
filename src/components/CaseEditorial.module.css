@@ -24,6 +24,7 @@
   border-radius: 12px;
 }
 .page :global(.evidence-dialog)::backdrop { background: rgb(0 0 0 / 85%); }
+.page :global(.evidence-dialog.is-phone) { width: min(92vw, 440px); }
 .page details > summary { cursor: pointer; }
 .page section[id] { scroll-margin-top: 6rem; }
 @media (prefers-reduced-motion: reduce) {

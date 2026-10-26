@@ -57,8 +57,9 @@ export default async function CaseStudyPage({
             <dl className="my-7 grid gap-x-8 gap-y-5 border-y border-border py-6 sm:grid-cols-2 lg:grid-cols-4">
               {cs.editorial.summary.map(({ label, value }) => <div key={label}><dt className="mb-2 font-mono text-[11px] uppercase tracking-widest text-muted">{label}</dt><dd className="text-sm leading-relaxed">{value}</dd></div>)}
             </dl>
+            {cs.related && <RelatedLinks links={cs.related} />}
             <figure>
-              <EvidenceImage src={cs.cover} alt="WarePro complex warehouse layout with labeled storage, occupancy visualization and mezzanine structure" label="Final" priority />
+              <EvidenceImage src={cs.cover} alt={cs.editorial.coverAlt} label="Final" priority />
               <figcaption className="mt-3 max-w-3xl text-xs leading-relaxed text-muted">{cs.editorial.caption}</figcaption>
             </figure>
             <nav aria-label="Case study sections" className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-b border-border pb-4">
@@ -90,6 +91,7 @@ export default async function CaseStudyPage({
             {cs.impact}
           </p>
 
+          {cs.related && <RelatedLinks links={cs.related} />}
           <div className="mt-8 flex flex-wrap gap-2">
             {cs.tools.map((t) => (
               <span
@@ -386,6 +388,20 @@ export default async function CaseStudyPage({
       </main>
       <Footer />
     </>
+  );
+}
+
+/** Points to other case studies about the same product. */
+function RelatedLinks({ links }: { links: { href: string; label: string }[] }) {
+  return (
+    <p className="mb-6 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
+      <span className="font-mono text-[11px] uppercase tracking-widest">Related</span>
+      {links.map((link) => (
+        <Link key={link.href} href={link.href} className="inline-flex items-center gap-1 text-accent hover:underline">
+          {link.label} <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+        </Link>
+      ))}
+    </p>
   );
 }
 
