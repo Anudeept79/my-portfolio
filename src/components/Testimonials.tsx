@@ -14,14 +14,14 @@ export function Testimonials() {
         <Reveal>
           <p className="mb-3 font-mono text-sm text-accent">What people say</p>
           <h2 className="mb-12 max-w-2xl font-display text-3xl sm:text-4xl">
-            Sign-off from the people I&apos;ve shipped for.
+            From the people I&apos;ve built with.
           </h2>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <Reveal key={t.name + i} delay={(i % 2) * 0.08}>
-              <figure className="card lift h-full p-7">
+              <figure className="card lift flex h-full flex-col p-7">
                 <Quote
                   className={`mb-4 h-6 w-6 ${dot[t.accent] ?? "text-accent"}`}
                   strokeWidth={1.5}
@@ -29,15 +29,17 @@ export function Testimonials() {
                 <blockquote className="text-lg leading-relaxed text-foreground/90">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3">
+                <figcaption className="mt-auto flex items-start gap-3 pt-6">
                   <span
-                    className={`h-2 w-2 rounded-full ${dot[t.accent] ?? "text-accent"}`}
+                    className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${dot[t.accent] ?? "text-accent"}`}
                     style={{ backgroundColor: "currentColor" }}
                   />
-                  <span className="text-sm font-medium text-foreground">
-                    {t.name}
+                  <span className="flex flex-col">
+                    <span className="text-sm font-medium text-foreground">
+                      {t.name}
+                    </span>
+                    <span className="text-sm text-muted">{t.role}</span>
                   </span>
-                  <span className="text-sm text-muted">· {t.role}</span>
                 </figcaption>
               </figure>
             </Reveal>

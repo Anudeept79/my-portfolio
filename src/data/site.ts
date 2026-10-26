@@ -3602,29 +3602,21 @@ export const redesigns = [
   },
 ];
 
-// Social proof. NOT RENDERED: these are draft wordings, not things these people
-// said. The homepage section is hidden until real, verbatim quotes (with
-// permission) replace them. Do not re-enable with draft text.
+// Social proof. Only feedback Anudeep has confirmed these people gave, polished
+// for reading. Never add a quote someone didn't actually say.
 export const testimonials = [
   {
     quote:
-      "The delivery speed genuinely impressed us — and the backend went live exactly as promised.",
-    name: "CEO",
-    role: "Golden Suisse",
+      "On PI-ERP and PiGo, Anudeep took the work from design all the way to a live product — owning design and development instead of handing over mockups and waiting. That's exactly the ownership I want to encourage.",
+    name: "Ajit Kumar",
+    role: "CEO, PIPRA Solutions",
     accent: "blue",
   },
   {
     quote:
-      "He took full ownership from Figma all the way to shipped React Native code. We confirmed the output ourselves.",
-    name: "CEO & VP",
-    role: "StoneX, Dubai",
-    accent: "blue",
-  },
-  {
-    quote:
-      "I found Anudeep through his portfolio and had him build two US government platforms independently. He delivered.",
-    name: "Senior Product Designer",
-    role: "US client",
+      "Anudeep picked up AI quickly and gave our developers real competition — designing and building side by side with the dev team, and delivering the product on time.",
+    name: "Satyendra Singh",
+    role: "VP, PIPRA Solutions",
     accent: "blue",
   },
   {
