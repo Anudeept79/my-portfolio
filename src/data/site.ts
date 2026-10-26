@@ -3514,7 +3514,7 @@ export const lab = [
     title: "Kerala EV Station App",
     tag: "Civic · 4-hour prototype",
     blurb:
-      "A working government EV-charging locator prototype, designed and built in 4 hours for a stakeholder pitch.",
+      "A working subsidy portal prototype for KSEB's EV charging scheme — station registration, eligibility and applications — designed and built in 4 hours for a stakeholder pitch.",
     accent: "blue",
   },
   {
