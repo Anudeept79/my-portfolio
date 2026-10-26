@@ -10,10 +10,10 @@ import { piErp2026CaseStudy } from "./pi-erp-2026";
 
 export const profile = {
   name: "Anudeep Thota",
-  title: "AI Product Designer · Full-Stack Builder",
+  title: "AI Product Designer who builds in code",
   tagline: "AI Product Designer who Builds.",
   subtitle:
-    "I take AI products from first problem to shipped production code — the design and the build, solo — across fintech, government, logistics and SaaS.",
+    "I design AI products and build them in working code, then ship them side by side with engineering — across logistics, enterprise SaaS, government and fintech.",
   location: "Hyderabad, India",
   availability: "Open to Product / AI Design roles — worldwide",
   email: "Anudeept79@gmail.com",
@@ -30,9 +30,9 @@ export const profile = {
 
 export const stats = [
   { value: "10+", label: "Apps shipped", sub: "production-grade" },
-  { value: "2 years", label: "Owning design end-to-end", sub: "problem → code" },
+  { value: "2 years", label: "Product design + front-end code", sub: "problem → working product" },
   { value: "4", label: "US Gov projects", sub: "for Virginia State Police" },
-  { value: "100%", label: "Design → production", sub: "solo, no handoff" },
+  { value: "3", label: "Products, one design system", sub: "web · mobile · AI assistant" },
 ];
 
 // Trust signals — the fast-scan credibility row under the hero.
@@ -58,16 +58,7 @@ export const toolkit = [
   },
   {
     group: "AI & Build",
-    items: [
-      "Antigravity",
-      "Kiro",
-      "Google AI Studio",
-      "Amazon Q",
-      "Cursor",
-      "Claude",
-      "v0 / Bolt / Lovable",
-      "React Native",
-    ],
+    items: ["Claude Code", "Cursor", "Antigravity", "Google AI Studio", "React / React Native", "TypeScript"],
   },
   {
     group: "Design Tools",
@@ -312,6 +303,19 @@ export type CaseStudy = {
   results: { metric: string; label: string }[];
   gallery: { src: string; caption: string }[];
 };
+
+/**
+ * The case studies that lead the homepage, in order. Everything else that
+ * isn't a Lab entry is listed compactly under "More case studies".
+ */
+export const featuredSlugs = [
+  "warepro-digital-twin",
+  "pigo",
+  "pi-erp-platform-ux",
+  "myresumeai",
+  "stonex-migration",
+  "us-gov-platforms",
+];
 
 export const caseStudies: CaseStudy[] = [
   wareproCaseStudy,
@@ -3016,6 +3020,7 @@ export const caseStudies: CaseStudy[] = [
   // -------------------------------------------------------------- WarePro Mobile
   {
     slug: "warepro-mobile",
+    related: [{ href: "/work/pigo", label: "PiGo: the app this design grew into" }],
     title: "Five apps with the same icon, rebuilt as one",
     client: "WarePro (PIPRA Solutions)",
     domain: "Logistics · Mobile",
@@ -3439,39 +3444,6 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-// Compact grid — the rest of the work, listed not deep-dived.
-export const moreWork = [
-  {
-    title: "WarePro Dashboard & App",
-    domain: "Logistics",
-    blurb:
-      "Redesigned the full WarePro dashboard + mobile app for warehouse workers. Simplified complex flows for older, non-tech users — working prototype in 4 hours.",
-  },
-  {
-    title: "Kerala EV & Tissue Culture",
-    domain: "Civic Tech · Gov",
-    blurb:
-      "Government EV-station prototype delivered in 4 hours + redesigned the Kerala Tissue Culture dashboard, with a full AI concept video (Veo 3, ElevenLabs).",
-  },
-  {
-    title: "AI EdTech Platform",
-    domain: "Founder · EdTech",
-    blurb:
-      "Founder & sole designer/builder of an AI-native personalised learning platform. Prototype complete, CEO-backed.",
-  },
-  {
-    title: "Form Builder & HR Portal",
-    domain: "Internal Tools",
-    blurb:
-      "Designed and built an internal Form Builder and HR Portal at PIPRA — both launching soon.",
-  },
-  {
-    title: "AI Camera Control System",
-    domain: "AI · Logistics",
-    blurb:
-      "AI-powered warehouse camera control system integrated into WarePro for spatial navigation and monitoring.",
-  },
-];
 
 // The Lab — experiments, prototypes, side builds & archived work.
 // `href` turns a Lab card into a link — used for smaller engagements that still
@@ -3579,8 +3551,8 @@ export const process = [
   },
   {
     step: "04",
-    title: "Ship the working code",
-    body: "Build and deliver production code — zero engineering dependency, CEO/VP sign-off.",
+    title: "Build it, ship it with engineering",
+    body: "Working front-end code that engineering can build on, reviewed with product leadership before it ships.",
   },
 ];
 
@@ -3630,8 +3602,9 @@ export const redesigns = [
   },
 ];
 
-// Social proof — front-loaded credibility (Garima-style).
-// DRAFT quotes grounded in real facts — replace with real verbatim quotes when you can.
+// Social proof. NOT RENDERED: these are draft wordings, not things these people
+// said. The homepage section is hidden until real, verbatim quotes (with
+// permission) replace them. Do not re-enable with draft text.
 export const testimonials = [
   {
     quote:
