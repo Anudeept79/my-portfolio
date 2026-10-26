@@ -22,7 +22,10 @@ export const pigoCaseStudy: CaseStudy = {
   accent: "blue",
   cover: `${dir}/cover.webp`,
   tools: ["React", "TypeScript", "Atlassian Design System"],
-  related: [{ href: "/work/pi-erp-platform-ux", label: "PI-ERP in 2026: role-based UX at scale" }],
+  related: [
+    { href: "/work/warepro-mobile", label: "The earlier WarePro Mobile redesign" },
+    { href: "/work/pi-erp-platform-ux", label: "PI-ERP in 2026: role-based UX at scale" },
+  ],
   editorial: {
     headline: "Field work that answers back.",
     subheadline:

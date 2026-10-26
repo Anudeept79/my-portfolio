@@ -39,7 +39,8 @@ export default function AboutPage() {
                 I&apos;m an AI Product Designer in {profile.location}. I
                 love the moment a messy, frustrating flow turns into something
                 that just feels obvious — and I don&apos;t stop at the Figma
-                handoff. I build and ship the working code too.
+                file. I build the working product in code too, and ship it side
+                by side with engineering.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -65,7 +66,7 @@ export default function AboutPage() {
             <p>
               I didn&apos;t start in design. I&apos;m an Electronics &amp;
               Communication engineer by degree — but somewhere along the way I
-              realised I cared far more about how things
+              realised I cared far more about how things{" "}
               <em>feel to use</em>{" "}than how they&apos;re wired.
             </p>
             <p>
@@ -78,12 +79,12 @@ export default function AboutPage() {
             <p>
               Then AI changed everything. At{" "}
               <span className="text-foreground">PIPRA Solutions</span>{" "}I
-              pioneered an AI-led design-and-build workflow that let me go from
-              a problem to a shipped, working product — solo. Over the past 2
-              years I&apos;ve delivered 10+ production apps across fintech,
-              government, logistics, SaaS and EdTech, earning the company its{" "}
-              <span className="text-gold">AI Excellence Award</span> — with zero
-              engineering dependency.
+              pioneered an AI-led design-and-build workflow: I take a problem to a
+              working product in code, so engineering builds on something real
+              instead of a static mockup. Over the past 2 years I&apos;ve
+              delivered 10+ production apps across fintech, government,
+              logistics, SaaS and EdTech, earning the company its{" "}
+              <span className="text-gold">AI Excellence Award</span>.
             </p>
             <p>
               That work started finding me. A senior US designer discovered my

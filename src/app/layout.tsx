@@ -22,18 +22,26 @@ const fraunces = Fraunces({
   axes: ["opsz"],
 });
 
+// Share images need absolute URLs; Vercel provides the production domain at build.
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "https://anudeep-thota-portfolio-21.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: `${profile.name} — ${profile.title}`,
   description: profile.subtitle,
   openGraph: {
     title: `${profile.name} — ${profile.title}`,
-    description: profile.tagline,
+    description: profile.subtitle,
     type: "website",
+    images: [{ url: "/og/default.jpg", width: 1200, height: 630, alt: `${profile.name} — ${profile.title}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${profile.name} — ${profile.title}`,
-    description: profile.tagline,
+    description: profile.subtitle,
+    images: ["/og/default.jpg"],
   },
 };
 

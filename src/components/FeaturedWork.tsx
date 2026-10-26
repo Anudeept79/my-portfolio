@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { ArrowUpRight, Lock } from "lucide-react";
-import { caseStudies } from "@/data/site";
+import { caseStudies, featuredSlugs } from "@/data/site";
 import { Reveal } from "./Reveal";
 import { CoverFrame } from "./CoverFrame";
 
 export function FeaturedWork() {
+  const featured = featuredSlugs
+    .map((slug) => caseStudies.find((c) => c.slug === slug))
+    .filter((c): c is (typeof caseStudies)[number] => Boolean(c));
   return (
     <section id="work" className="scroll-mt-20 py-14 sm:py-20">
       <div className="container-x">
@@ -17,14 +20,14 @@ export function FeaturedWork() {
               </h2>
             </div>
             <p className="max-w-sm text-sm text-muted">
-              Each one: a real problem, real constraints, and work owned
-              end-to-end — across fintech, logistics, and US-government systems.
+              Each one: a real problem, the decisions I made, and what shipped —
+              across logistics, enterprise SaaS, government and AI products.
             </p>
           </div>
         </Reveal>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {caseStudies.filter((c) => !c.lab).map((cs, i) => (
+          {featured.map((cs, i) => (
             <Reveal key={cs.slug} delay={(i % 2) * 0.08}>
               <Link
                 href={`/work/${cs.slug}`}
@@ -59,10 +62,10 @@ export function FeaturedWork() {
                     <span>{cs.year}</span>
                   </div>
                   <h3 className="text-xl font-semibold tracking-tight">
-                    {cs.title}
+                    {cs.editorial?.headline ?? cs.title}
                   </h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-                    {cs.impact}
+                    {cs.editorial ? cs.teaser : cs.impact}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
                     {cs.locked ? (

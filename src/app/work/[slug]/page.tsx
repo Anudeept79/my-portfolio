@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { caseStudies, profile } from "@/data/site";
+import { caseStudies, featuredSlugs, profile } from "@/data/site";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -25,9 +25,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const cs = caseStudies.find((c) => c.slug === slug);
   if (!cs) return {};
+  // locked studies keep their screens private, so they share the site image
+  const image = cs.locked ? "/og/default.jpg" : `/og/${cs.slug}.jpg`;
+  const description = cs.editorial ? cs.teaser : cs.impact;
   return {
     title: `${cs.title} — ${profile.name}`,
     description: cs.impact,
+    openGraph: {
+      title: cs.editorial?.headline ?? cs.title,
+      description,
+      type: "article",
+      images: [{ url: image, width: 1200, height: 630, alt: cs.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: cs.editorial?.headline ?? cs.title,
+      description,
+      images: [image],
+    },
   };
 }
 
@@ -40,7 +55,10 @@ export default async function CaseStudyPage({
   const cs = caseStudies.find((c) => c.slug === slug);
   if (!cs) notFound();
 
-  const others = caseStudies.filter((c) => c.slug !== slug && !c.lab);
+  const others = featuredSlugs
+    .filter((s) => s !== slug)
+    .map((s) => caseStudies.find((c) => c.slug === s))
+    .filter((c): c is (typeof caseStudies)[number] => Boolean(c));
 
   return (
     <>
