@@ -6,6 +6,7 @@ import {
   ClosingBlock,
   ComparisonBlock,
   DecisionRows,
+  FieldBlock,
   GlanceBlock,
   ModelBlock,
   SequenceBlock,
@@ -97,6 +98,8 @@ function Block({ section: s, accent, editorial }: { section: CaseSection; accent
       return <ComparisonBlock s={s} />;
     case "sequence":
       return <SequenceBlock s={s} />;
+    case "field":
+      return <FieldBlock s={s} />;
     case "rewrites":
       return <RewritesBlock s={s} />;
     case "stats":

@@ -2,11 +2,13 @@ import type { CaseStudy } from "./site";
 
 /**
  * Factual source: case-study-briefs/pigo.md (from the PiGo review artifacts,
- * Oct 2026, and the author's confirmation of role and status).
+ * Oct 2026, and the author's confirmation of role and status), and the
+ * author's account and photos of the Oct 2026 visit to a customer's warehouse.
  *
- * Deliberately absent: customer or tenant names (masked in every capture),
- * people's names, user research, adoption or business metrics, and any claim
- * that the author built PiGo's backend.
+ * Deliberately absent: customer or tenant names (masked in every capture; in
+ * the visit photos the customer's brand and its staff's faces are blurred),
+ * people's names, interview counts, adoption or business metrics, and any
+ * claim that the author built PiGo's backend.
  */
 const dir = "/case-studies/pigo";
 
@@ -41,6 +43,7 @@ export const pigoCaseStudy: CaseStudy = {
       "Three PiGo phone screens: the WarePro supervisor home, a scan confirmed with “Added · 1 of 2”, and a work order's More actions sheet.",
     navigation: [
       { id: "starting-point", label: "Context" },
+      { id: "field", label: "Field research" },
       { id: "the-bet", label: "The bet" },
       { id: "principle", label: "Principle" },
       { id: "scan-flow", label: "Scanning" },
@@ -54,7 +57,7 @@ export const pigoCaseStudy: CaseStudy = {
       kind: "glance",
       items: [
         { label: "The problem", text: "Warehouse work ran through a launcher of near-identical apps, maintenance roles needed field apps of their own, and failed actions didn't say what went wrong." },
-        { label: "What I did", text: "Proposed PiGo, one configurable app for every warehouse and maintenance role, designed it, and built its React front end." },
+        { label: "What I did", text: "Studied the work on a customer's warehouse floor, proposed PiGo, one configurable app for every warehouse and maintenance role, designed it, and built its React front end." },
         { label: "The result", text: "In customer use: WarePro, Maintenance and Quality Inspector in one app, where every scan and action says what happened and what to do next." },
       ],
     },
@@ -89,9 +92,68 @@ export const pigoCaseStudy: CaseStudy = {
       ],
     },
     {
+      kind: "field",
+      id: "field",
+      eyebrow: "02 / On the floor",
+      title: "Every step, with the people who do it.",
+      intro:
+        "In October 2026 I visited a customer's warehouse with the PIPRA team and the CEO. I interviewed the people who run it and worked through their daily tasks with them, from receiving to put-away, picking and dispatch: how stock is arranged on the racks, how an order is picked, and how it's checked and packed. The aim was an app the floor team could pick up quickly.",
+      photos: [
+        {
+          src: `${dir}/field/floor-team.webp`,
+          alt: "The author with PIPRA colleagues and the CEO in the customer's warehouse, talking among stacked cartons.",
+          caption: "With the PIPRA team and the CEO on the warehouse floor.",
+        },
+        {
+          src: `${dir}/field/racks.webp`,
+          alt: "The author in a narrow aisle between tall steel racks of boxed products, looking along a shelf; product branding blurred.",
+          caption: "Studying how stock is arranged, rack by rack.",
+        },
+        {
+          src: `${dir}/field/order-sheet.webp`,
+          alt: "A warehouse worker holding a printed order sheet talks with the author; the worker's face and company logo are blurred.",
+          caption: "A picker walks me through the paper order sheet.",
+        },
+        {
+          src: `${dir}/field/paper-picking.webp`,
+          alt: "Over-the-shoulder view: a worker picks items into an open carton while someone checks a printed order and handwritten notes on a clipboard; documents blurred.",
+          caption: "Picking into a carton while the order is checked off on paper.",
+        },
+        {
+          src: `${dir}/field/packing.webp`,
+          alt: "A worker opens a large empty carton to show the author how it's packed; the faces of the worker and a bystander are blurred.",
+          caption: "At packing: how a carton is made up for dispatch.",
+        },
+        {
+          src: `${dir}/field/floor-interview.webp`,
+          alt: "The author and a PIPRA colleague talk with a staff member holding a notebook and papers, whose face is blurred.",
+          caption: "Asking the floor team about their daily tasks.",
+        },
+      ],
+      note: "I'm in the black T-shirt. The customer's brand and its staff's faces are blurred.",
+      findings: [
+        {
+          saw: "Each step belongs to different people: some receive, some put away, some pick and pack. Each person needs only their own tasks, and where to do them.",
+          did: "Each role lands on only its own apps. A labour role sees just Put away and Pick list, so there's less to learn on day one.",
+        },
+        {
+          saw: "Stock is found by its rack and shelf, so a pick is only right if it comes from the right place.",
+          did: "The locator is scanned as well as the product, and a wrong locator is refused with the right one named.",
+        },
+        {
+          saw: "Orders were checked off on paper, so knowing which product left which rack, and spotting stock that went missing, depended on handwritten notes.",
+          did: "Every item is scanned against the order and its rack as it's picked (“1 of 2”). Extras are refused and nothing counts twice, so each pick is on record.",
+        },
+        {
+          saw: "Hands are full with a carton, a sheet or a scanner, and there's little time to read a screen.",
+          did: "Every scan answers with a sound, a color and one sentence that says what to do next.",
+        },
+      ],
+    },
+    {
       kind: "decisions",
       id: "the-bet",
-      eyebrow: "02 / The bet",
+      eyebrow: "03 / The bet",
       title: "One app, configured for each role.",
       items: [
         {
@@ -124,9 +186,9 @@ export const pigoCaseStudy: CaseStudy = {
     {
       kind: "turning",
       id: "principle",
-      eyebrow: "03 / The principle",
+      eyebrow: "04 / The principle",
       title: "Catch the mistake at the shelf, not at save.",
-      body: "A picker holds a scanner in one hand and stock in the other. If a wrong label is only refused when they press Save, they walk back to the shelf. So in PiGo every scan answers right away, with a sound, a color and a sentence that says what to do next.",
+      body: "On the floor, a picker has a scanner in one hand and stock in the other. If a wrong label is only refused when they press Save, they walk back to the shelf. So in PiGo every scan answers right away, with a sound, a color and a sentence that says what to do next.",
       shift: {
         from: "Does the flow reach the end?",
         to: "Does the person know what just happened, without looking twice?",
@@ -135,7 +197,7 @@ export const pigoCaseStudy: CaseStudy = {
     {
       kind: "sequence",
       id: "scan-flow",
-      eyebrow: "04 / Picking, scan by scan",
+      eyebrow: "05 / Picking, scan by scan",
       title: "Every scan answers back.",
       intro:
         "From PiGo's order-to-dispatch walkthrough on sample data. Refusals say why and what to do, and nothing is counted twice or dropped silently.",
@@ -181,7 +243,7 @@ export const pigoCaseStudy: CaseStudy = {
     {
       kind: "decisions",
       id: "product-decisions",
-      eyebrow: "05 / Four decisions from review rounds",
+      eyebrow: "06 / Four decisions from review rounds",
       title: "Make the next step obvious.",
       intro:
         "Before screens come from the first end-to-end run on live data; after screens show the same app after the fixes. Tenant names are masked.",
@@ -287,7 +349,7 @@ export const pigoCaseStudy: CaseStudy = {
       kind: "prose",
       id: "platform",
       variant: "split",
-      eyebrow: "06 / Every device, every brand",
+      eyebrow: "07 / Every device, every brand",
       title: "Phone first, not phone only.",
       body: [
         "PiGo is designed at phone size first. On tablets and desktops, side navigation replaces the bottom bar and records use the extra width.",
@@ -313,22 +375,23 @@ export const pigoCaseStudy: CaseStudy = {
       kind: "prose",
       id: "how-i-worked",
       variant: "split",
-      eyebrow: "07 / How I worked",
+      eyebrow: "08 / How I worked",
       title: "Evidence first, every round.",
       body: [
-        "I was the only designer, working with engineering over about a month. Each round ended in a review page: every screen captured from the running app, before and after, so the CEO and engineers could comment next to the exact screen. One field-test review covered 87 screens across three apps.",
+        "I was the only designer, working with engineering over about a month, starting with the warehouse visit. Each round ended in a review page: every screen captured from the running app, before and after, so the CEO and engineers could comment next to the exact screen. One field-test review covered 87 screens across three apps.",
         "Rules that matter in the field became automated tests, such as one icon per action and the colors of risky actions, so a later change can't quietly undo them. I used AI-assisted coding throughout and checked every change in the running app before review.",
       ],
     },
     {
       kind: "ownership",
       id: "collaboration",
-      eyebrow: "08 / Collaboration",
+      eyebrow: "09 / Collaboration",
       title: "I designed and built the front end. Engineering owned the platform behind it.",
       groups: [
         {
           name: "My contribution",
           items: [
+            "Field research at a customer's warehouse",
             "Product & interaction design",
             "Visual design on Atlassian Design System tokens",
             "React / TypeScript front end",
@@ -350,7 +413,7 @@ export const pigoCaseStudy: CaseStudy = {
     {
       kind: "status",
       id: "status",
-      eyebrow: "09 / Status",
+      eyebrow: "10 / Status",
       title: "Where PiGo is today.",
       states: [
         { name: "PiGo", status: "In customer use", state: "production" },
@@ -361,7 +424,7 @@ export const pigoCaseStudy: CaseStudy = {
     },
     {
       kind: "closing",
-      eyebrow: "10 / Learning",
+      eyebrow: "11 / Learning",
       statement:
         "On a warehouse floor, an app is judged in the second after a scan. Most of this work wasn't adding screens. It was making each one say what happened and what to do next.",
       reflection:

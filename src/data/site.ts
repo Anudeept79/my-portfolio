@@ -110,6 +110,16 @@ export type CaseSection = { id?: string } & (
     }
   // a flow told as numbered phone captures, read left to right
   | { kind: "sequence"; eyebrow?: string; title: string; intro?: string; items: EvidenceItem[] }
+  // field research: photos from the visit, then what was seen → what the product does about it
+  | {
+      kind: "field";
+      eyebrow?: string;
+      title: string;
+      intro?: string;
+      photos: EvidenceItem[];
+      findings: { saw: string; did: string }[];
+      note?: string;
+    }
   // interface copy, old line → new line, by where it appears
   | { kind: "rewrites"; eyebrow?: string; title: string; intro?: string; items: { where: string; before: string; after: string }[] }
   | { kind: "turning"; eyebrow: string; title: string; body: string; shift?: { from: string; to: string } }
