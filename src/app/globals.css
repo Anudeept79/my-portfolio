@@ -23,7 +23,9 @@
   /* display gradient: dark ends with a bronze sheen; lightest stop still 4:1 */
   --grad-from: #6b4f1e;
   --grad-to: #3f2d0e;
-  --grad-sheen: #8c6a2e;
+  --grad-sheen: #9a7634;
+  /* metallic gold for small text: every stop stays ≥ 4.5:1 on cream */
+  --gold-shine: linear-gradient(180deg, #6b4f1e 0%, #8c6a2e 42%, #533c12 60%, #3f2d0e 100%);
   /* ambient glow, barely there */
   --glow-a: rgba(255, 236, 200, 0.25);
   --glow-b: rgba(122, 90, 28, 0.04);
@@ -167,11 +169,38 @@ p {
   color: var(--accent);
 }
 
+/* Rush gold: all gold text is bold and metallic. text-fill (not color) goes
+   transparent, so icons drawn in currentColor stay solid gold; elements with
+   their own background are left solid so the fill isn't clipped away. */
+.eyebrow,
+:is(.text-accent, .text-gold):not(svg):not([class*="bg-"]) {
+  background-image: var(--gold-shine);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+/* DM Mono is loaded at 400/500: use its real 500 rather than a faux bold */
+.eyebrow,
+:is(.text-accent, .text-gold).font-mono {
+  font-weight: 500;
+}
+:is(.text-accent, .text-gold):is([class*="bg-"]) {
+  font-weight: 600;
+}
+/* a child with its own text colour keeps it */
+:is(.eyebrow, .text-accent, .text-gold) :is([class*="text-muted"], [class*="text-foreground"], [class*="text-background"]) {
+  -webkit-text-fill-color: currentColor;
+}
+
+/* display gold: heavier, with a bright band and a struck-coin edge */
 .text-gradient {
-  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-sheen) 46%, var(--grad-from) 54%, var(--grad-to) 100%);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-sheen) 44%, var(--grad-from) 56%, var(--grad-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 600;
+  filter: drop-shadow(0 1px 0 rgb(255 250 240 / 90%));
 }
 
 .accent-underline {
@@ -183,10 +212,12 @@ p {
 
 /* Rush-gold display text */
 .text-accent-gradient {
-  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-sheen) 46%, var(--grad-from) 54%, var(--grad-to) 100%);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-sheen) 44%, var(--grad-from) 56%, var(--grad-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 600;
+  filter: drop-shadow(0 1px 0 rgb(255 250 240 / 90%));
 }
 
 /* Primary action — the Rush "Notify Me" button: solid black, square, cream
