@@ -8,6 +8,7 @@ import type { CaseStudy } from "./site";
  * live site on 2026-10-27. The author paused AI generation on 2026-10-27, so
  * the study says "launched, paused" rather than "live". Usage per the author:
  * about 50 people made a resume with it (no analytics; no payment count given).
+ * The research sample is 50 resumes (corrected by the author from ~1,000).
  *
  * Every screen is a capture of the real build with a fictional candidate
  * ("Meera Iyer"); the AI call was answered locally, so nothing was generated
@@ -101,7 +102,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
       title: "Three sources, one answer.",
       intro: "I didn't want the product built on instinct, so I checked the structure question from several directions before designing anything.",
       items: [
-        { value: "~1,000", label: "resumes from people hired at top tech companies, read for structure, not content" },
+        { value: "50", label: "resumes from people hired at top tech companies, read for structure, not content" },
         { value: "5", label: "resume builders used end to end, with their output run through ATS checkers" },
         { value: "15+", label: "informal conversations with freshers about what they'd tried and what happened" },
         { value: "3", label: "tracking systems' parsing behavior checked: Taleo, Workday and SuccessFactors" },
