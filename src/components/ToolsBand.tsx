@@ -46,7 +46,7 @@ const tools: Tool[] = [
   { name: "Lovable", icon: <Heart className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#F4468A" },
   { name: "Kiro", icon: <Ghost className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#8B5CF6" },
   { name: "Adobe", icon: <Brand d={BRAND.adobe} />, color: "#EC1C24" },
-  { name: "Product thinking", icon: <Brain className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#7a5a1c" },
+  { name: "Product thinking", icon: <Brain className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#5e4515" },
 ];
 
 function Chip({ t }: { t: Tool }) {
