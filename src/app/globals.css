@@ -1,36 +1,36 @@
 @import "tailwindcss";
 
 /* ============================================================
-   THEME — light, after CRED's tokens: white surfaces, black
-   hairline borders, electric blue (#0000ee) as the one brand
-   colour, gold kept for awards. Serif display, sans body, mono
-   labels. Hover is a hard offset shadow, not a glow.
+   THEME — light and warm, after CRED's Rush look: a cream-to-cloud
+   sky behind everything, cream-white cards with dark hairline
+   borders, and bronze-gold as the one accent. Serif display, sans
+   body, mono labels. Hover is a hard offset shadow, not a glow.
    ============================================================ */
 :root {
   /* neutrals */
-  --background: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f3f3f1; /* quiet fill: inputs, tags, highlighted rows */
-  --foreground: #0a0a0a;
-  --muted: #55555c; /* 7.4:1 on white */
-  --border: #0a0a0a; /* CRED: black hairlines */
+  --background: #f4ede3; /* cream, shown before the sky loads */
+  --surface: #fffaf3; /* cream-white cards */
+  --surface-2: #f2e9dc; /* quiet fill: inputs, tags, highlighted rows */
+  --foreground: #1c1710; /* warm near-black */
+  --muted: #4f4940; /* ≥ 6:1 on the cards and the pale sky */
+  --border: #1c1710; /* dark hairlines */
   /* brand */
-  --accent: #0000ee;
-  --accent-deep: #0000b8;
-  --accent-ink: #ffffff;
-  --gold: #8a6a12; /* 5.3:1 on white */
-  /* display gradient (kept near-solid on light) */
-  --grad-from: #0a0a0a;
-  --grad-to: #3a3a40;
+  --accent: #7a5a1c; /* bronze-gold, 6:1 on cream-white */
+  --accent-deep: #5c4314;
+  --accent-ink: #fff8ec;
+  --gold: #7a5a1c;
+  /* display gradient: Rush gold */
+  --grad-from: #b08534;
+  --grad-to: #5c4314;
   /* ambient glow, barely there */
-  --glow-a: rgba(0, 0, 238, 0.035);
-  --glow-b: rgba(138, 106, 18, 0.03);
+  --glow-a: rgba(255, 236, 200, 0.25);
+  --glow-b: rgba(122, 90, 28, 0.04);
   /* elevation: flat at rest, a hard offset shadow when lifted */
   --card-hi: transparent;
   --shadow-card: none;
   --shadow-lift: 6px 6px 0 0 var(--foreground);
   /* glass */
-  --glass-bg: rgba(255, 255, 255, 0.86);
+  --glass-bg: rgba(255, 250, 243, 0.82);
   --glass-border: var(--border);
   --glass-hi: transparent;
   /* radii */
@@ -80,15 +80,17 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Subtle radial glow — blue + gold */
+/* The sky: a fixed cloud backdrop (public/bg/sky.webp, generated, original art)
+   under a cream veil that deepens downward, so body text stays readable */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(60rem 40rem at 78% -10%, var(--glow-a), transparent 60%),
-    radial-gradient(50rem 40rem at 0% 15%, var(--glow-b), transparent 55%);
+    linear-gradient(180deg, rgb(250 244 234 / 10%) 0%, rgb(250 244 234 / 35%) 45%, rgb(250 244 234 / 55%) 100%),
+    url("/bg/sky.webp") center top / cover no-repeat,
+    var(--background);
   pointer-events: none;
 }
 
@@ -177,14 +179,17 @@ p {
   text-decoration-thickness: 3px;
 }
 
-/* Brand-blue display text */
+/* Rush-gold display text */
 .text-accent-gradient {
-  color: var(--accent);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-to) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Primary action — solid brand blue; lifts onto a hard black shadow on hover */
+/* Primary action — dark bronze; lifts onto a hard shadow on hover */
 .btn-gradient {
-  background: var(--accent);
+  background: linear-gradient(180deg, #6e521c 0%, var(--accent-deep) 100%);
   color: var(--accent-ink);
   border: 1px solid var(--foreground);
   box-shadow: 0 0 0 0 var(--foreground);
@@ -271,8 +276,8 @@ p {
 .grid-lines {
   /* a faint grid, not the black hairline used for borders */
   background-image:
-    linear-gradient(to right, rgb(10 10 10 / 9%) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(10 10 10 / 9%) 1px, transparent 1px);
+    linear-gradient(to right, rgb(28 23 16 / 8%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(28 23 16 / 8%) 1px, transparent 1px);
   background-size: 3.5rem 3.5rem;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 75%);
 }

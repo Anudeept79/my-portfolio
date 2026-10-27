@@ -11,15 +11,13 @@ export function Hero() {
   const reduce = useReducedMotion();
   return (
     <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40">
-      <div className="pointer-events-none absolute inset-0 grid-lines opacity-40" />
-
       {/* living aurora — still under prefers-reduced-motion */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-40 h-[38rem] w-[38rem] rounded-full opacity-25 blur-[100px]"
+        className="pointer-events-none absolute -right-32 -top-40 h-[38rem] w-[38rem] rounded-full opacity-70 blur-[100px]"
         style={{
           background:
-            "radial-gradient(circle at 50% 50%, var(--accent), transparent 62%)",
+            "radial-gradient(circle at 50% 50%, #fff1d6, transparent 62%)",
         }}
         animate={reduce ? undefined : { scale: [1, 1.15, 1], x: [0, -30, 0], y: [0, 25, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}

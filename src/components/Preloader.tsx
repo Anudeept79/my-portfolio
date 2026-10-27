@@ -73,7 +73,7 @@ export function Preloader() {
             >
               Anu
             </motion.span>
-            {/* deep — blue, leads the fall */}
+            {/* deep — gold, leads the fall */}
             <motion.span
               className="text-accent-gradient"
               initial={{ y: 120, opacity: 0 }}
