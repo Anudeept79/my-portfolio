@@ -2,6 +2,7 @@ import { wareproCaseStudy } from "./warepro";
 import { pigoCaseStudy } from "./pigo";
 import { piErp2026CaseStudy } from "./pi-erp-2026";
 import { kuyilCaseStudy } from "./kuyil";
+import { stonexCaseStudy } from "./stonex";
 
 // ============================================================================
 // SITE CONTENT — single source of truth for the whole portfolio.
@@ -110,6 +111,16 @@ export type CaseSection = { id?: string } & (
     }
   // a flow told as numbered phone captures, read left to right
   | { kind: "sequence"; eyebrow?: string; title: string; intro?: string; items: EvidenceItem[] }
+  // field research: photos from the visit, then what was seen → what the product does about it
+  | {
+      kind: "field";
+      eyebrow?: string;
+      title: string;
+      intro?: string;
+      photos: EvidenceItem[];
+      findings: { saw: string; did: string }[];
+      note?: string;
+    }
   // interface copy, old line → new line, by where it appears
   | { kind: "rewrites"; eyebrow?: string; title: string; intro?: string; items: { where: string; before: string; after: string }[] }
   | { kind: "turning"; eyebrow: string; title: string; body: string; shift?: { from: string; to: string } }
@@ -136,7 +147,7 @@ export type CaseSection = { id?: string } & (
       statement: string;
       /** What I'd do differently, grounded in what actually happened. */
       reflection?: string;
-      open: { label: string; text: string };
+      open?: { label: string; text: string };
     }
   // Scannable header block. Hiring managers skim a case study in seconds before
   // deciding whether to read it — this answers role / scope / problem / outcome
@@ -325,247 +336,7 @@ export const caseStudies: CaseStudy[] = [
   pigoCaseStudy,
 
   // -------------------------------------------------------------- StoneX
-  {
-    slug: "stonex-migration",
-    title: "An iPad app for inspecting stone on Dubai construction sites",
-    client: "StoneX — stone inspection, Dubai",
-    domain: "Field Ops · Enterprise",
-    year: "2025",
-    role: "Product Designer (sole designer)",
-    impact:
-      "My first project, taken from paper sketches to an app that's still in production — redesigned twice when the client changed direction, then migrated Flutter → React with AI.",
-    teaser:
-      "Inspectors walk Dubai sites logging defects in stone. I designed the iPad app they use to record it, annotate the photos, and generate the report that gets the stone replaced.",
-    accent: "blue",
-    cover: "/work/stonex-migration/cover.jpg",
-    video: "/work/stonex-migration/full-demo.mp4",
-    tools: ["Figma", "iPad / Field UX", "Design Systems", "Claude Code"],
-    sections: [
-      {
-        kind: "snapshot",
-        role: "Sole product designer — research, IA, UI, prototype, dev handoff",
-        timeline: "2025 · my first owned project",
-        team: "Me + a dev team, reporting to my manager",
-        platform: "iPad-first web app",
-        status: "Shipped — still in production",
-        problem:
-          "Inspectors log stone defects on Dubai construction sites, but the record has to become a formal report before a supplier will replace anything. That reporting loop was slow and manual.",
-        outcome:
-          "A shipped iPad app that turns an on-site inspection into an annotated, branded report — redesigned twice as the client's direction changed, then migrated Flutter → React.",
-      },
-      {
-        kind: "takeaways",
-        items: [
-          "I designed for a job I'd never done — most of the value came from studying what happens before and after the screen, not the screen itself.",
-          "The client changed direction mid-project and the whole UI was rebuilt. I've shown the work that got replaced, not just the version that survived.",
-          "I stayed with it past handoff — reviewing builds weekly, then migrating the entire codebase from Flutter to React myself.",
-        ],
-      },
-      {
-        kind: "lead",
-        body:
-          "In Dubai, before stone goes into a building, someone has to walk the site and check it. StoneX are the people who do that checking — and the app I designed is what they carry.",
-      },
-      {
-        kind: "prose",
-        eyebrow: "The business, first",
-        title: "Understanding who pays, and why",
-        body: [
-          "StoneX is a stone inspection company. A project owner hires them to inspect the stone being used on a build — the marble, the cladding, the slabs — and their inspectors go out and record what they find, project by project.",
-          "Every defect they log has to reach the stone supplier as a formal, shareable report. That report is what gets faulty stone replaced, and getting it replaced is what StoneX are paid for. So the app was never really about recording data. It was about producing the document that moves money and material.",
-        ],
-      },
-      {
-        kind: "insight",
-        eyebrow: "The constraint that shaped everything",
-        title: "This gets used standing up, on a site, on an iPad",
-        body:
-          "Inspectors aren't at a desk — they're on a construction site holding a tablet, often in bright sun, often with one hand. That single fact set the rules: an iPad-first layout, targets big enough to hit without precision, flows short enough to finish while standing, and photo capture and annotation built into the inspection rather than bolted on afterwards.",
-      },
-      {
-        kind: "principles",
-        eyebrow: "Design principles",
-        title: "Three rules I held every screen against",
-        items: [
-          {
-            name: "Gloves-on, sun-on",
-            body:
-              "Fitts's Law under field conditions: large targets, generous spacing, nothing that needs a precise tap. If it can't be hit while holding a tablet one-handed, it fails.",
-          },
-          {
-            name: "Recognition, not recall",
-            body:
-              "An inspector shouldn't have to remember what to check. Templates present the checklist; the interface carries the knowledge so working memory stays free for the stone.",
-          },
-          {
-            name: "The report is the product",
-            body:
-              "Every screen is judged by whether it improves the document that reaches the supplier. Data capture that doesn't sharpen the report is cognitive load with no payoff.",
-          },
-        ],
-      },
-      {
-        kind: "figure",
-        src: "/work/stonex-migration/01-userflow.jpg",
-        caption:
-          "Task flows mapped before any UI — single-user and multi-user paths, template creation, image annotation, and the report screens they all converge on.",
-        wide: true,
-      },
-      {
-        kind: "prose",
-        eyebrow: "Where it started",
-        title: "Paper first, because the flow was the hard part",
-        body: "This was the first project I owned as a designer, and I started it on paper — pen sketches of the inspection sequence, working out how many taps it takes to log a defect and where the photo fits in. Only once the sequence held up did it become wireframes, and only then iPad Pro frames. Getting the flow wrong on paper costs a page; getting it wrong in Figma costs a week.",
-      },
-      {
-        kind: "figure",
-        src: "/work/stonex-migration/02-sketches-wireframes.jpg",
-        caption:
-          "The actual notebook sketches alongside the wireframes they became — the flow argued out in pen before a single pixel was placed.",
-        wide: true,
-      },
-      {
-        kind: "figure",
-        src: "/work/stonex-migration/03-design-system.jpg",
-        caption:
-          "A colour palette and style guide built early, so the screens that came later stayed consistent as the product grew.",
-      },
-      {
-        kind: "prose",
-        eyebrow: "The shape of the work",
-        title: "It was never a straight line",
-        body: [
-          "I designed in Figma, handed off to the dev team, and then stayed with them — reviewing builds, catching drift, and reworking screens as feedback came back every week. The Figma file ended up as an honest record of that: pages named Wireframes, UI design, Updated UI, Prototype, and After feedback, each one a round of it.",
-          "Then the client asked for a different approach — not a tweak, a different direction for the whole product. So the UI and UX were redesigned from the ground up into what became Version 2. That's the part of the process people leave out of case studies: the work that was good, and got replaced anyway, because the client's understanding of their own product had moved on.",
-        ],
-      },
-      {
-        kind: "figures",
-        items: [
-          { src: "/work/stonex-migration/04-first-ui.jpg", caption: "The first UI, straight off the wireframes." },
-          { src: "/work/stonex-migration/05-iteration.jpg", caption: "Mid-iteration — reworked against weekly feedback." },
-        ],
-      },
-      {
-        kind: "figure",
-        src: "/work/stonex-migration/07-version2-final.jpg",
-        caption:
-          "Version 2 — the full redesign after the client changed direction. Single-user and multi-user home, template selection, inspection details, image annotation, and the report screens.",
-        wide: true,
-      },
-      {
-        kind: "video",
-        src: "/work/stonex-migration/demo.mp4",
-        badge: "In production",
-        caption:
-          "The inspection flow running in the shipped app — the screen an inspector actually works through on site.",
-        wide: true,
-      },
-      {
-        kind: "decisions",
-        eyebrow: "The decisions",
-        title: "What I changed, and why it mattered on site",
-        items: [
-          {
-            decision: "Templates instead of blank inspection forms",
-            logic:
-              "The same defect types recur across projects, so I made templates a first-class object — build once, reuse per project. This is recognition over recall: rather than an inspector remembering what to check, the checklist arrives pre-populated. It also cuts extraneous cognitive load at exactly the moment attention should be on the stone, not the tablet.",
-          },
-          {
-            decision: "Annotation directly on the photograph",
-            logic:
-              "“Chip, lower left” is ambiguous by the time it reaches a supplier. Marking the defect on the photo collapses the evidence and the claim into one artifact, eliminating a translation step — and with it a whole category of slips. When the report triggers a physical replacement, ambiguity is expensive.",
-          },
-          {
-            decision: "Separate single-user and multi-user modes",
-            logic:
-              "A lone inspector and a coordinated team hold different mental models — one optimises for speed, the other needs assignment, roles, and accountability. Forcing both through one interface would have meant every user paying the complexity cost of the other's needs. Splitting them let each stay simple, and kept choice within each mode narrow (Hick's Law).",
-          },
-          {
-            decision: "A stepper for the inspection flow",
-            logic:
-              "Inspections are long and get interrupted on site. Chunking them into visible steps with clear progress applies Miller's Law and the goal-gradient effect — you can see how much is left, and a half-finished inspection reads as resumable rather than lost.",
-          },
-          {
-            decision: "The report as the destination, not an export",
-            logic:
-              "Since the shareable report is what actually gets stone replaced, I treated it as the product's endpoint rather than an afterthought — branded, page-formatted, with preview and zoom editing. WYSIWYG here isn't polish; it removes the gap between what an inspector approves and what a supplier receives.",
-          },
-        ],
-      },
-      {
-        kind: "video",
-        src: "/work/stonex-migration/proof.mp4",
-        badge: "In production",
-        caption:
-          "Report generation — the branded, shareable document that goes to the stone supplier and gets faulty material replaced.",
-        wide: true,
-      },
-      {
-        kind: "figures",
-        items: [
-          { src: "/work/stonex-migration/12-templates.jpg", caption: "Template selection — reusable inspection checklists." },
-          { src: "/work/stonex-migration/11-new-inspection.jpg", caption: "New inspection details, built for one-handed entry." },
-          { src: "/work/stonex-migration/10-inspection-points.jpg", caption: "Inspection points captured against the project." },
-          { src: "/work/stonex-migration/13-users.jpg", caption: "User management for the multi-user team mode." },
-        ],
-      },
-      {
-        kind: "prose",
-        eyebrow: "The last turn",
-        title: "Then I moved the whole codebase myself",
-        body: "I'd been experimenting with AI coding tools on my own side projects, and my CEO noticed and asked me to bring it into the team. The app had been built in Flutter. Using Claude Code, I migrated the entire codebase to React — the designer who drew the screens moving the code that rendered them, which meant nothing got lost in translation between the two.",
-      },
-      {
-        kind: "metrics",
-        eyebrow: "Where it stands",
-        items: [
-          { metric: "In production", label: "still running as StoneX's live inspection tool" },
-          { metric: "Sole designer", label: "my first owned project, end to end" },
-          { metric: "2 full redesigns", label: "reworked when the client changed direction" },
-          { metric: "Flutter → React", label: "whole codebase migrated with Claude Code" },
-        ],
-      },
-      {
-        kind: "prose",
-        eyebrow: "What I took from it",
-        title: "Designing for a job I'd never done",
-        body: "I had never inspected stone, never worked a construction site, and never used an iPad as a work tool in the sun. Most of the value I added came from asking what happens before and after the screen — where the inspector is standing, who reads the report, and what the report is supposed to make happen. The redesigns stung at the time, but they were the client learning their own product out loud, and the second version was better for it.",
-      },
-    ],
-    overview:
-      "I originally designed the full StoneX app in Figma; developers built it in Flutter. When the codebase needed to move to React Native, I took full ownership and migrated it solo using Antigravity — then built the complete Dubai corporate website, frontend and backend. Delivered ahead of schedule; CEO and VP confirmed successful output.",
-    problem: [
-      "The product was designed in Figma and built in Flutter — but needed to live on React Native.",
-      "A migration like this normally needs a dedicated engineering team and weeks of runway.",
-      "Design and engineering ownership were split, slowing every decision.",
-    ],
-    process: [
-      {
-        title: "Full ownership",
-        body: "Rather than hand off, I took ownership of the codebase end-to-end so design intent survived the migration intact.",
-      },
-      {
-        title: "Antigravity-powered migration",
-        body: "Used Antigravity to translate Flutter patterns into React Native, screen by screen, keeping the design system consistent.",
-      },
-      {
-        title: "Building the corporate site",
-        body: "Built the full Dubai corporate website — frontend and backend — so the brand and product shipped together.",
-      },
-    ],
-    solution: [
-      "A complete Flutter → React Native migration delivered by one person.",
-      "A full corporate website (frontend + backend) for the Dubai entity.",
-      "Design fidelity preserved because the designer owned the build.",
-    ],
-    results: [
-      { metric: "Solo", label: "migration, no eng team" },
-      { metric: "Ahead", label: "of schedule" },
-      { metric: "CEO + VP", label: "confirmed success" },
-    ],
-    gallery: [],
-  },
+  stonexCaseStudy,
 
   piErp2026CaseStudy,
   kuyilCaseStudy,

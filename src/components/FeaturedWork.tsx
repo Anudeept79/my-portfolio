@@ -4,6 +4,9 @@ import { caseStudies, featuredSlugs } from "@/data/site";
 import { Reveal } from "./Reveal";
 import { CoverFrame } from "./CoverFrame";
 
+/** "PiGo · PIPRA Solutions" → "PiGo", "StoneX — stone inspection, Dubai" → "StoneX" */
+const productName = (client: string) => client.split(/ · | — /)[0];
+
 export function FeaturedWork() {
   const featured = featuredSlugs
     .map((slug) => caseStudies.find((c) => c.slug === slug))
@@ -49,7 +52,7 @@ export function FeaturedWork() {
                         <Lock className="h-5 w-5" />
                       </span>
                       <span className="font-mono text-[11px] uppercase tracking-widest text-foreground/80">
-                        Locked · enter code
+                        Locked · code on request
                       </span>
                     </div>
                   )}
@@ -61,6 +64,12 @@ export function FeaturedWork() {
                     </span>
                     <span>{cs.year}</span>
                   </div>
+                  {/* name the product above a headline that doesn't already say it */}
+                  {!(cs.editorial?.headline ?? cs.title).startsWith(productName(cs.client)) && (
+                    <p className="mb-1.5 font-mono text-[11px] uppercase tracking-widest text-accent">
+                      {productName(cs.client)}
+                    </p>
+                  )}
                   <h3 className="text-xl font-semibold tracking-tight">
                     {cs.editorial?.headline ?? cs.title}
                   </h3>

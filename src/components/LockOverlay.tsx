@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Lock, LockOpen } from "lucide-react";
+import { profile } from "@/data/site";
 
 const KEY = "wp_unlock_";
 
@@ -11,7 +12,7 @@ const KEY = "wp_unlock_";
  * until the correct code is entered (remembered per browser). Note: this is an
  * exclusivity gate, not real security — the content still ships to the client.
  */
-export function LockOverlay({ slug, code }: { slug: string; code: string }) {
+export function LockOverlay({ slug, code, title, teaser }: { slug: string; code: string; title?: string; teaser?: string }) {
   const [locked, setLocked] = useState(true);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
@@ -62,10 +63,12 @@ export function LockOverlay({ slug, code }: { slug: string; code: string }) {
         </div>
         <p className="eyebrow mb-3">Protected case study</p>
         <h2 className="font-display text-2xl tracking-tight sm:text-3xl">
-          This one&apos;s under wraps.
+          {title ?? "This one's under wraps."}
         </h2>
+        {/* say what's behind the gate, so someone without the code still learns what the work is */}
+        {teaser && <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-foreground/85">{teaser}</p>}
         <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted">
-          Government client work — shared by access code only. Enter the code I
+          Government client work, shared by access code only. Enter the code I
           gave you to view the full case study.
         </p>
 
@@ -100,6 +103,16 @@ export function LockOverlay({ slug, code }: { slug: string; code: string }) {
             That code isn&apos;t right — try again.
           </p>
         )}
+
+        <p className="mt-5 text-sm text-muted">
+          Don&apos;t have the code?{" "}
+          <a
+            href={`mailto:${profile.email}?subject=${encodeURIComponent(`Access code: ${title ?? slug}`)}`}
+            className="text-accent underline-offset-4 hover:underline"
+          >
+            Email me and I&apos;ll send it.
+          </a>
+        </p>
 
         <Link
           href="/#work"

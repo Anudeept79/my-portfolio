@@ -62,7 +62,7 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      {cs.locked && <LockOverlay slug={cs.slug} code="9191" />}
+      {cs.locked && <LockOverlay slug={cs.slug} code="9191" title={cs.title} teaser={cs.impact} />}
       <Nav />
       <main className={`pt-28 ${cs.editorial ? editorialStyles.page : ""}`}>
         {/* header */}
