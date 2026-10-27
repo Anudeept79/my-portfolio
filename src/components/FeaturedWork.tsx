@@ -52,7 +52,7 @@ export function FeaturedWork() {
                         <Lock className="h-5 w-5" />
                       </span>
                       <span className="font-mono text-[11px] uppercase tracking-widest text-foreground/80">
-                        Locked · enter code
+                        Locked · code on request
                       </span>
                     </div>
                   )}

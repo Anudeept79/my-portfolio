@@ -326,8 +326,8 @@ export const featuredSlugs = [
   "kuyil-ai-assistant",
   "pigo",
   "pi-erp-platform-ux",
+  "us-gov-platforms",
   "myresumeai",
-  "stonex-migration",
 ];
 
 export const caseStudies: CaseStudy[] = [
