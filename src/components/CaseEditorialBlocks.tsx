@@ -124,6 +124,7 @@ export function ComparisonBlock({ s }: { s: Of<"comparison"> }) {
 
 /** Field research: photos from the visit, then each observation beside what the product does about it. */
 export function FieldBlock({ s }: { s: Of<"field"> }) {
+  const [sawLabel, didLabel] = s.labels ?? ["On the floor", "In the product"];
   return (
     <div className="container-x max-w-6xl">
       <div className="max-w-3xl">
@@ -131,26 +132,28 @@ export function FieldBlock({ s }: { s: Of<"field"> }) {
         <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
         {s.intro && <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.intro}</p>}
       </div>
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
-        {s.photos.map((photo) => <Capture key={photo.src} item={photo} compact />)}
-      </div>
+      {s.photos && (
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+          {s.photos.map((photo) => <Capture key={photo.src} item={photo} compact />)}
+        </div>
+      )}
       {s.note && <p className="mt-3 text-xs leading-relaxed text-muted">{s.note}</p>}
-      <div className="mt-8 overflow-hidden rounded-xl border border-border">
+      <div className={`${s.photos ? "mt-8" : "mt-6"} overflow-hidden rounded-xl border border-border`}>
         <div aria-hidden className={`${LABEL} hidden grid-cols-[2rem_1fr_1fr] gap-6 border-b border-border bg-surface px-5 py-3 text-muted sm:grid`}>
           <span />
-          <span>On the floor</span>
-          <span className="text-accent">In the product</span>
+          <span>{sawLabel}</span>
+          <span className="text-accent">{didLabel}</span>
         </div>
         <ol>
           {s.findings.map((f, i) => (
             <li key={f.saw} className="grid gap-2 border-b border-border px-5 py-4 last:border-b-0 sm:grid-cols-[2rem_1fr_1fr] sm:gap-6">
               <span className="font-mono text-xs text-accent sm:pt-0.5">{String(i + 1).padStart(2, "0")}</span>
               <p className="text-sm leading-relaxed text-foreground/90">
-                <span className={`${LABEL} mr-2 text-muted sm:hidden`}>On the floor</span>
+                <span className={`${LABEL} mr-2 text-muted sm:hidden`}>{sawLabel}</span>
                 {f.saw}
               </p>
               <p className="text-sm leading-relaxed text-foreground/90">
-                <span className={`${LABEL} mr-2 text-accent sm:hidden`}>In the product</span>
+                <span className={`${LABEL} mr-2 text-accent sm:hidden`}>{didLabel}</span>
                 {f.did}
               </p>
             </li>
@@ -221,7 +224,8 @@ export function StatsBlock({ s }: { s: Of<"stats"> }) {
         <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
         {s.intro && <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.intro}</p>}
       </div>
-      <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+      {/* four numbers sit in one row rather than leaving an empty cell in a grid of three */}
+      <dl className={`mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 ${s.items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
         {s.items.map((item) => (
           <div key={item.label} className="bg-background p-5 sm:p-6">
             <dt className="sr-only">{item.label}</dt>
