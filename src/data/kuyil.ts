@@ -133,6 +133,7 @@ export const kuyilCaseStudy: CaseStudy = {
             "Show the server's real reason, keep the question, and offer the next step: Try again resends it, Edit question puts it back in the box. Copy, Read aloud and Translate are hidden on a failure, because there's nothing to act on.",
           result:
             "A failure now reads, for example: “Kuyil couldn't answer that. Kuyil is not configured — ask your administrator to set it up in the LLM Configuration window. Your question is kept.”",
+          wide: true,
           images: [
             {
               src: `${dir}/failed-before.webp`,
@@ -179,6 +180,7 @@ export const kuyilCaseStudy: CaseStudy = {
             "Three named steps with ticks (understanding the question, getting data from PI-ERP, writing the answer) and a seconds counter. Send becomes Stop, in the same place, so one button has one meaning at a time.",
           tradeoff: "Stop only stops the waiting: the server still finishes its query, because there's no cancel API yet.",
           result: "You can see progress and stop a slow answer, and the chat notes “You stopped this answer” with Ask again.",
+          wide: true,
           images: [
             {
               src: `${dir}/thinking-before.webp`,
@@ -200,6 +202,7 @@ export const kuyilCaseStudy: CaseStudy = {
           logic:
             "Show nothing when the connection is fine. When it drops, a banner explains with Retry now, earlier answers stay readable, and the disabled message box says why: “Waiting for connection…”.",
           result: "The only connection state on screen is one that needs you, and a disabled box always explains itself.",
+          wide: true,
           images: [
             {
               src: `${dir}/offline-before.webp`,
@@ -274,6 +277,7 @@ export const kuyilCaseStudy: CaseStudy = {
             "Move Kuyil onto the Atlassian Design System tokens, type ramp and icon names that PiGo and the PI-ERP web UI use. Icons are copied path for path from PiGo, and the few PiGo doesn't have are drawn in the same 24px, 2px-stroke style.",
           result:
             "No raw colors or generic icons left in the chat, and Kuyil takes the tenant's brand from the same Appearance & Branding setting as the web app and PiGo.",
+          wide: true,
           images: [
             {
               src: `${dir}/start-before.webp`,

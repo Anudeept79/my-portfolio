@@ -234,6 +234,8 @@ export type CaseSection = { id?: string } & (
         images?: EvidenceItem[];
         /** Stack a pair of wide, short captures instead of setting them side by side. */
         stack?: boolean;
+        /** Set the captures full width below the reasoning, so a detailed before/after pair stays readable. */
+        wide?: boolean;
       }[];
     }
   | { kind: "metrics"; eyebrow?: string; items: { metric: string; label: string }[] }
