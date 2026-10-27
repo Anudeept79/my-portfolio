@@ -466,10 +466,12 @@ export function ClosingBlock({ s }: { s: Of<"closing"> }) {
           <p className="text-[0.9375rem] leading-relaxed text-foreground/85 md:col-span-9">{s.reflection}</p>
         </div>
       )}
-      <div className="mt-6 grid gap-1.5 border-t border-border pt-4 sm:mt-8 md:grid-cols-12 md:gap-10">
-        <p className={`${LABEL} text-muted md:col-span-3`}>{s.open.label}</p>
-        <p className="text-sm leading-relaxed text-muted md:col-span-9">{s.open.text}</p>
-      </div>
+      {s.open && (
+        <div className="mt-6 grid gap-1.5 border-t border-border pt-4 sm:mt-8 md:grid-cols-12 md:gap-10">
+          <p className={`${LABEL} text-muted md:col-span-3`}>{s.open.label}</p>
+          <p className="text-sm leading-relaxed text-muted md:col-span-9">{s.open.text}</p>
+        </div>
+      )}
     </div>
   );
 }
