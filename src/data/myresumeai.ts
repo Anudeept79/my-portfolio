@@ -6,7 +6,8 @@ import type { CaseStudy } from "./site";
  * C:\Anudeep\Mine-MA\AI Resume App (system prompt, fresher form, loading steps,
  * error and success screens, ₹49 / ₹199 pricing, 7-day local save) and the
  * live site on 2026-10-27. The author paused AI generation on 2026-10-27, so
- * the study says "launched, paused" rather than "live".
+ * the study says "launched, paused" rather than "live". Usage per the author:
+ * about 50 people made a resume with it (no analytics; no payment count given).
  *
  * Every screen is a capture of the real build with a fictional candidate
  * ("Meera Iyer"); the AI call was answered locally, so nothing was generated
@@ -67,7 +68,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
         },
         {
           label: "The result",
-          text: "Built solo in about a week and launched in March 2026 with ₹49 downloads, then audited screen by screen. Paused for now.",
+          text: "Built solo in about a week and launched in March 2026. About 50 people made a resume with it; I audited every screen after launch. Paused for now.",
         },
       ],
     },
@@ -288,6 +289,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
       title: "Launched, now paused.",
       states: [
         { name: "MyResumeAI", status: "Launched March 2026, paused for now", state: "in-progress" },
+        { name: "Usage", status: "About 50 people made a resume with it", state: "production" },
         { name: "Product analytics", status: "Not set up yet", state: "in-progress" },
       ],
       qualification: "Status as of October 2026.",
@@ -306,7 +308,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
     },
   ],
   overview:
-    "MyResumeAI is my own AI product: one input gives you an ATS-safe resume, a cover letter and a LinkedIn About, written inside rules I researched. I designed and built it solo in about a week and launched it in March 2026.",
+    "MyResumeAI is my own AI product: one input gives you an ATS-safe resume, a cover letter and a LinkedIn About, written inside rules I researched. I designed and built it solo in about a week, launched it in March 2026, and about 50 people made a resume with it.",
   problem: [],
   process: [],
   solution: [],
