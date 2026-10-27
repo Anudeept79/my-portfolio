@@ -317,12 +317,15 @@ export function DecisionRows({ s }: { s: Of<"decisions"> }) {
         {s.items.map((d, i) => {
           const images = d.images ?? [];
           const pair = images.length > 1 && !d.stack;
+          const wide = Boolean(d.wide) && images.length > 0;
           const imageRight = i % 2 === 0;
           // full class names, so Tailwind can see them
-          const figureCols = pair
+          const figureCols = wide
+            ? "md:col-span-12 md:col-start-1 md:row-start-3"
+            : pair
             ? imageRight ? "md:col-span-7 md:col-start-6" : "md:col-span-7 md:col-start-1"
             : imageRight ? "md:col-span-5 md:col-start-8" : "md:col-span-5 md:col-start-1";
-          const textCols = images.length === 0
+          const textCols = images.length === 0 || wide
             ? "md:col-span-8 md:col-start-1"
             : pair
               ? imageRight ? "md:col-span-5 md:col-start-1" : "md:col-span-5 md:col-start-8"
@@ -340,8 +343,8 @@ export function DecisionRows({ s }: { s: Of<"decisions"> }) {
                 {d.decision}
               </h3>
               {images.length > 0 && (
-                <div className={`md:row-span-2 md:row-start-1 ${figureCols} ${pair ? "grid grid-cols-2 gap-3 self-start" : d.stack ? "grid gap-4 self-start" : "self-start"}`}>
-                  {images.map((image) => <Capture key={image.src} item={image} compact={pair} />)}
+                <div className={`${wide ? "mt-2" : "md:row-span-2 md:row-start-1"} ${figureCols} ${pair ? (wide ? "grid grid-cols-1 gap-4 self-start sm:grid-cols-2 sm:gap-5" : "grid grid-cols-2 gap-3 self-start") : d.stack ? "grid gap-4 self-start" : "self-start"}`}>
+                  {images.map((image) => <Capture key={image.src} item={image} compact={pair && !wide} />)}
                 </div>
               )}
               <dl className={`space-y-2 md:row-start-2 md:space-y-3.5 ${textCols}`}>
