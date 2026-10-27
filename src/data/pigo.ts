@@ -29,9 +29,9 @@ export const pigoCaseStudy: CaseStudy = {
     { href: "/work/pi-erp-platform-ux", label: "PI-ERP in 2026: role-based UX at scale" },
   ],
   editorial: {
-    headline: "Field work that answers back.",
+    headline: "PiGo: one app for every role on the floor.",
     subheadline:
-      "I designed and built the front end of PiGo, PIPRA's mobile app for warehouse and maintenance teams. It moved the WarePro operator app into one role-based platform, where every scan and action says what happened and what to do next.",
+      "PiGo is PIPRA's mobile app for warehouse and maintenance teams. I studied the work on a customer's warehouse floor, proposed PiGo, designed it and built its front end: one role-based app in place of WarePro's launcher of separate apps, where every scan and action says what happened and what to do next.",
     summary: [
       { label: "Role", value: "Product design · React / TypeScript front end" },
       { label: "Team & time", value: "Only designer, with engineering · about a month (Oct 2026)" },
@@ -254,19 +254,13 @@ export const pigoCaseStudy: CaseStudy = {
           logic: "Give each state one main action, and put the rest one tap away in a More actions sheet, with the actions available now listed first.",
           tradeoff: "Less common actions are one tap further away.",
           result: "“Sign off my work” is the single main button. Send back and Safety hold sit apart at the bottom of the sheet.",
-          stack: true,
           images: [
             {
-              src: `${dir}/wo-actions-before.webp`,
-              label: "Before",
-              alt: "Work order action bar before: Pause and four wrapping blue buttons (Sign off my work, Approve work, Safety approve, Close work order), with the more button squeezed to the edge.",
-              caption: "Before: five primary buttons.",
-            },
-            {
-              src: `${dir}/wo-actions-after.webp`,
-              label: "After",
-              alt: "Work order action bar after: one blue Sign off my work button and a More button.",
-              caption: "After: one main action, the rest in “…”.",
+              src: `${dir}/wo-final.webp`,
+              label: "Final",
+              phone: true,
+              alt: "An emergency work order in PiGo: an amber banner listing the sign-offs needed to close it, the Details tab, and one blue Sign off my work button with a More button beside it.",
+              caption: "One main action; everything else is one tap away in “…”.",
             },
           ],
         },
@@ -409,6 +403,11 @@ export const pigoCaseStudy: CaseStudy = {
           items: ["iDempiere backend & REST APIs", "Warehouse & maintenance business rules", "Tenant & seed data", "Deployment & infrastructure"],
         },
       ],
+    },
+    {
+      kind: "quote",
+      text: "On PI-ERP and PiGo, Anudeep took the work from design all the way to a live product — owning design and development instead of handing over mockups and waiting. That's exactly the ownership I want to encourage.",
+      attribution: "Ajit Kumar · CEO, PIPRA Solutions",
     },
     {
       kind: "status",
