@@ -5,7 +5,8 @@ import type { CaseStudy } from "./site";
  * earlier version of this study), checked against the product's own code in
  * C:\Anudeep\Mine-MA\AI Resume App (system prompt, fresher form, loading steps,
  * error and success screens, ₹49 / ₹199 pricing, 7-day local save) and the
- * live site on 2026-10-27.
+ * live site on 2026-10-27. The author paused AI generation on 2026-10-27, so
+ * the study says "launched, paused" rather than "live".
  *
  * Every screen is a capture of the real build with a fictional candidate
  * ("Meera Iyer"); the AI call was answered locally, so nothing was generated
@@ -24,7 +25,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
   domain: "AI Product · Founder",
   year: "2026",
   role: "Founder · Product Design · Build",
-  impact: "One input gives you an ATS-safe resume, a cover letter and a LinkedIn About. Researched, designed and built solo in about a week; live with paid downloads.",
+  impact: "One input gives you an ATS-safe resume, a cover letter and a LinkedIn About. Researched, designed and built solo in about a week, and launched in March 2026.",
   teaser:
     "My own AI product: one input gives you an ATS-safe resume, cover letter and LinkedIn About, written inside rules I researched. Designed and built solo in about a week.",
   accent: "blue",
@@ -38,7 +39,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
       { label: "Role", value: "Founder · research, product design, AI prompt, build" },
       { label: "Team & time", value: "Solo · about a week (March 2026)" },
       { label: "Platform", value: "Web, mobile first" },
-      { label: "Status", value: "Live at myresumeai.org, paid downloads" },
+      { label: "Status", value: "Launched March 2026 · paused for now" },
     ],
     caption: "The results screen with its score and checklist, and the payment drawer that opens over the finished resume. Fictional candidate.",
     coverAlt:
@@ -66,7 +67,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
         },
         {
           label: "The result",
-          text: "Live at myresumeai.org with ₹49 downloads. Built solo in about a week, then audited screen by screen after launch.",
+          text: "Built solo in about a week and launched in March 2026 with ₹49 downloads, then audited screen by screen. Paused for now.",
         },
       ],
     },
@@ -284,9 +285,9 @@ export const myResumeAiCaseStudy: CaseStudy = {
       kind: "status",
       id: "status",
       eyebrow: "10 / Status",
-      title: "Live.",
+      title: "Launched, now paused.",
       states: [
-        { name: "MyResumeAI", status: "Live at myresumeai.org, with paid downloads", state: "production" },
+        { name: "MyResumeAI", status: "Launched March 2026, paused for now", state: "in-progress" },
         { name: "Product analytics", status: "Not set up yet", state: "in-progress" },
       ],
       qualification: "Status as of October 2026.",
@@ -305,7 +306,7 @@ export const myResumeAiCaseStudy: CaseStudy = {
     },
   ],
   overview:
-    "MyResumeAI is my own AI product: one input gives you an ATS-safe resume, a cover letter and a LinkedIn About, written inside rules I researched. I designed and built it solo in about a week, and it's live with paid downloads.",
+    "MyResumeAI is my own AI product: one input gives you an ATS-safe resume, a cover letter and a LinkedIn About, written inside rules I researched. I designed and built it solo in about a week and launched it in March 2026.",
   problem: [],
   process: [],
   solution: [],
