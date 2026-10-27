@@ -82,7 +82,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.28, ease }}
               className="mt-8"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold shadow-[0_0_30px_-10px_rgba(201,168,76,0.5)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold">
                 <Award className="h-4 w-4" strokeWidth={2} />
                 AI Excellence Award — PIPRA Solutions, 2025
               </span>
