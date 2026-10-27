@@ -115,8 +115,43 @@ export function ComparisonBlock({ s }: { s: Of<"comparison"> }) {
         <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
         <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.body}</p>
       </div>
-      <div className={`mt-5 grid gap-3 sm:mt-6 sm:gap-5 ${s.items.some((item) => item.phone) ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"}`}>
+      <div className={`mt-5 grid gap-3 sm:mt-6 sm:gap-5 ${s.items.some((item) => item.phone) ? (s.items.length === 2 ? "grid-cols-2 sm:max-w-xl" : "grid-cols-2 sm:grid-cols-3") : "grid-cols-2"}`}>
         {s.items.map((item) => <Capture key={item.src} item={item} aspect={s.uncropped ? undefined : "2 / 1"} compact />)}
+      </div>
+    </div>
+  );
+}
+
+/** Interface copy before and after, by where it appears. Stacks on phones, three columns from sm. */
+export function RewritesBlock({ s }: { s: Of<"rewrites"> }) {
+  return (
+    <div className="container-x max-w-6xl">
+      <div className="max-w-3xl">
+        <Eyebrow>{s.eyebrow}</Eyebrow>
+        <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
+        {s.intro && <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.intro}</p>}
+      </div>
+      <div className="mt-6 overflow-hidden rounded-xl border border-border">
+        <div aria-hidden className={`${LABEL} hidden grid-cols-[11rem_1fr_1fr] gap-6 border-b border-border bg-surface px-5 py-3 text-muted sm:grid`}>
+          <span>Where</span>
+          <span>Before</span>
+          <span className="text-accent">After</span>
+        </div>
+        <dl>
+          {s.items.map((item) => (
+            <div key={item.where} className="grid gap-2 border-b border-border px-5 py-4 last:border-b-0 sm:grid-cols-[11rem_1fr_1fr] sm:gap-6">
+              <dt className="text-sm font-medium text-foreground">{item.where}</dt>
+              <dd className="text-sm leading-relaxed text-muted">
+                <span className={`${LABEL} mr-2 text-muted sm:hidden`}>Before</span>
+                {item.before}
+              </dd>
+              <dd className="text-sm leading-relaxed text-foreground/90">
+                <span className={`${LABEL} mr-2 text-accent sm:hidden`}>After</span>
+                {item.after}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   );
@@ -316,15 +351,17 @@ export function VideoSplit({ s }: { s: Of<"video"> }) {
 
 /** Who owned what — the first column is mine, weighted by a rule, not by color alone. */
 export function OwnershipBlock({ s }: { s: Of<"ownership"> }) {
+  // two groups split the row evenly instead of leaving a third column empty
+  const pair = s.groups.length === 2;
   return (
     <div className="container-x max-w-6xl">
       <div>
         <Eyebrow>{s.eyebrow}</Eyebrow>
         <h2 className="font-display text-xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
       </div>
-      <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:mt-6 md:grid-cols-3">
+      <div className={`mt-5 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:mt-6 ${pair ? "sm:grid-cols-2" : "grid-cols-2 md:grid-cols-3"}`}>
         {s.groups.map((group, i) => (
-          <section key={group.name} className={`p-4 sm:p-6 ${i === 0 ? "col-span-2 border-t-2 border-t-accent bg-surface md:col-span-1" : "bg-background"}`}>
+          <section key={group.name} className={`p-4 sm:p-6 ${i === 0 ? `border-t-2 border-t-accent bg-surface ${pair ? "" : "col-span-2 md:col-span-1"}` : "bg-background"}`}>
             <h3 className={`${LABEL} mb-3 ${i === 0 ? "text-accent" : "text-muted"}`}>{group.name}</h3>
             <ul className="space-y-1 text-sm leading-snug text-foreground/85 sm:space-y-1.5">
               {group.items.map((item) => (
