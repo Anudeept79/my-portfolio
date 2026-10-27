@@ -25,6 +25,7 @@ export const piErp2026CaseStudy: CaseStudy = {
   related: [
     { href: "/work/pi-erp-design-system", label: "The 2025 PI-ERP visual restyle" },
     { href: "/work/pigo", label: "PiGo mobile platform" },
+    { href: "/work/kuyil-ai-assistant", label: "Kuyil AI assistant, the full redesign" },
   ],
   editorial: {
     headline: "An ERP that tells each person what needs them.",
@@ -34,7 +35,7 @@ export const piErp2026CaseStudy: CaseStudy = {
       { label: "Role", value: "Product design · UX engineering (theme, configuration, renderer)" },
       { label: "Team & time", value: "Only designer, with engineering · about a month (Oct 2026)" },
       { label: "Scope", value: "774 web screens · PiGo · Kuyil" },
-      { label: "Status", value: "Deployed in parts · see Status" },
+      { label: "Status", value: "Live · web, PiGo and Kuyil" },
     ],
     caption: "A technician's dashboard on the web, and the same design system on PiGo. Tenant names masked.",
     coverAlt:
@@ -270,7 +271,7 @@ export const piErp2026CaseStudy: CaseStudy = {
       id: "kuyil",
       eyebrow: "06 / Kuyil, the AI assistant",
       title: "Answers you can check.",
-      body: "Kuyil answers questions about PI-ERP data. Its answers gave no source, and a failure only said “I'm sorry, I encountered an error”. The redesign moves Kuyil onto the same tokens and icons as PiGo and the web app. Every answer names its source and time, records open in PI-ERP, and data sits in a card with table and chart views, copy and CSV. A failed answer says what happened, with Try again and Edit question.",
+      body: "Kuyil answers questions about PI-ERP data. Its answers gave no source, and a failure only said “I'm sorry, I encountered an error”. The redesign moves Kuyil onto the same tokens and icons as PiGo and the web app. Every answer names its source and time, records open in PI-ERP, and data sits in a card with table and chart views, copy and CSV. A failed answer says what happened, with Try again and Edit question. The full redesign has its own case study.",
       uncropped: true,
       items: [
         {
@@ -329,15 +330,15 @@ export const piErp2026CaseStudy: CaseStudy = {
       kind: "status",
       id: "status",
       eyebrow: "09 / Status",
-      title: "Where each part stands.",
+      title: "All five areas are live.",
       states: [
-        { name: "Role landing & dashboards", status: "Deployed and verified on a demo tenant", state: "production" },
-        { name: "Tenant branding", status: "Deployed", state: "production" },
-        { name: "Board views & calendar", status: "In final review for merge", state: "in-progress" },
-        { name: "Accessibility & responsive", status: "Built on a branch, awaiting deploy", state: "in-progress" },
-        { name: "Kuyil redesign", status: "Built, in review", state: "in-progress" },
+        { name: "Role landing & dashboards", status: "Live", state: "production" },
+        { name: "Tenant branding", status: "Live", state: "production" },
+        { name: "Board views & calendar", status: "Live", state: "production" },
+        { name: "Accessibility & responsive", status: "Live", state: "production" },
+        { name: "Kuyil redesign", status: "Live", state: "production" },
       ],
-      qualification: "Statuses come from the October 2026 review documents. Rolling the role landing out to more tenants waits for approval.",
+      qualification: "Status as of late October 2026.",
     },
     {
       kind: "closing",

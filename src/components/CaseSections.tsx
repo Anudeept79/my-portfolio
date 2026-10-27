@@ -11,6 +11,7 @@ import {
   SequenceBlock,
   StatsBlock,
   NoteBlock,
+  RewritesBlock,
   OwnershipBlock,
   SplitProse,
   StatusBlock,
@@ -96,6 +97,8 @@ function Block({ section: s, accent, editorial }: { section: CaseSection; accent
       return <ComparisonBlock s={s} />;
     case "sequence":
       return <SequenceBlock s={s} />;
+    case "rewrites":
+      return <RewritesBlock s={s} />;
     case "stats":
       return <StatsBlock s={s} />;
     case "glance":

@@ -1,6 +1,7 @@
 import { wareproCaseStudy } from "./warepro";
 import { pigoCaseStudy } from "./pigo";
 import { piErp2026CaseStudy } from "./pi-erp-2026";
+import { kuyilCaseStudy } from "./kuyil";
 
 // ============================================================================
 // SITE CONTENT — single source of truth for the whole portfolio.
@@ -109,6 +110,8 @@ export type CaseSection = { id?: string } & (
     }
   // a flow told as numbered phone captures, read left to right
   | { kind: "sequence"; eyebrow?: string; title: string; intro?: string; items: EvidenceItem[] }
+  // interface copy, old line → new line, by where it appears
+  | { kind: "rewrites"; eyebrow?: string; title: string; intro?: string; items: { where: string; before: string; after: string }[] }
   | { kind: "turning"; eyebrow: string; title: string; body: string; shift?: { from: string; to: string } }
   | {
       kind: "model";
@@ -310,11 +313,11 @@ export type CaseStudy = {
  */
 export const featuredSlugs = [
   "warepro-digital-twin",
+  "kuyil-ai-assistant",
   "pigo",
   "pi-erp-platform-ux",
   "myresumeai",
   "stonex-migration",
-  "us-gov-platforms",
 ];
 
 export const caseStudies: CaseStudy[] = [
@@ -565,6 +568,7 @@ export const caseStudies: CaseStudy[] = [
   },
 
   piErp2026CaseStudy,
+  kuyilCaseStudy,
 
   // -------------------------------------------------------------- PI-ERP
   // VERIFY: the "delivered as a UI plugin/theme layer so core code stays
