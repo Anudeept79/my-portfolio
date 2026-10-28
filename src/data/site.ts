@@ -109,6 +109,8 @@ export type CaseSection = { id?: string } & (
       intro?: string;
       items: { from?: string; value: string; label: string }[];
       note?: string;
+      /** evidence for the numbers, set beside them; the numbers then stack in one column */
+      image?: EvidenceItem;
     }
   // a flow told as numbered phone captures, read left to right
   | { kind: "sequence"; eyebrow?: string; title: string; intro?: string; items: EvidenceItem[] }

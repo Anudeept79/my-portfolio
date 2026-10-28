@@ -224,8 +224,9 @@ export function StatsBlock({ s }: { s: Of<"stats"> }) {
         <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
         {s.intro && <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.intro}</p>}
       </div>
+      <div className={s.image ? "mt-6 grid gap-5 md:grid-cols-12 md:items-start md:gap-8" : undefined}>
       {/* four numbers sit in one row rather than leaving an empty cell in a grid of three */}
-      <dl className={`mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 ${s.items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
+      <dl className={`grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border ${s.image ? "md:col-span-6" : `mt-6 sm:grid-cols-2 ${s.items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}`}>
         {s.items.map((item) => (
           <div key={item.label} className="bg-background p-5 sm:p-6">
             <dt className="sr-only">{item.label}</dt>
@@ -237,6 +238,8 @@ export function StatsBlock({ s }: { s: Of<"stats"> }) {
           </div>
         ))}
       </dl>
+      {s.image && <div className="md:col-span-6"><Capture item={s.image} /></div>}
+      </div>
       {s.note && <p className="mt-3 max-w-3xl text-xs leading-relaxed text-muted">{s.note}</p>}
     </div>
   );
