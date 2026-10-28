@@ -37,7 +37,7 @@ type Tool = { name: string; icon: ReactNode; color: string };
 const tools: Tool[] = [
   { name: "Antigravity", icon: <Rocket className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#4285F4" },
   { name: "Claude Code", icon: <Brand d={BRAND.claude} />, color: "#D97757" },
-  { name: "Cursor", icon: <Brand d={BRAND.cursor} />, color: "#e5e7eb" },
+  { name: "Cursor", icon: <Brand d={BRAND.cursor} />, color: "#1c1710" },
   { name: "Figma", icon: <Brand d={BRAND.figma} />, color: "#F24E1E" },
   { name: "Gemini", icon: <Brand d={BRAND.gemini} />, color: "#9a7cff" },
   { name: "OpenAI", icon: <Sparkles className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#19C37D" },
@@ -46,7 +46,7 @@ const tools: Tool[] = [
   { name: "Lovable", icon: <Heart className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#F4468A" },
   { name: "Kiro", icon: <Ghost className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#8B5CF6" },
   { name: "Adobe", icon: <Brand d={BRAND.adobe} />, color: "#EC1C24" },
-  { name: "Product thinking", icon: <Brain className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#c9a84c" },
+  { name: "Product thinking", icon: <Brain className="h-5 w-5 shrink-0" strokeWidth={1.6} />, color: "#5e4515" },
 ];
 
 function Chip({ t }: { t: Tool }) {

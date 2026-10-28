@@ -31,7 +31,7 @@ function Tile({
       className={`relative ${className}`}
       style={{ transform: `rotate(${rotate}deg)` }}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_16px_36px_-12px_rgba(0,0,0,0.7)]">
+      <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-[5px_5px_0_0_#1c1710]">
         {/* placeholder */}
         <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-accent/12 via-transparent to-transparent">
           <div className="grid-lines absolute inset-0 opacity-20" />

@@ -1,45 +1,47 @@
 @import "tailwindcss";
 
 /* ============================================================
-   THEME — dark premium. Blue accent, gold for awards.
-   Serif display headings, sans body, mono labels.
+   THEME — light and warm, after CRED's Rush look: a cream-to-cloud
+   sky behind everything, cream-white cards with dark hairline
+   borders, and bronze-gold as the one accent. Serif display, sans
+   body, mono labels. Hover is a hard offset shadow, not a glow.
    ============================================================ */
-/* ---- DARK (default) ---- elevation from lighter surfaces + soft shadow + top sheen */
 :root {
   /* neutrals */
-  --background: #0a0a0c;
-  --surface: #141519; /* cards sit ABOVE bg */
-  --surface-2: #1c1e24;
-  --foreground: #f4f4f2;
-  --muted: #9196a1;
-  --border: #282a31;
+  --background: #f4ede3; /* cream, shown before the sky loads */
+  --surface: #fffaf3; /* cream-white cards */
+  --surface-2: #f2e9dc; /* quiet fill: inputs, tags, highlighted rows */
+  --foreground: #1a1611; /* warm near-black */
+  --muted: #3d3832; /* secondary text, ≥ 9:1 on cream */
+  --border: #1c1710; /* dark hairlines */
   /* brand */
-  --accent: #5b82ff; /* readable blue on dark (family of #1847c7) */
-  --accent-deep: #1847c7;
-  --accent-ink: #ffffff;
-  --gold: #d4b25e;
-  /* display gradient */
-  --grad-from: #ffffff;
-  --grad-to: #aeb1ba;
-  /* ambient glow */
-  --glow-a: rgba(91, 130, 255, 0.1);
-  --glow-b: rgba(212, 178, 94, 0.06);
-  /* elevation */
-  --card-hi: rgba(255, 255, 255, 0.055); /* top-edge sheen (lit from above) */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.34),
-    0 20px 44px -12px rgba(0, 0, 0, 0.55),
-    0 0 50px -18px rgba(91, 130, 255, 0.22);
-  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.5), 0 14px 30px rgba(0, 0, 0, 0.5),
-    0 34px 66px -12px rgba(0, 0, 0, 0.62);
+  /* Rush gold, sampled from the reference: deep bronze, never pale */
+  --accent: #5e4515; /* labels, links, eyebrows: 8:1 on cream */
+  --accent-deep: #45320f;
+  --accent-ink: #fffaf3;
+  --gold: #5e4515;
+  /* display gradient: dark ends with a bronze sheen; lightest stop still 4:1 */
+  --grad-from: #6b4f1e;
+  --grad-to: #3f2d0e;
+  --grad-sheen: #9a7634;
+  /* metallic gold for small text: every stop stays ≥ 4.5:1 on cream */
+  --gold-shine: linear-gradient(180deg, #6b4f1e 0%, #8c6a2e 42%, #533c12 60%, #3f2d0e 100%);
+  /* ambient glow, barely there */
+  --glow-a: rgba(255, 236, 200, 0.25);
+  --glow-b: rgba(122, 90, 28, 0.04);
+  /* elevation: flat at rest, a hard offset shadow when lifted */
+  --card-hi: transparent;
+  --shadow-card: none;
+  --shadow-lift: 6px 6px 0 0 var(--foreground);
   /* glass */
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hi: rgba(255, 255, 255, 0.14);
+  --glass-bg: rgba(255, 250, 243, 0.82);
+  --glass-border: var(--border);
+  --glass-hi: transparent;
   /* radii */
-  --radius-sm: 0.625rem;
-  --radius: 0.9rem;
-  --radius-lg: 1.15rem;
-  --radius-xl: 1.5rem;
+  --radius-sm: 0.5rem;
+  --radius: 0.75rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
   /* one motion language */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
@@ -47,32 +49,7 @@
   --dur-2: 220ms;
   --dur-3: 400ms;
   --dur-4: 600ms;
-}
-
-/* ---- LIGHT ---- off-white page + pure-white cards + real layered soft shadows (Stripe/Razorpay) */
-:root[data-theme="light"] {
-  --background: #f4f2ee; /* warm paper off-white (Antigravity/Razorpay feel) */
-  --surface: #ffffff; /* cards are pure white and lift off the warm page */
-  --surface-2: #ebe7df;
-  --foreground: #14151a; /* warm near-black ink */
-  --muted: #6b6862;
-  --border: #e7e2d8;
-  --accent: #1847c7;
-  --accent-deep: #123aa8;
-  --accent-ink: #ffffff;
-  --gold: #927012;
-  --grad-from: #14151a;
-  --grad-to: #4a4a52;
-  --glow-a: rgba(24, 71, 199, 0.05);
-  --glow-b: rgba(201, 168, 76, 0.06);
-  --card-hi: rgba(255, 255, 255, 0.9);
-  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.05), 0 4px 10px rgba(16, 24, 40, 0.06),
-    0 16px 40px -12px rgba(16, 24, 40, 0.12);
-  --shadow-lift: 0 2px 6px rgba(16, 24, 40, 0.06), 0 10px 24px rgba(16, 24, 40, 0.1),
-    0 30px 60px -14px rgba(16, 24, 40, 0.2);
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(16, 24, 40, 0.07);
-  --glass-hi: rgba(255, 255, 255, 0.9);
+  color-scheme: light;
 }
 
 @theme inline {
@@ -107,15 +84,17 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Subtle radial glow — blue + gold */
+/* The sky: a fixed cloud backdrop (public/bg/sky.webp, generated, original art)
+   under a cream veil that deepens downward, so body text stays readable */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(60rem 40rem at 78% -10%, var(--glow-a), transparent 60%),
-    radial-gradient(50rem 40rem at 0% 15%, var(--glow-b), transparent 55%);
+    linear-gradient(180deg, rgb(252 241 230 / 25%) 0%, rgb(252 241 230 / 50%) 45%, rgb(252 241 230 / 66%) 100%),
+    url("/bg/sky.webp") center top / cover no-repeat,
+    var(--background);
   pointer-events: none;
 }
 
@@ -190,11 +169,38 @@ p {
   color: var(--accent);
 }
 
+/* Rush gold: all gold text is bold and metallic. text-fill (not color) goes
+   transparent, so icons drawn in currentColor stay solid gold; elements with
+   their own background are left solid so the fill isn't clipped away. */
+.eyebrow,
+:is(.text-accent, .text-gold):not(svg):not([class*="bg-"]) {
+  background-image: var(--gold-shine);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+/* DM Mono is loaded at 400/500: use its real 500 rather than a faux bold */
+.eyebrow,
+:is(.text-accent, .text-gold).font-mono {
+  font-weight: 500;
+}
+:is(.text-accent, .text-gold):is([class*="bg-"]) {
+  font-weight: 600;
+}
+/* a child with its own text colour keeps it */
+:is(.eyebrow, .text-accent, .text-gold) :is([class*="text-muted"], [class*="text-foreground"], [class*="text-background"]) {
+  -webkit-text-fill-color: currentColor;
+}
+
+/* display gold: heavier, with a bright band and a struck-coin edge */
 .text-gradient {
-  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-to) 100%);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-sheen) 44%, var(--grad-from) 56%, var(--grad-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 600;
+  filter: drop-shadow(0 1px 0 rgb(255 250 240 / 90%));
 }
 
 .accent-underline {
@@ -204,35 +210,37 @@ p {
   text-decoration-thickness: 3px;
 }
 
-/* Blue gradient text (matches the hero blue shade) */
+/* Rush-gold display text */
 .text-accent-gradient {
-  background: linear-gradient(180deg, #8aa8ff 0%, #3b6ef5 100%);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--grad-sheen) 44%, var(--grad-from) 56%, var(--grad-to) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 600;
+  filter: drop-shadow(0 1px 0 rgb(255 250 240 / 90%));
 }
 
-/* Primary action — blue gradient with glow */
+/* Primary action — the Rush "Notify Me" button: solid black, square, cream
+   text; lifts onto a gold offset shadow on hover. Unlayered, so its radius
+   wins over the rounded-full utility on the elements. */
 .btn-gradient {
-  background: linear-gradient(135deg, #6f93ff 0%, #1f52d6 100%);
-  color: #fff;
-  box-shadow:
-    0 6px 20px -6px rgba(91, 130, 255, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: #000000;
+  color: var(--accent-ink);
+  border: 1px solid #000000;
+  border-radius: 2px;
+  font-weight: 600;
+  box-shadow: 0 0 0 0 var(--accent);
   transition:
     transform var(--dur-2) var(--ease-out),
-    box-shadow var(--dur-2) var(--ease-out),
-    filter var(--dur-2) var(--ease-out);
+    box-shadow var(--dur-2) var(--ease-out);
 }
 .btn-gradient:hover {
-  transform: scale(1.03);
-  filter: brightness(1.06);
-  box-shadow:
-    0 10px 32px -6px rgba(91, 130, 255, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 var(--accent);
 }
 .btn-gradient:active {
-  transform: scale(0.98);
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 0 var(--accent);
 }
 
 .card {
@@ -277,11 +285,8 @@ p {
     border-color var(--dur-2) var(--ease-standard);
 }
 .lift:hover {
-  transform: translateY(-5px);
-  box-shadow:
-    var(--shadow-lift),
-    0 0 60px -14px rgba(91, 130, 255, 0.5);
-  border-color: rgba(91, 130, 255, 0.35);
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lift);
 }
 
 /* Soft always-on blue product glow (behind featured/product cards) */
@@ -302,13 +307,14 @@ p {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0;
 }
 
 .grid-lines {
+  /* a faint grid, not the black hairline used for borders */
   background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    linear-gradient(to right, rgb(28 23 16 / 8%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(28 23 16 / 8%) 1px, transparent 1px);
   background-size: 3.5rem 3.5rem;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 75%);
 }

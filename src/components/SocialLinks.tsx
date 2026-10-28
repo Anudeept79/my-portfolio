@@ -24,13 +24,13 @@ export function SocialLinks({ className = "" }: { className?: string }) {
   const s = profile.socials;
   const items: Social[] = [
     { label: "LinkedIn", href: s.linkedin, icon: <Svg d={ICON.linkedin} />, color: "#0A66C2" },
-    { label: "X", href: s.x, icon: <Svg d={ICON.x} />, color: "#e7e7ea" },
-    { label: "GitHub", href: s.github, icon: <Svg d={ICON.github} />, color: "#e7e7ea" },
+    { label: "X", href: s.x, icon: <Svg d={ICON.x} />, color: "#1c1710" },
+    { label: "GitHub", href: s.github, icon: <Svg d={ICON.github} />, color: "#1c1710" },
     {
       label: "Contra",
       href: s.contra,
       icon: <span className="text-[13px] font-bold leading-none">Ct</span>,
-      color: "#e7e7ea",
+      color: "#1c1710",
     },
   ].filter((i) => i.href);
 

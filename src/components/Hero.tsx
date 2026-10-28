@@ -11,15 +11,13 @@ export function Hero() {
   const reduce = useReducedMotion();
   return (
     <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40">
-      <div className="pointer-events-none absolute inset-0 grid-lines opacity-40" />
-
       {/* living aurora — still under prefers-reduced-motion */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-40 h-[38rem] w-[38rem] rounded-full opacity-25 blur-[100px]"
+        className="pointer-events-none absolute -right-32 -top-40 h-[38rem] w-[38rem] rounded-full opacity-70 blur-[100px]"
         style={{
           background:
-            "radial-gradient(circle at 50% 50%, var(--accent), transparent 62%)",
+            "radial-gradient(circle at 50% 50%, #fff1d6, transparent 62%)",
         }}
         animate={reduce ? undefined : { scale: [1, 1.15, 1], x: [0, -30, 0], y: [0, 25, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
@@ -82,7 +80,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.28, ease }}
               className="mt-8"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold shadow-[0_0_30px_-10px_rgba(201,168,76,0.5)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-medium text-gold">
                 <Award className="h-4 w-4" strokeWidth={2} />
                 AI Excellence Award — PIPRA Solutions, 2025
               </span>

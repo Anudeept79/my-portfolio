@@ -570,7 +570,7 @@ function Block({ section: s, accent, editorial }: { section: CaseSection; accent
                       it.tone === "bad"
                         ? "text-red-400"
                         : it.tone === "good"
-                          ? "text-[#4ade80]"
+                          ? "text-[#15803d]"
                           : "text-muted"
                     }`}
                   >
