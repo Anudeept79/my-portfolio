@@ -22,10 +22,10 @@ const fraunces = Fraunces({
   axes: ["opsz"],
 });
 
-// Share images need absolute URLs; Vercel provides the production domain at build.
-const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "https://anudeep-thota-portfolio-21.vercel.app";
+// Share images and links need absolute URLs. www.anudeept.com is the primary
+// domain (anudeept.com redirects to it), so it's set here rather than taken
+// from Vercel, which can pick the shorter, redirecting domain.
+const siteUrl = "https://www.anudeept.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
