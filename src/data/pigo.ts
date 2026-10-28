@@ -75,6 +75,12 @@ export const pigoCaseStudy: CaseStudy = {
         { value: "87", label: "Screens reviewed in one field-test round across three apps" },
       ],
       note: "Inventory accuracy as published by PIPRA Solutions. The customer is not named.",
+      image: {
+        src: `${dir}/result-accuracy.webp`,
+        label: "Published by PIPRA",
+        alt: "PIPRA and WarePro graphic: inventory accuracy 70% without WarePro, 95% with WarePro, above a photo of PIPRA's CEO and VP with the customer's warehouse team (staff faces covered) and a photo of the warehouse racks.",
+        caption: "PIPRA’s published result, with the CEO and VP at the customer’s warehouse. Customer staff and branding are covered.",
+      },
     },
     {
       kind: "comparison",
