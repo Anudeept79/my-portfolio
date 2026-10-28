@@ -7,8 +7,10 @@ import type { CaseStudy } from "./site";
  *
  * Deliberately absent: customer or tenant names (masked in every capture; in
  * the visit photos the customer's brand and its staff's faces are blurred),
- * people's names, interview counts, adoption or business metrics, and any
- * claim that the author built PiGo's backend.
+ * people's names, interview counts, and any claim that the author built PiGo's
+ * backend. The one business metric (inventory accuracy 70% to 95%) is PIPRA's
+ * own published figure for a customer running WarePro on PiGo, credited to the
+ * product, not to the design alone.
  */
 const dir = "/case-studies/pigo";
 
@@ -20,7 +22,7 @@ export const pigoCaseStudy: CaseStudy = {
   year: "2026",
   role: "Product Design · Front-end Engineering",
   impact: "One role-based mobile app for warehouse and maintenance teams, where every scan and action answers back.",
-  teaser: "WarePro's operator app moved into PiGo: one configurable mobile app for warehouse and maintenance roles.",
+  teaser: "One role-based mobile app for warehouse and maintenance teams. At a customer site running it, inventory accuracy rose from 70% to 95%.",
   accent: "blue",
   cover: `${dir}/cover.webp`,
   tools: ["React", "TypeScript", "Atlassian Design System"],
@@ -42,6 +44,7 @@ export const pigoCaseStudy: CaseStudy = {
     coverAlt:
       "Three PiGo phone screens: the WarePro supervisor home, a scan confirmed with “Added · 1 of 2”, and a work order's More actions sheet.",
     navigation: [
+      { id: "result", label: "Result" },
       { id: "starting-point", label: "Context" },
       { id: "field", label: "Field research" },
       { id: "the-bet", label: "The bet" },
@@ -58,8 +61,20 @@ export const pigoCaseStudy: CaseStudy = {
       items: [
         { label: "The problem", text: "Warehouse work ran through a launcher of near-identical apps, maintenance roles needed field apps of their own, and failed actions didn't say what went wrong." },
         { label: "What I did", text: "Studied the work on a customer's warehouse floor, proposed PiGo, one configurable app for every warehouse and maintenance role, designed it, and built its React front end." },
-        { label: "The result", text: "In customer use: WarePro, Maintenance and Quality Inspector in one app, where every scan and action says what happened and what to do next." },
+        { label: "The result", text: "In customer use. At a customer site running WarePro on PiGo, inventory accuracy rose from 70% to 95% (reported by PIPRA)." },
       ],
+    },
+    {
+      kind: "stats",
+      id: "result",
+      title: "Fewer stock mistakes where it’s used.",
+      intro: "PIPRA’s reported result for a customer warehouse running WarePro on PiGo. The gain belongs to the whole product and team; the design’s part was catching mistakes at the shelf, scan by scan.",
+      items: [
+        { from: "70%", value: "95%", label: "Inventory accuracy at a customer site, with WarePro on PiGo" },
+        { value: "3 in 1", label: "WarePro, Maintenance and Quality Inspector in one role-based app" },
+        { value: "87", label: "Screens reviewed in one field-test round across three apps" },
+      ],
+      note: "Inventory accuracy as published by PIPRA Solutions. The customer is not named.",
     },
     {
       kind: "comparison",
