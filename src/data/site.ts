@@ -2402,7 +2402,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2026",
     role: "Product Designer",
     impact:
-      "WarePro's handheld app was a launcher full of near-identical apps. I rebuilt the whole operator side — receiving through dispatch — as one system on the Atlassian Design System.",
+      "WarePro's handheld app was a launcher full of near-identical apps. I rebuilt the operator side as one system; at a customer site now running it on PiGo, inventory accuracy rose from 70% to 95%.",
     teaser:
       "The operator side of WarePro: nine flows covering the whole inbound-to-outbound chain, rebuilt so a picker can run them one-handed while holding a scanner.",
     accent: "blue",
@@ -2420,11 +2420,11 @@ export const caseStudies: CaseStudy[] = [
         timeline: "2026",
         team: "With PIPRA's WarePro product and engineering teams",
         platform: "Android handhelds · warehouse scanners",
-        status: "Redesign delivered",
+        status: "Delivered; now running in PiGo at customer sites",
         problem:
           "The app opened on a “Select your app” launcher where five assembly apps shared one identical icon. Inside, screens showed raw unlabelled IDs to operators working one-handed with a scanner, where a mis-read becomes a real inventory error.",
         outcome:
-          "Nine flows rebuilt as one system on the Atlassian Design System — task-first instructions, a single status grammar, and guards that stop invalid work before it's submitted.",
+          "Nine flows rebuilt as one system on the Atlassian Design System — task-first instructions, a single status grammar, and guards that stop invalid work before it's submitted. At a customer site running WarePro on PiGo, the app this redesign grew into, inventory accuracy rose from 70% to 95% (reported by PIPRA).",
       },
       {
         kind: "takeaways",
@@ -2588,6 +2588,19 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        kind: "metrics",
+        eyebrow: "Result",
+        items: [
+          { metric: "70% → 95%", label: "inventory accuracy at a customer site running WarePro on PiGo, the app this redesign grew into (reported by PIPRA)" },
+        ],
+      },
+      {
+        kind: "figure",
+        src: "/case-studies/pigo/result-accuracy.webp",
+        caption:
+          "PIPRA's published result, with the CEO and VP at the customer's warehouse; customer staff and branding are covered. The gain belongs to the whole product and team. The design's part was making every scan say what to do next, so wrong stock is stopped at the shelf.",
+      },
+      {
         kind: "prose",
         eyebrow: "What I took from it",
         title: "Consistency is a safety feature here",
@@ -2616,6 +2629,7 @@ export const caseStudies: CaseStudy[] = [
     results: [
       { metric: "9 flows", label: "the full inbound-to-outbound chain" },
       { metric: "1 design system", label: "Atlassian DS, shared with PI-ERP" },
+      { metric: "70% → 95%", label: "inventory accuracy at a customer site, with WarePro on PiGo (reported by PIPRA)" },
       { metric: "Delivered", label: "handed to the WarePro product team" },
     ],
     gallery: [],
