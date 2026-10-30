@@ -15,7 +15,7 @@ const dir = "/case-studies/kuyil";
 
 export const kuyilCaseStudy: CaseStudy = {
   slug: "kuyil-ai-assistant",
-  title: "Kuyil · AI assistant for PI-ERP",
+  title: "Kuyil · AI assistant for PIPRA One",
   client: "Kuyil · PIPRA Solutions",
   domain: "AI assistant · Enterprise SaaS",
   year: "2026",
@@ -26,20 +26,20 @@ export const kuyilCaseStudy: CaseStudy = {
   cover: `${dir}/cover.webp`,
   tools: ["React", "TypeScript", "Atlassian Design System", "MCP"],
   related: [
-    { href: "/work/pi-erp-platform-ux", label: "PI-ERP: role-based UX at scale" },
+    { href: "/work/pi-erp-platform-ux", label: "PIPRA One: role-based UX at scale" },
     { href: "/work/pigo", label: "PiGo mobile platform" },
   ],
   editorial: {
     headline: "An AI assistant you can check.",
     subheadline:
-      "Kuyil answers questions about live PI-ERP data: overdue work orders, stock, receipts. I redesigned it and built the new chat front end, so every answer shows where its data came from, every failure says what happened, and the assistant shares one design system with the web app and PiGo.",
+      "Kuyil answers questions about live PIPRA One data: overdue work orders, stock, receipts. I redesigned it and built the new chat front end, so every answer shows where its data came from, every failure says what happened, and the assistant shares one design system with the web app and PiGo.",
     summary: [
       { label: "Role", value: "Product design · front-end build (React, TypeScript)" },
       { label: "Team & time", value: "Only designer, with the chat-server engineers · Oct 2026" },
       { label: "Scope", value: "14 screens and states · 12 micro-flows" },
-      { label: "Status", value: "Live in PI-ERP" },
+      { label: "Status", value: "Live in PIPRA One" },
     ],
-    caption: "An answer with its data card and record links, and the same chat in PI-ERP's 420 × 600 window. Demo data.",
+    caption: "An answer with its data card and record links, and the same chat in PIPRA One's 420 × 600 window. Demo data, captured when the product was called PI-ERP.",
     coverAlt:
       "Kuyil answering “Which work orders are overdue?” with a Results card (Table and Chart, copy, download), Open in PiERP record chips and a follow-up chip, beside the same answer in the narrow chat window as one card per record.",
     navigation: [
@@ -66,7 +66,7 @@ export const kuyilCaseStudy: CaseStudy = {
         },
         {
           label: "The result",
-          text: "Live in PI-ERP. Every data answer names its source, time and row count, records open in PI-ERP in one click, and no state is left to a bare spinner or a generic apology.",
+          text: "Live in PIPRA One. Every data answer names its source, time and row count, records open in PIPRA One in one click, and no state is left to a bare spinner or a generic apology.",
         },
       ],
     },
@@ -75,7 +75,7 @@ export const kuyilCaseStudy: CaseStudy = {
       id: "starting-point",
       eyebrow: "01 / Starting point",
       title: "Answers you had to take on faith.",
-      body: "Kuyil turns a question like “Which work orders are overdue?” into a query on live PI-ERP data. The old answer was a plain table with raw dates, five rows under “Showing 28 records”, and nothing to say where the data came from. Now the data sits in its own card with Table and Chart views, Copy and CSV, long tables fold behind Show more, and the records in the answer open in PI-ERP.",
+      body: "Kuyil turns a question like “Which work orders are overdue?” into a query on live PIPRA One data. The old answer was a plain table with raw dates, five rows under “Showing 28 records”, and nothing to say where the data came from. Now the data sits in its own card with Table and Chart views, Copy and CSV, long tables fold behind Show more, and the records in the answer open in PIPRA One.",
       uncropped: true,
       items: [
         {
@@ -116,7 +116,7 @@ export const kuyilCaseStudy: CaseStudy = {
           logic:
             "A source line under every data answer says where the data came from, when, and how many rows. Records in the answer become Open in PiERP chips, and the message box carries “Kuyil can make mistakes. Check the info.”",
           tradeoff: "Inline [1][2] citations need chat-server work, so the source is per answer, not per sentence.",
-          result: "Every data answer can be traced to its source and time, and any record in it is one click from PI-ERP.",
+          result: "Every data answer can be traced to its source and time, and any record in it is one click from PIPRA One.",
           images: [
             {
               src: `${dir}/source-after.webp`,
@@ -177,7 +177,7 @@ export const kuyilCaseStudy: CaseStudy = {
           decision: "Show the work while Kuyil thinks",
           evidence: "While answering, Kuyil showed a spinner and “Retrieving data...”. Past about three seconds, a bare spinner feels broken.",
           logic:
-            "Three named steps with ticks (understanding the question, getting data from PI-ERP, writing the answer) and a seconds counter. Send becomes Stop, in the same place, so one button has one meaning at a time.",
+            "Three named steps with ticks (understanding the question, getting data from PIPRA One, writing the answer) and a seconds counter. Send becomes Stop, in the same place, so one button has one meaning at a time.",
           tradeoff: "Stop only stops the waiting: the server still finishes its query, because there's no cancel API yet.",
           result: "You can see progress and stop a slow answer, and the chat notes “You stopped this answer” with Ask again.",
           wide: true,
@@ -222,9 +222,9 @@ export const kuyilCaseStudy: CaseStudy = {
     },
     {
       kind: "comparison",
-      eyebrow: "05 / Inside PI-ERP",
+      eyebrow: "05 / Inside PIPRA One",
       title: "The same assistant in a 420 × 600 window.",
-      body: "The floating Kuyil button in PI-ERP opens a narrow window. The old layout squeezed the conversation into a sliver beside a full sidebar. Now the sidebar starts as a 38px icon rail, tables become one card per record instead of scrolling sideways, and every action is still there.",
+      body: "The floating Kuyil button in PIPRA One opens a narrow window. The old layout squeezed the conversation into a sliver beside a full sidebar. Now the sidebar starts as a 38px icon rail, tables become one card per record instead of scrolling sideways, and every action is still there.",
       items: [
         {
           src: `${dir}/bubble-before.webp`,
@@ -274,7 +274,7 @@ export const kuyilCaseStudy: CaseStudy = {
           decision: "The same tokens and icons as PiGo and the web app",
           evidence: "Kuyil had its own look: raw color values, a generic icon library, and a fixed blue that ignored the tenant's brand.",
           logic:
-            "Move Kuyil onto the Atlassian Design System tokens, type ramp and icon names that PiGo and the PI-ERP web UI use. Icons are copied path for path from PiGo, and the few PiGo doesn't have are drawn in the same 24px, 2px-stroke style.",
+            "Move Kuyil onto the Atlassian Design System tokens, type ramp and icon names that PiGo and the PIPRA One web UI use. Icons are copied path for path from PiGo, and the few PiGo doesn't have are drawn in the same 24px, 2px-stroke style.",
           result:
             "No raw colors or generic icons left in the chat, and Kuyil takes the tenant's brand from the same Appearance & Branding setting as the web app and PiGo.",
           wide: true,
@@ -349,7 +349,7 @@ export const kuyilCaseStudy: CaseStudy = {
       eyebrow: "10 / Status",
       title: "Where it stands.",
       states: [
-        { name: "Kuyil redesign", status: "Live in PI-ERP", state: "production" },
+        { name: "Kuyil redesign", status: "Live in PIPRA One", state: "production" },
         { name: "Rename and Delete", status: "Built; appears when the chat server offers it", state: "in-progress" },
       ],
       qualification: "Status as of late October 2026.",
@@ -368,7 +368,7 @@ export const kuyilCaseStudy: CaseStudy = {
     },
   ],
   overview:
-    "In 2026 I redesigned Kuyil, PI-ERP's AI assistant, and built its new chat front end: every answer names its source and time, failures say what happened and what to do next, and Kuyil shares one design system with the PI-ERP web app and PiGo.",
+    "In 2026 I redesigned Kuyil, PIPRA One's AI assistant, and built its new chat front end: every answer names its source and time, failures say what happened and what to do next, and Kuyil shares one design system with the PIPRA One web app and PiGo.",
   problem: [],
   process: [],
   solution: [],

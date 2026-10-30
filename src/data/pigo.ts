@@ -28,7 +28,7 @@ export const pigoCaseStudy: CaseStudy = {
   tools: ["React", "TypeScript", "Atlassian Design System"],
   related: [
     { href: "/work/warepro-mobile", label: "The earlier WarePro Mobile redesign" },
-    { href: "/work/pi-erp-platform-ux", label: "PI-ERP in 2026: role-based UX at scale" },
+    { href: "/work/pi-erp-platform-ux", label: "PIPRA One: role-based UX at scale" },
   ],
   editorial: {
     headline: "PiGo: one app for every role on the floor.",
@@ -427,7 +427,7 @@ export const pigoCaseStudy: CaseStudy = {
     },
     {
       kind: "quote",
-      text: "On PI-ERP and PiGo, Anudeep took the work from design all the way to a live product — owning design and development instead of handing over mockups and waiting. That's exactly the ownership I want to encourage.",
+      text: "On PI-ERP [now PIPRA One] and PiGo, Anudeep took the work from design all the way to a live product — owning design and development instead of handing over mockups and waiting. That's exactly the ownership I want to encourage.",
       attribution: "Ajit Kumar · CEO, PIPRA Solutions",
     },
     {
