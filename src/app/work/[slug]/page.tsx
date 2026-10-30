@@ -68,7 +68,7 @@ export default async function CaseStudyPage({
         {/* header */}
         {cs.editorial ? (
           <header className="container-x">
-            <Link href="/#work" className="mb-8 inline-flex items-center gap-2 text-sm text-muted hover:text-foreground"><ArrowLeft size={16} /> All work</Link>
+            <Link href="/#work" className="mb-8 inline-flex min-h-11 items-center gap-2 text-sm text-muted hover:text-foreground"><ArrowLeft size={16} /> All work</Link>
             <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-muted">{cs.title} <span className="mx-3 text-border">/</span> Product design case study</p>
             <h1 className={`font-display ${editorialStyles.heroTitle}`}>{cs.editorial.headline}</h1>
             <p className={`mt-6 text-muted ${editorialStyles.heroDescription}`}>{cs.editorial.subheadline}</p>
@@ -81,14 +81,14 @@ export default async function CaseStudyPage({
               <figcaption className="mt-3 max-w-3xl text-xs leading-relaxed text-muted">{cs.editorial.caption}</figcaption>
             </figure>
             <nav aria-label="Case study sections" className="mt-6 flex flex-wrap gap-x-6 gap-y-1 border-b border-border pb-4">
-              {cs.editorial.navigation.map((item, index) => <a key={item.id} href={`#${item.id}`} className="py-2 text-sm text-muted hover:text-foreground"><span className="mr-2 font-mono text-[10px] text-accent">{String(index + 1).padStart(2, "0")}</span>{item.label}</a>)}
+              {cs.editorial.navigation.map((item, index) => <a key={item.id} href={`#${item.id}`} className="inline-flex min-h-11 items-center text-sm text-muted hover:text-foreground"><span className="mr-2 font-mono text-[11px] text-accent">{String(index + 1).padStart(2, "0")}</span>{item.label}</a>)}
             </nav>
           </header>
         ) : (
         <header className="container-x">
           <Link
             href="/#work"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+            className="mb-8 inline-flex min-h-11 items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" /> All work
           </Link>
@@ -140,7 +140,7 @@ export default async function CaseStudyPage({
                 controls
                 className="block h-auto max-h-[78vh] w-auto max-w-full"
               />
-              <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
+              <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-foreground backdrop-blur">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
                 Live demo
               </span>
@@ -334,7 +334,7 @@ export default async function CaseStudyPage({
                   controls
                   className="h-auto w-full"
                 />
-                <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
+                <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-foreground backdrop-blur">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#4ade80]" />
                   {cs.proof.badge ?? "Shipped — in production"}
                 </span>
@@ -415,7 +415,7 @@ function RelatedLinks({ links }: { links: { href: string; label: string }[] }) {
     <p className="mb-6 mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
       <span className="font-mono text-[11px] uppercase tracking-widest">Related</span>
       {links.map((link) => (
-        <Link key={link.href} href={link.href} className="inline-flex items-center gap-1 text-accent hover:underline">
+        <Link key={link.href} href={link.href} className="inline-flex min-h-11 items-center gap-1 text-accent hover:underline">
           {link.label} <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
       ))}

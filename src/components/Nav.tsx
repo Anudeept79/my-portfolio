@@ -51,7 +51,7 @@ export function Nav() {
           onClick={() => setOpen(false)}
           className="group flex items-center gap-2 font-semibold"
         >
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-accent-ink text-sm font-bold">
+          <span className="grid h-11 w-11 place-items-center rounded-lg bg-accent text-accent-ink text-sm font-bold md:h-8 md:w-8">
             AT
           </span>
           <span className="hidden sm:inline">{profile.name}</span>

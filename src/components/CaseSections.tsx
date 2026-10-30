@@ -376,7 +376,7 @@ function Block({ section: s, accent, editorial }: { section: CaseSection; accent
                 className="h-auto w-full"
               />
               {s.badge && (
-                <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-foreground backdrop-blur">
+                <span className="pointer-events-none absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-background/70 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-foreground backdrop-blur">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
                   {s.badge}
                 </span>

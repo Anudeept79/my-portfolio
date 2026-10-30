@@ -45,24 +45,24 @@ export function Footer() {
           </div>
         </div>
 
-        <nav className="flex flex-col gap-2.5 text-sm">
+        <nav className="flex flex-col text-sm md:gap-2.5">
           <span className="eyebrow mb-2">Explore</span>
           {explore.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="w-fit text-muted transition-colors hover:text-foreground"
+              className="inline-flex min-h-11 w-fit items-center text-muted transition-colors hover:text-foreground md:min-h-0"
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <nav className="flex flex-col gap-2.5 text-sm">
+        <nav className="flex flex-col text-sm md:gap-2.5">
           <span className="eyebrow mb-2">Elsewhere</span>
           <Link
             href={profile.resumeUrl}
-            className="w-fit text-muted transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 w-fit items-center text-muted transition-colors hover:text-foreground md:min-h-0"
           >
             Résumé (PDF)
           </Link>

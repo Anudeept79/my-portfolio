@@ -162,7 +162,7 @@ function ProductSkeleton({
 
       {/* label */}
       <div className="flex items-center justify-between border-t border-border/70 px-4 py-2.5">
-        <span className="truncate font-mono text-[10px] uppercase tracking-widest text-muted">
+        <span className="truncate font-mono text-[11px] uppercase tracking-widest text-muted">
           {label}
         </span>
         {typeof index === "number" && (
