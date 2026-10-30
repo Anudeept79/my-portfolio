@@ -354,9 +354,9 @@ export const caseStudies: CaseStudy[] = [
   // Anudeep's constraint that core code and DB could not change. Confirm.
   {
     slug: "pi-erp-design-system",
-    related: [{ href: "/work/pi-erp-platform-ux", label: "PI-ERP in 2026: role-based UX at scale" }],
+    related: [{ href: "/work/pi-erp-platform-ux", label: "Now PIPRA One: role-based UX at scale" }],
     title: "Restyling an ERP that 4 years of muscle memory depended on",
-    client: "PIPRA Solutions — PI-ERP (built on iDempiere)",
+    client: "PI-ERP, now PIPRA One — PIPRA Solutions (built on iDempiere)",
     domain: "Enterprise SaaS · Design Systems",
     year: "2025",
     role: "Product Designer — design system & UI",
@@ -2510,7 +2510,7 @@ export const caseStudies: CaseStudy[] = [
         kind: "prose",
         eyebrow: "The system",
         title: "Why Atlassian, again",
-        body: "I'd already put PI-ERP on the Atlassian Design System for its density under enterprise data, and the reasoning applies harder here. Warehouse screens are lists of states — orders, batches, shipments, bins — and Atlassian's lozenge and card patterns are built for exactly that, without the generous consumer spacing that would cost visible rows on a small screen. Sharing it across both products also means a PIPRA operator moving between desktop and handheld isn't learning two visual languages.",
+        body: "I'd already put PI-ERP (now PIPRA One) on the Atlassian Design System for its density under enterprise data, and the reasoning applies harder here. Warehouse screens are lists of states — orders, batches, shipments, bins — and Atlassian's lozenge and card patterns are built for exactly that, without the generous consumer spacing that would cost visible rows on a small screen. Sharing it across both products also means a PIPRA operator moving between desktop and handheld isn't learning two visual languages.",
       },
       {
         kind: "figures",
@@ -2996,7 +2996,7 @@ export const redesigns = [
 export const testimonials = [
   {
     quote:
-      "On PI-ERP and PiGo, Anudeep took the work from design all the way to a live product — owning design and development instead of handing over mockups and waiting. That's exactly the ownership I want to encourage.",
+      "On PI-ERP [now PIPRA One] and PiGo, Anudeep took the work from design all the way to a live product — owning design and development instead of handing over mockups and waiting. That's exactly the ownership I want to encourage.",
     name: "Ajit Kumar",
     role: "CEO, PIPRA Solutions",
     accent: "blue",
