@@ -37,7 +37,7 @@ export function MoreWork() {
         </ul>
         <Link
           href="/lab"
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
+          className="mt-6 inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-accent hover:underline"
         >
           Experiments and side builds in the Lab <ArrowUpRight className="h-4 w-4" aria-hidden />
         </Link>

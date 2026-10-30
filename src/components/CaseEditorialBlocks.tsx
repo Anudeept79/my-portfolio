@@ -44,7 +44,7 @@ export function DetailList({ items }: { items: DetailItem[] }) {
         <details key={item.title} className="group">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-medium [&::-webkit-details-marker]:hidden">
             <span>
-              <span className="mr-3 font-mono text-[10px] uppercase tracking-widest text-muted">Optional</span>
+              <span className="mr-3 font-mono text-[11px] uppercase tracking-widest text-muted">Optional</span>
               {item.title}
             </span>
             <ChevronDown aria-hidden className="h-4 w-4 shrink-0 text-muted transition-transform group-open:rotate-180 motion-reduce:transition-none" />
@@ -115,7 +115,7 @@ export function ComparisonBlock({ s }: { s: Of<"comparison"> }) {
         <h2 className="font-display mb-3 text-2xl leading-tight tracking-tight sm:text-3xl">{s.title}</h2>
         <p className="text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem]">{s.body}</p>
       </div>
-      <div className={`mt-5 grid gap-3 sm:mt-6 sm:gap-5 ${s.items.some((item) => item.phone) ? (s.items.length === 2 ? "grid-cols-2 sm:max-w-xl" : "grid-cols-2 sm:grid-cols-3") : "grid-cols-2"}`}>
+      <div className={`mt-5 grid gap-3 sm:mt-6 sm:gap-5 ${s.items.some((item) => item.phone) ? (s.items.length === 2 ? "grid-cols-2 sm:max-w-xl" : "grid-cols-2 sm:grid-cols-3") : "grid-cols-1 sm:grid-cols-2"}`}>
         {s.items.map((item) => <Capture key={item.src} item={item} aspect={s.uncropped ? undefined : "2 / 1"} compact />)}
       </div>
     </div>
@@ -258,14 +258,14 @@ export function SequenceBlock({ s }: { s: Of<"sequence"> }) {
         <ol className="flex w-max gap-4 sm:gap-5">
           {s.items.map((item, i) => (
             <li key={item.src} className="w-[200px] shrink-0 [scroll-snap-align:start] sm:w-[220px]">
-              <p className="mb-2 font-mono text-[10px] text-accent">{String(i + 1).padStart(2, "0")}</p>
+              <p className="mb-2 font-mono text-[11px] text-accent">{String(i + 1).padStart(2, "0")}</p>
               <EvidenceImage src={item.src} alt={item.alt} label={item.label} phone />
               {item.caption && <p className="mt-2 text-xs leading-snug text-muted">{item.caption}</p>}
             </li>
           ))}
         </ol>
       </div>
-      <p aria-hidden className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted">Scroll sideways · {s.items.length} steps</p>
+      <p aria-hidden className="mt-1 font-mono text-[11px] uppercase tracking-widest text-muted">Scroll sideways · {s.items.length} steps</p>
     </div>
   );
 }
@@ -278,12 +278,12 @@ export function ModelBlock({ s }: { s: Of<"model"> }) {
       <div className="rounded-2xl border border-dashed border-foreground/30 bg-surface/40 p-5 sm:p-8">
         <div className="flex flex-col-reverse items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <h2 className="font-display text-lg tracking-tight sm:text-2xl">{s.title}</h2>
-          <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted">{s.label}</span>
+          <span className="rounded-full border border-border px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-muted">{s.label}</span>
         </div>
         <ol className="mt-4 divide-y divide-border sm:mt-7 sm:grid sm:grid-cols-4 sm:gap-6 sm:divide-y-0">
           {s.stages.map((stage, i) => (
             <li key={stage.name} className="relative grid grid-cols-[1.75rem_1fr] py-2.5 sm:block sm:rounded-lg sm:border sm:border-border sm:bg-background sm:p-4">
-              <span className="pt-0.5 font-mono text-[10px] text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <span className="pt-0.5 font-mono text-[11px] text-accent">{String(i + 1).padStart(2, "0")}</span>
               <div>
                 <p className="text-sm font-medium leading-snug sm:mt-1.5 sm:text-base">{stage.name}</p>
                 <p className="mt-0.5 text-xs leading-snug text-muted sm:mt-1 sm:leading-relaxed">{stage.note}</p>
@@ -296,7 +296,7 @@ export function ModelBlock({ s }: { s: Of<"model"> }) {
         <ol className="grid grid-cols-2 gap-x-4 gap-y-2.5 sm:grid-cols-4 sm:gap-y-5 lg:grid-cols-8">
           {s.items.map((item, i) => (
             <li key={item} className="flex items-baseline gap-2 border-t-2 pt-2 sm:pt-2.5" style={{ borderTopColor: `color-mix(in srgb, var(--accent) ${Math.round((i / last) * 100)}%, var(--border))` }}>
-              <span className="font-mono text-[10px] text-muted">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-mono text-[11px] text-muted">{String(i + 1).padStart(2, "0")}</span>
               <span className="text-sm leading-snug">{item}</span>
             </li>
           ))}
@@ -346,14 +346,14 @@ export function DecisionRows({ s }: { s: Of<"decisions"> }) {
                 {d.decision}
               </h3>
               {images.length > 0 && (
-                <div className={`${wide ? "mt-2" : "md:row-span-2 md:row-start-1"} ${figureCols} ${pair ? (wide ? "grid grid-cols-1 gap-4 self-start sm:grid-cols-2 sm:gap-5" : "grid grid-cols-2 gap-3 self-start") : d.stack ? "grid gap-4 self-start" : "self-start"}`}>
+                <div className={`${wide ? "mt-2" : "md:row-span-2 md:row-start-1"} ${figureCols} ${pair ? (wide ? "grid grid-cols-1 gap-4 self-start sm:grid-cols-2 sm:gap-5" : `grid gap-3 self-start ${images.every((image) => image.phone) ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`) : d.stack ? "grid gap-4 self-start" : "self-start"}`}>
                   {images.map((image) => <Capture key={image.src} item={image} compact={pair && !wide} />)}
                 </div>
               )}
               <dl className={`space-y-2 md:row-start-2 md:space-y-3.5 ${textCols}`}>
                 {rows.map(([label, value]) => value && (
                   <div key={label} className="md:grid md:grid-cols-[6.75rem_1fr] md:gap-4">
-                    <dt className="mr-2 inline font-mono text-[10px] uppercase tracking-widest text-accent md:block md:pt-1">{label}</dt>
+                    <dt className="mr-2 inline font-mono text-[11px] uppercase tracking-widest text-accent md:block md:pt-1">{label}</dt>
                     <dd className="inline text-sm leading-snug text-foreground/80 sm:leading-normal md:block">{value}</dd>
                   </div>
                 ))}
@@ -388,7 +388,7 @@ export function VideoSplit({ s }: { s: Of<"video"> }) {
               aria-label={s.caption}
               className="block h-auto w-full"
             />
-            {s.badge && <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 rounded-full border border-white/15 bg-black/75 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-white">{s.badge}</span>}
+            {s.badge && <span aria-hidden className="pointer-events-none absolute left-2.5 top-2.5 rounded-full border border-white/15 bg-black/75 px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest text-white">{s.badge}</span>}
           </div>
           {s.caption && <figcaption className="mt-2.5 text-xs leading-relaxed text-muted">{s.caption}</figcaption>}
         </figure>

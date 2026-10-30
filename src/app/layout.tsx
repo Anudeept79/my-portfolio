@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data/site";
@@ -26,6 +26,12 @@ const fraunces = Fraunces({
 // domain (anudeept.com redirects to it), so it's set here rather than taken
 // from Vercel, which can pick the shorter, redirecting domain.
 const siteUrl = "https://www.anudeept.com";
+
+// One theme everywhere: "only light" stops phone browsers in dark mode recolouring the site.
+export const viewport: Viewport = {
+  colorScheme: "only light",
+  themeColor: "#f4ede3",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

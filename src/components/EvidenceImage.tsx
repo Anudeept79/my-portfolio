@@ -44,7 +44,7 @@ export function EvidenceImage({
           }}
           className="block h-auto w-full"
         />
-        {label && <span aria-hidden className="absolute left-2.5 top-2.5 rounded-full border border-white/15 bg-black/75 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-white">{label}</span>}
+        {label && <span aria-hidden className="absolute left-2.5 top-2.5 rounded-full border border-white/15 bg-black/75 px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest text-white">{label}</span>}
         <span aria-hidden className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/75 px-2.5 py-1.5 text-[11px] text-white"><Maximize2 size={12} /><span className="hidden sm:inline">Inspect</span></span>
       </button>
       <dialog ref={dialog} aria-labelledby={titleId} className={`evidence-dialog ${phone ? "is-phone" : ""}`} onClick={(event) => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
@@ -54,9 +54,9 @@ export function EvidenceImage({
         </div>
         <div className="overflow-auto p-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={alt} loading="lazy" decoding="async" className={`block h-auto w-full ${phone ? "rounded-xl" : "min-w-[900px]"}`} />
+          <img src={src} alt={alt} loading="lazy" decoding="async" className={`block h-auto w-full ${phone ? "rounded-xl" : "md:min-w-[900px]"}`} />
         </div>
-        <p className="p-4 text-xs text-muted">{phone ? "Press Escape to close." : "Scroll horizontally on small screens to inspect details. Press Escape to close."}</p>
+        <p className="p-4 text-xs text-muted">Pinch to zoom in. Tap × or press Escape to close.</p>
       </dialog>
     </>
   );

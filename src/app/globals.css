@@ -49,7 +49,7 @@
   --dur-2: 220ms;
   --dur-3: 400ms;
   --dur-4: 600ms;
-  color-scheme: light;
+  color-scheme: only light;
 }
 
 @theme inline {
